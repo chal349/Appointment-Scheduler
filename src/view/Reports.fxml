@@ -157,7 +157,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Label layoutX="633.0" layoutY="100.0" style="-fx-background-color: #dddddd;" text="REPORTS" textFill="#545454">
+            <Label layoutX="650.0" layoutY="100.0" style="-fx-background-color: #dddddd;" text="REPORTS" textFill="#545454">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
