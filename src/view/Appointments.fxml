@@ -29,31 +29,6 @@
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #352343;">
          <children>
-            <ButtonBar layoutX="207.0" layoutY="460.0" prefHeight="48.0" prefWidth="595.0" style="-fx-background-color: #dddddd;">
-              <buttons>
-                <Button mnemonicParsing="false" text="SCHEDULE">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="510.0" layoutY="25.0" mnemonicParsing="false" style="-fx-border-width: 0;" text="UPDATE">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="510.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: #352243;" text="DELETE" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Button>
-              </buttons>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </ButtonBar>
             <VBox layoutY="207.0" prefHeight="392.0" prefWidth="160.0" style="-fx-background-color: #dddddd;">
                <children>
                   <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #352243;" text="APPOINTMENTS" textFill="WHITE">
@@ -85,6 +60,31 @@
                   </Button>
                </children>
             </VBox>
+            <ButtonBar layoutX="207.0" layoutY="460.0" prefHeight="48.0" prefWidth="595.0" style="-fx-background-color: #dddddd;">
+              <buttons>
+                <Button mnemonicParsing="false" text="SCHEDULE">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="510.0" layoutY="25.0" mnemonicParsing="false" style="-fx-border-width: 0;" text="UPDATE">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="510.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: #352243;" text="DELETE" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Button>
+              </buttons>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </ButtonBar>
             <VBox layoutY="-4.0" prefHeight="212.0" prefWidth="160.0" style="-fx-background-color: #dddddd;">
                <children>
                   <Circle radius="45.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
