@@ -17,6 +17,7 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Appointments">
@@ -29,6 +30,7 @@
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #352343;">
          <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#615c70" height="176.0" layoutX="160.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="690.0" />
             <VBox layoutY="207.0" prefHeight="392.0" prefWidth="160.0" style="-fx-background-color: #dddddd;">
                <children>
                   <Button fx:id="appointmentsButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #352243;" text="APPOINTMENTS" textFill="WHITE">
@@ -42,7 +44,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="customersButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionCustomersScreen" prefHeight="60.0" prefWidth="160.0" text="CUSTOMERS" textFill="#545454">
+                  <Button fx:id="customersButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionGoToCustomerScreen" prefHeight="60.0" prefWidth="160.0" text="CUSTOMERS" textFill="#545454">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -62,7 +64,7 @@
             </VBox>
             <ButtonBar layoutX="207.0" layoutY="460.0" prefHeight="48.0" prefWidth="595.0" style="-fx-background-color: #dddddd;">
               <buttons>
-                <Button fx:id="addButton" mnemonicParsing="false" onAction="#onActionAddScreen" text="ADD">
+                <Button fx:id="addButton" mnemonicParsing="false" onAction="#onActionAddAppointmentScreen" text="ADD">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>

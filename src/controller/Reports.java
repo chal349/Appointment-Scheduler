@@ -1,18 +1,26 @@
 package controller;
 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Reports implements Initializable {
+
+    Stage stage;
+    Parent scene;
 
     @FXML
     private Button appointmentsButton;
@@ -108,13 +116,21 @@ public class Reports implements Initializable {
     private Label headerText;
 
     @FXML
-    void onActionAppointmentsScreen(ActionEvent event) {
-
+    void onActionAppointmentsScreen(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.setTitle("Appointments");
+        stage.show();
     }
 
     @FXML
-    void onActionCustomersScreen(ActionEvent event) {
-
+    void onActionCustomersScreen(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.setTitle("Customers");
+        stage.show();
     }
 
     @FXML

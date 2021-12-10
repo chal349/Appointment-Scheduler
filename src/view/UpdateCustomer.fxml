@@ -12,7 +12,6 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #dddddd;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateCustomer">
    <children>
       <Circle layoutX="201.0" layoutY="75.0" radius="37.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
@@ -33,7 +32,7 @@
             </LinearGradient>
          </fill>
       </Circle>
-      <Label layoutX="91.0" layoutY="131.0" style="-fx-background-color: #dddddd;" text="UPDATE CUSTOMER" textFill="#545454">
+      <Label fx:id="headerText" layoutX="91.0" layoutY="131.0" style="-fx-background-color: #dddddd;" text="UPDATE CUSTOMER" textFill="#545454">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
@@ -41,60 +40,60 @@
             <Insets left="20.0" right="20.0" />
          </padding>
       </Label>
-      <Label layoutX="49.0" layoutY="191.0" text="CUSTOMER ID" textFill="#3c3c3c">
+      <Label fx:id="customerID" layoutX="49.0" layoutY="191.0" text="CUSTOMER ID" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField disable="true" editable="false" layoutX="186.0" layoutY="188.0" prefHeight="25.0" prefWidth="167.0" />
-      <Label layoutX="49.0" layoutY="231.0" text="FULL NAME" textFill="#3c3c3c">
+      <TextField fx:id="customerID_field" disable="true" editable="false" layoutX="186.0" layoutY="188.0" prefHeight="25.0" prefWidth="167.0" />
+      <Label fx:id="fullName" layoutX="49.0" layoutY="231.0" text="FULL NAME" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="233.0" layoutY="538.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #593972;" text="SAVE" textFill="WHITE">
+      <Button fx:id="saveButton" layoutX="233.0" layoutY="538.0" mnemonicParsing="false" onAction="#onActionSave" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #593972;" text="SAVE" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TextField layoutX="186.0" layoutY="228.0" prefHeight="25.0" prefWidth="167.0" />
-      <Label layoutX="50.0" layoutY="272.0" text="PHONE NUMBER" textFill="#3c3c3c">
+      <TextField fx:id="fullNameField" layoutX="186.0" layoutY="228.0" prefHeight="25.0" prefWidth="167.0" />
+      <Label fx:id="phoneNumber" layoutX="50.0" layoutY="272.0" text="PHONE NUMBER" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="187.0" layoutY="269.0" prefHeight="25.0" prefWidth="167.0" />
-      <Label layoutX="50.0" layoutY="312.0" text="STREET ADDRESS" textFill="#3c3c3c">
+      <TextField fx:id="phoneNumberField" layoutX="187.0" layoutY="269.0" prefHeight="25.0" prefWidth="167.0" />
+      <Label fx:id="streetAddress" layoutX="50.0" layoutY="312.0" text="STREET ADDRESS" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="187.0" layoutY="309.0" prefHeight="25.0" prefWidth="167.0" />
-      <Label layoutX="50.0" layoutY="352.0" text="CITY/TOWN" textFill="#3c3c3c">
+      <TextField fx:id="streetAddressField" layoutX="187.0" layoutY="309.0" prefHeight="25.0" prefWidth="167.0" />
+      <Label fx:id="cityTown" layoutX="50.0" layoutY="352.0" text="CITY/TOWN" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="187.0" layoutY="349.0" prefHeight="25.0" prefWidth="167.0" />
-      <Label layoutX="50.0" layoutY="392.0" text="POSTAL CODE" textFill="#3c3c3c">
+      <TextField fx:id="cityTownField" layoutX="187.0" layoutY="349.0" prefHeight="25.0" prefWidth="167.0" />
+      <Label fx:id="postalCode" layoutX="50.0" layoutY="392.0" text="POSTAL CODE" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="187.0" layoutY="389.0" prefHeight="25.0" prefWidth="167.0" />
-      <Label layoutX="51.0" layoutY="433.0" text="COUNTRY" textFill="#3c3c3c">
+      <TextField fx:id="postalCodeField" layoutX="187.0" layoutY="389.0" prefHeight="25.0" prefWidth="167.0" />
+      <Label fx:id="country" layoutX="51.0" layoutY="433.0" text="COUNTRY" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <ComboBox layoutX="188.0" layoutY="430.0" prefWidth="150.0" />
-      <Label layoutX="51.0" layoutY="473.0" text="STATE/PROVINCE" textFill="#3c3c3c">
+      <ComboBox fx:id="countryBox" layoutX="188.0" layoutY="430.0" prefWidth="150.0" />
+      <Label fx:id="stateProvince" layoutX="51.0" layoutY="473.0" text="STATE/PROVINCE" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <ComboBox layoutX="188.0" layoutY="470.0" prefWidth="150.0" />
-      <Button layoutX="50.0" layoutY="538.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="CANCEL">
+      <ComboBox fx:id="stateProvinceBox" layoutX="188.0" layoutY="470.0" prefWidth="150.0" />
+      <Button fx:id="cancelButton" layoutX="50.0" layoutY="538.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="25.0" prefWidth="120.0" text="CANCEL">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
