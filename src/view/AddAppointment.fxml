@@ -14,7 +14,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: #dddddd;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddAppointment">
    <children>
       <Line endX="329.0" layoutX="259.0" layoutY="77.0" startX="-123.0" strokeLineCap="ROUND" strokeWidth="0.5" />
@@ -74,24 +73,24 @@
          </font>
       </Label>
       <ComboBox layoutX="181.0" layoutY="306.0" prefHeight="25.0" prefWidth="102.0" />
-      <Label layoutX="334.0" layoutY="148.0" text="TITLE" textFill="#3c3c3c">
+      <Label layoutX="334.0" layoutY="147.0" text="LOCATION" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="441.0" layoutY="145.0" prefHeight="25.0" prefWidth="92.0" />
-      <Label layoutX="334.0" layoutY="188.0" text="DESCRIPTION" textFill="#3c3c3c">
+      <TextField layoutX="441.0" layoutY="144.0" prefHeight="25.0" prefWidth="92.0" />
+      <Label layoutX="335.0" layoutY="188.0" text="TITLE" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="441.0" layoutY="185.0" prefHeight="25.0" prefWidth="145.0" />
-      <Label layoutX="334.0" layoutY="228.0" text="LOCATION" textFill="#3c3c3c">
+      <TextField layoutX="442.0" layoutY="185.0" prefHeight="25.0" prefWidth="92.0" />
+      <Label layoutX="334.0" layoutY="228.0" text="DESCRIPTION" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="441.0" layoutY="225.0" prefHeight="25.0" prefWidth="92.0" />
+      <TextField layoutX="441.0" layoutY="225.0" prefHeight="25.0" prefWidth="145.0" />
       <Label layoutX="335.0" layoutY="269.0" text="DATE" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
