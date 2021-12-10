@@ -30,17 +30,17 @@
             <children>
                 <ButtonBar layoutX="198.0" layoutY="458.0" prefHeight="48.0" prefWidth="612.0" style="-fx-background-color: #dddddd;">
                     <buttons>
-                        <Button mnemonicParsing="false" text="ADD ">
+                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#onActionAddCustomerScreen" text="ADD ">
                             <font>
                                 <Font name="System Bold Italic" size="14.0" />
                             </font>
                         </Button>
-                        <Button layoutX="510.0" layoutY="25.0" mnemonicParsing="false" style="-fx-border-width: 0;" text="UPDATE">
+                        <Button fx:id="updateButton" layoutX="510.0" layoutY="25.0" mnemonicParsing="false" onAction="#onActionUpdateCustomerScreen" style="-fx-border-width: 0;" text="UPDATE">
                             <font>
                                 <Font name="System Bold Italic" size="14.0" />
                             </font>
                         </Button>
-                        <Button layoutX="510.0" layoutY="25.0" mnemonicParsing="false" style="-fx-border-width: 0;" text="DELETE">
+                        <Button fx:id="deleteButton" layoutX="510.0" layoutY="25.0" mnemonicParsing="false" onAction="#onActionDelete" style="-fx-background-color: #352243;" text="DELETE" textFill="WHITE">
                             <font>
                                 <Font name="System Bold Italic" size="14.0" />
                             </font>
@@ -55,7 +55,7 @@
                 </ButtonBar>
                 <VBox layoutY="208.0" prefHeight="391.0" prefWidth="160.0" style="-fx-background-color: #dddddd;">
                     <children>
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" text="APPOINTMENTS" textFill="#545454">
+                        <Button fx:id="appointmentsButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionAppointmentsScreen" prefHeight="60.0" prefWidth="160.0" text="APPOINTMENTS" textFill="#545454">
                             <font>
                                 <Font name="System Bold Italic" size="16.0" />
                             </font>
@@ -63,7 +63,7 @@
                                 <Insets top="-1.0" />
                             </VBox.margin>
                         </Button>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #352243;" text="CUSTOMERS" textFill="WHITE">
+                  <Button fx:id="customersButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #352243;" text="CUSTOMERS" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -71,7 +71,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" text="REPORTS" textFill="#545454">
+                  <Button fx:id="reportsButton" mnemonicParsing="false" onAction="#onActionReportsScreen" prefHeight="60.0" prefWidth="160.0" text="REPORTS" textFill="#545454">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -103,14 +103,15 @@
                         </Circle>
                     </children>
                 </VBox>
-                <Button layoutX="735.0" layoutY="546.0" mnemonicParsing="false" text="LOGOUT">
+                <Button fx:id="logoutButton" layoutX="735.0" layoutY="537.0" mnemonicParsing="false" onAction="#onActionLogout" text="LOGOUT">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
             <AnchorPane layoutX="198.0" layoutY="98.0" prefHeight="362.0" prefWidth="612.0" style="-fx-background-color: #dddddd;">
                <children>
-                      <Label layoutX="1.0" layoutY="4.0" style="-fx-background-color: #dddddd;" text="CUSTOMERS" textFill="#545454">
+                  <Line endX="351.0" layoutX="247.0" layoutY="18.0" startX="-234.0" stroke="#616161" strokeLineCap="ROUND" strokeWidth="0.5" />
+                      <Label fx:id="headerText" layoutX="234.0" layoutY="4.0" style="-fx-background-color: #dddddd;" text="CUSTOMERS" textFill="#545454">
                           <font>
                               <Font name="System Bold Italic" size="18.0" />
                           </font>
@@ -118,21 +119,20 @@
                               <Insets left="20.0" right="20.0" />
                           </padding>
                       </Label>
-                  <TableView layoutX="11.0" layoutY="34.0" prefHeight="328.0" prefWidth="590.0">
+                  <TableView fx:id="customerTableView" layoutX="11.0" layoutY="34.0" prefHeight="328.0" prefWidth="590.0">
                      <columns>
-                        <TableColumn prefWidth="43.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
-                        <TableColumn prefWidth="61.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="NAME" />
-                        <TableColumn prefWidth="68.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="ADDRESS" />
-                        <TableColumn prefWidth="44.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="ZIP" />
-                        <TableColumn prefWidth="51.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="PHONE" />
-                        <TableColumn prefWidth="79.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DATE CREATED" />
-                        <TableColumn prefWidth="65.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CREATED BY" />
-                        <TableColumn prefWidth="71.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="LAST UPDATE" />
-                        <TableColumn prefWidth="68.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="UPDATED BY" />
-                        <TableColumn prefWidth="39.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DIV ID" />
+                        <TableColumn fx:id="custID_col" prefWidth="43.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
+                        <TableColumn fx:id="name_col" prefWidth="61.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="NAME" />
+                        <TableColumn fx:id="address_col" prefWidth="68.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="ADDRESS" />
+                        <TableColumn fx:id="zip_col" prefWidth="44.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="ZIP" />
+                        <TableColumn fx:id="phone_col" prefWidth="51.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="PHONE" />
+                        <TableColumn fx:id="DateCreated_col" prefWidth="79.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DATE CREATED" />
+                        <TableColumn fx:id="createdBy_col" prefWidth="65.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CREATED BY" />
+                        <TableColumn fx:id="lastUpdate_col" prefWidth="71.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="LAST UPDATE" />
+                        <TableColumn fx:id="updatedBy_col" prefWidth="68.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="UPDATED BY" />
+                        <TableColumn fx:id="divID_col" prefWidth="39.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DIV ID" />
                      </columns>
                   </TableView>
-                  <Line endX="351.0" layoutX="247.0" layoutY="18.0" startX="-100.0" stroke="#616161" strokeWidth="0.5" />
                </children>
             </AnchorPane>
             </children>

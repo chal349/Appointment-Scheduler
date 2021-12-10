@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #dddddd;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login">
    <children>
-      <Circle layoutX="200.0" layoutY="103.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+      <Circle layoutX="200.0" layoutY="102.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
          <fill>
             <LinearGradient endX="1.0" endY="0.7904761904761904" startX="0.30952380952380953" startY="0.2857142857142857">
                <stops>
@@ -31,24 +31,24 @@
             </LinearGradient>
          </fill>
       </Circle>
-      <Label layoutX="70.0" layoutY="200.0" text="USERNAME" textFill="#3c3c3c">
+      <Label fx:id="username" layoutX="70.0" layoutY="203.0" text="USERNAME" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="164.0" layoutY="197.0" prefHeight="25.0" prefWidth="167.0" />
-      <Label layoutX="70.0" layoutY="240.0" text="PASSWORD" textFill="#3c3c3c">
+      <TextField fx:id="usernameField" layoutX="164.0" layoutY="200.0" prefHeight="25.0" prefWidth="167.0" />
+      <Label fx:id="password" layoutX="70.0" layoutY="243.0" text="PASSWORD" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <PasswordField layoutX="164.0" layoutY="238.0" prefHeight="25.0" prefWidth="167.0" />
-      <Label layoutX="94.0" layoutY="350.0" text="LOCAL TIMEZONE: WHITEPLAINS, NY" textFill="#ae0000">
+      <PasswordField fx:id="passwordField" layoutX="164.0" layoutY="241.0" prefHeight="25.0" prefWidth="167.0" />
+      <Label fx:id="LocalTimeZone" layoutX="94.0" layoutY="347.0" text="LOCAL TIMEZONE: WHITEPLAINS, NY" textFill="#ae0000">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="140.0" layoutY="289.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #593972;" text="LOGIN" textFill="WHITE">
+      <Button fx:id="loginButton" layoutX="140.0" layoutY="296.0" mnemonicParsing="false" onAction="#onActionLoginAppointmentsScreen" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #593972;" text="LOGIN" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
