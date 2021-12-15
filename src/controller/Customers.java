@@ -49,7 +49,7 @@ public class Customers implements Initializable {
     private TableView<?> customerTableView;
 
     @FXML
-    private TableColumn<?, ?> custID_col;
+    private TableColumn<?, ?> customerID_col;
 
     @FXML
     private TableColumn<?, ?> name_col;
@@ -58,25 +58,16 @@ public class Customers implements Initializable {
     private TableColumn<?, ?> address_col;
 
     @FXML
-    private TableColumn<?, ?> zip_col;
+    private TableColumn<?, ?> postalCode_col;
+
+    @FXML
+    private TableColumn<?, ?> country_col;
 
     @FXML
     private TableColumn<?, ?> phone_col;
 
     @FXML
-    private TableColumn<?, ?> DateCreated_col;
-
-    @FXML
-    private TableColumn<?, ?> createdBy_col;
-
-    @FXML
-    private TableColumn<?, ?> lastUpdate_col;
-
-    @FXML
-    private TableColumn<?, ?> updatedBy_col;
-
-    @FXML
-    private TableColumn<?, ?> divID_col;
+    private TableColumn<?, ?> divisionID_col;
 
     @FXML
     void onActionAddCustomerScreen(ActionEvent event) throws IOException {

@@ -41,74 +41,47 @@ public class Appointments implements Initializable {
     @FXML
     private Button deleteButton;
 
-    @FXML
-    private Tab allTab;
+    //ALL TABLEVIEW
+    @FXML private Tab allTab;
+    @FXML private TableView<?> allTableView;
+    @FXML private TableColumn<?, ?> allApptID_col;
+    @FXML private TableColumn<?, ?> allTitle_col;
+    @FXML private TableColumn<?, ?> allDescription_col;
+    @FXML private TableColumn<?, ?> allLocation_col;
+    @FXML private TableColumn<?, ?> allType_col;
+    @FXML private TableColumn<?, ?> allStart_col;
+    @FXML private TableColumn<?, ?> allEnd_col;
+    @FXML private TableColumn<?, ?> allContact_col;
+    @FXML private TableColumn<?, ?> allCustID_col;
+    @FXML private TableColumn<?, ?> allUserID_col;
 
-    @FXML
-    private TableView<?> allTableView;
+    //WEEK TABLEVIEW
+    @FXML private Tab weekTab;
+    @FXML private TableView<?> weekTableView;
+    @FXML private TableColumn<?, ?> weekApptID_col;
+    @FXML private TableColumn<?, ?> weekTitle_col;
+    @FXML private TableColumn<?, ?> weekDescription_col;
+    @FXML private TableColumn<?, ?> weekLocation_col;
+    @FXML private TableColumn<?, ?> weekType_Col;
+    @FXML private TableColumn<?, ?> weekStart_col;
+    @FXML private TableColumn<?, ?> weekEnd_col;
+    @FXML private TableColumn<?, ?> weekContact_col;
+    @FXML private TableColumn<?, ?> weekCustID_col;
+    @FXML private TableColumn<?, ?> weekUserID_col;
 
-    @FXML
-    private TableColumn<?, ?> allAppID_col;
-
-    @FXML
-    private TableColumn<?, ?> allTitle_col;
-
-    @FXML
-    private TableColumn<?, ?> allDescription_col;
-
-    @FXML
-    private TableColumn<?, ?> allLocation_col;
-
-    @FXML
-    private TableColumn<?, ?> allContact_col;
-
-    @FXML
-    private TableColumn<?, ?> allType_col;
-
-    @FXML
-    private TableColumn<?, ?> allStart_col;
-
-    @FXML
-    private TableColumn<?, ?> allEnd_col;
-
-    @FXML
-    private TableColumn<?, ?> custID_col;
-
-    @FXML
-    private TableColumn<?, ?> userID_col;
-
-    @FXML
-    private Tab weekTab;
-
-    @FXML
-    private TableView<?> weekTableView;
-
-    @FXML
-    private TableColumn<?, ?> weekAppID_col;
-
-    @FXML
-    private TableColumn<?, ?> weekTitle_col;
-
-    @FXML
-    private TableColumn<?, ?> weekDescription_col;
-
-    @FXML
-    private TableColumn<?, ?> weekLocation_col;
-
-    @FXML
-    private TableColumn<?, ?> weekContact_col;
-
-    @FXML
-    private TableColumn<?, ?> weekType_Col;
-
-    @FXML
-    private TableColumn<?, ?> weekStart_col;
-
-    @FXML
-    private TableColumn<?, ?> weekEnd_col;
-
-    @FXML
-    private Tab monthTab;
+    // MONTH TABLEVIEW
+    @FXML private Tab monthTab;
+    @FXML private TableView<?> monthTableView;
+    @FXML private TableColumn<?, ?> monthApptID_col;
+    @FXML private TableColumn<?, ?> monthTitle_col;
+    @FXML private TableColumn<?, ?> monthDescription_col;
+    @FXML private TableColumn<?, ?> monthLocation_col;
+    @FXML private TableColumn<?, ?> monthType_col;
+    @FXML private TableColumn<?, ?> monthStart_col;
+    @FXML private TableColumn<?, ?> monthEnd_col;
+    @FXML private TableColumn<?, ?> monthContact_col;
+    @FXML private TableColumn<?, ?> monthCustID_col;
+    @FXML private TableColumn<?, ?> monthUserID_col;
 
     @FXML
     private Button logoutButton;
