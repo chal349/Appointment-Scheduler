@@ -5,69 +5,38 @@ import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class Customers implements Initializable {
+public class Customers_Controller implements Initializable {
 
     Stage stage;
     Parent scene;
 
-    @FXML
-    private Button addButton;
+    @FXML private Button addButton;
+    @FXML private Button updateButton;
+    @FXML private Button deleteButton;
+    @FXML private Button appointmentsButton;
+    @FXML private Button customersButton;
+    @FXML private Button reportsButton;
+    @FXML private Button logoutButton;
 
-    @FXML
-    private Button updateButton;
+    @FXML private Label headerText;
 
-    @FXML
-    private Button deleteButton;
-
-    @FXML
-    private Button appointmentsButton;
-
-    @FXML
-    private Button customersButton;
-
-    @FXML
-    private Button reportsButton;
-
-    @FXML
-    private Button logoutButton;
-
-    @FXML
-    private Label headerText;
-
-    @FXML
-    private TableView<?> customerTableView;
-
-    @FXML
-    private TableColumn<?, ?> customerID_col;
-
-    @FXML
-    private TableColumn<?, ?> name_col;
-
-    @FXML
-    private TableColumn<?, ?> address_col;
-
-    @FXML
-    private TableColumn<?, ?> postalCode_col;
-
-    @FXML
-    private TableColumn<?, ?> country_col;
-
-    @FXML
-    private TableColumn<?, ?> phone_col;
-
-    @FXML
-    private TableColumn<?, ?> divisionID_col;
+    @FXML private TableView<model.Customers> customerTableView;
+    @FXML private TableColumn<model.Customers, Integer> customerID_col;
+    @FXML private TableColumn<model.Customers, String> name_col;
+    @FXML private TableColumn<model.Customers, String> address_col;
+    @FXML private TableColumn<model.Customers, Integer> postalCode_col;
+    @FXML private TableColumn<model.Customers, String> country_col;
+    @FXML private TableColumn<model.Customers, Integer> phone_col;
+    @FXML private TableColumn<model.Customers, Integer> divisionID_col;
 
     @FXML
     void onActionAddCustomerScreen(ActionEvent event) throws IOException {
@@ -94,7 +63,11 @@ public class Customers implements Initializable {
 
     @FXML
     void onActionLogout(ActionEvent event) {
-
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to close Application?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.exit(0);
+        }
     }
 
     @FXML

@@ -1,72 +1,74 @@
 package model;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Appointments {
-    private int appointmentID;
-    private String title;
-    private String description;
-    private String location;
-    private String type;
-    private LocalDateTime start;
-    private LocalDateTime end;
-    private int contact;
-    private int customerID;
-    private int userID;
+    private int Appointment_ID;
+    private String Title;
+    private String Description;
+    private String Location;
+    private String Type;
+    private Timestamp Start;
+    private Timestamp End;
+    private int Customer_ID;
+    private int User_ID;
+    private int Contact_ID;
 
 
     public Appointments(int appointmentID, String title, String description,
-                        String location, String type, LocalDateTime start,
-                        LocalDateTime end, int contact, int customerID, int userID) {
-        this.appointmentID = appointmentID;
-        this.title = title;
-        this.description = description;
-        this.location = location;
-        this.type = type;
-        this.start = start;
-        this.end = end;
-        this.contact = contact;
-        this.customerID = customerID;
-        this.userID = userID;
+                        String location, String type, Timestamp start,
+                        Timestamp end, int contact, int customerID, int userID) {
+        Appointment_ID = appointmentID;
+        Title = title;
+        Description = description;
+        Location = location;
+        Type = type;
+        Start = start;
+        End = end;
+        Customer_ID = customerID;
+        User_ID = userID;
+        Contact_ID = contact;
     }
 
-    public int getAppointmentID() {
-        return appointmentID;
+    public int getAppointment_ID() {
+        return Appointment_ID;
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
     public String getLocation() {
-        return location;
+        return Location;
     }
 
     public String getType() {
-        return type;
+        return Type;
     }
 
-    public LocalDateTime getStart() {
-        return start;
+    public Timestamp getStart() {
+        return Start;
     }
 
-    public LocalDateTime getEnd() {
-        return end;
+    public Timestamp getEnd() {
+        return End;
     }
 
-    public int getContact() {
-        return contact;
+    public int getCustomer_ID() {
+        return Customer_ID;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public int getUser_ID() {
+        return User_ID;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getContact_ID() {
+        return Contact_ID;
     }
 }
