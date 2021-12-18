@@ -100,13 +100,13 @@ public class Customers_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DBCustomers.getAllCustomers();
+
         customerTableView.setItems(getAllCustomers());
-        customerID_col.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
-        name_col.setCellValueFactory(new PropertyValueFactory<>("Customer_Name"));
-        address_col.setCellValueFactory(new PropertyValueFactory<>("Address"));
-        postalCode_col.setCellValueFactory(new PropertyValueFactory<>("Postal_Code"));
-        phone_col.setCellValueFactory(new PropertyValueFactory<>("Phone"));
-        divisionID_col.setCellValueFactory(new PropertyValueFactory<>("Division_ID"));
+        customerID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        name_col.setCellValueFactory(new PropertyValueFactory<>("name"));
+        address_col.setCellValueFactory(new PropertyValueFactory<>("address"));
+        postalCode_col.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        phone_col.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        divisionID_col.setCellValueFactory(new PropertyValueFactory<>("divisionID"));
     }
 }

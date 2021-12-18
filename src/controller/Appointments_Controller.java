@@ -150,39 +150,39 @@ public class Appointments_Controller implements Initializable {
 
         //Populate ALL TABLEVIEW with info
         allTableView.setItems(DBAppointments.getAllAppointments());
-        allApptID_col.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
-        allTitle_col.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        allDescription_col.setCellValueFactory(new PropertyValueFactory<>("Description"));
-        allLocation_col.setCellValueFactory(new PropertyValueFactory<>("Location"));
-        allContact_col.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
-        allType_col.setCellValueFactory(new PropertyValueFactory<>("Type"));
-        allStart_col.setCellValueFactory(new PropertyValueFactory<>("Start"));
-        allEnd_col.setCellValueFactory(new PropertyValueFactory<>("End"));
-        allCustID_col.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
-        allUserID_col.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+        allApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        allTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        allDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        allLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
+        allContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
+        allType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
+        allStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
+        allEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        allCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        allUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
         //Populate MONTH TABLEVIEW with info
-        monthTableView.setItems(DBAppointments.getMonthAppointments());
-        monthApptID_col.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
-        monthTitle_col.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        monthDescription_col.setCellValueFactory(new PropertyValueFactory<>("Description"));
-        monthLocation_col.setCellValueFactory(new PropertyValueFactory<>("Location"));
-        monthContact_col.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
-        monthType_col.setCellValueFactory(new PropertyValueFactory<>("Type"));
-        monthStart_col.setCellValueFactory(new PropertyValueFactory<>("Start"));
-        monthEnd_col.setCellValueFactory(new PropertyValueFactory<>("End"));
-        monthCustID_col.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
-        monthUserID_col.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+        monthTableView.setItems(DBAppointments.getAllAppointments());
+        monthApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        monthTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        monthDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        monthLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
+        monthContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
+        monthType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
+        monthStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
+        monthEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        monthCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        monthUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
         //Populate MONTH TABLEVIEW with info
         weekTableView.setItems(DBAppointments.getAllAppointments());
-        weekApptID_col.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
-        weekTitle_col.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        weekDescription_col.setCellValueFactory(new PropertyValueFactory<>("Description"));
-        weekLocation_col.setCellValueFactory(new PropertyValueFactory<>("Location"));
-        weekContact_col.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
-        weekType_Col.setCellValueFactory(new PropertyValueFactory<>("Type"));
-        weekStart_col.setCellValueFactory(new PropertyValueFactory<>("Start"));
-        weekEnd_col.setCellValueFactory(new PropertyValueFactory<>("End"));
-        weekCustID_col.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
-        weekUserID_col.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+        weekApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        weekTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        weekDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        weekLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
+        weekContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
+        weekType_Col.setCellValueFactory(new PropertyValueFactory<>("type"));
+        weekStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
+        weekEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        weekCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        weekUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
     }
 }

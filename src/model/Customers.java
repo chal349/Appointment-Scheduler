@@ -4,67 +4,67 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Customers {
-    private int Customer_ID;
-    private String Customer_Name;
-    private String Address;
-    private String Postal_Code;
-    private String Phone;
-    private int Division_ID;
+    private int customerID;
+    private String name;
+    private String address;
+    private String postalCode;
+    private String phone;
+    private int divisionID;
 
     public Customers(int customerID, String name, String address, String postalCode, String phone, int divisionID) {
-        Customer_ID = customerID;
-        Customer_Name = name;
-        Address = address;
-        Postal_Code = postalCode;
-        Phone = phone;
-        Division_ID = divisionID;
+        this.customerID = customerID;
+        this.name = name;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.divisionID = divisionID;
     }
 
     public int getCustomerID() {
-        return Customer_ID;
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
     public String getName() {
-        return Customer_Name;
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
-        return Address;
-    }
-
-    public String getPostalCode() {
-        return Postal_Code;
-    }
-
-    public String getPhone() {
-        return Phone;
-    }
-
-    public int getDivisionID() {
-        return Division_ID;
-    }
-
-    public void setCustomer_ID(int customer_ID) {
-        Customer_ID = customer_ID;
-    }
-
-    public void setCustomer_Name(String customer_Name) {
-        Customer_Name = customer_Name;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
-    public void setPostal_Code(String postal_Code) {
-        Postal_Code = postal_Code;
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public void setPhone(String phone) {
-        Phone = phone;
+        this.phone = phone;
     }
 
-    public void setDivision_ID(int division_ID) {
-        Division_ID = division_ID;
+    public int getDivisionID() {
+        return divisionID;
+    }
+
+    public void setDivisionID(int divisionID) {
+        this.divisionID = divisionID;
     }
 }
