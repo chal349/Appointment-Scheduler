@@ -67,11 +67,15 @@ public class Customers_Controller implements Initializable {
     }
 
     @FXML
-    void onActionLogout(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to close Application?");
+    void onActionLogout(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to Logout?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            System.exit(0);
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.setTitle("SCHEDULER");
+            stage.show();
         }
     }
 
