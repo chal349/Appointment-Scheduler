@@ -143,7 +143,7 @@ public class Appointments_Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        DBAppointments.populateTable();
+
         //Populate ALL TABLEVIEW with info
         allTableView.setItems(DBAppointments.getAllAppointments());
         allApptID_col.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
@@ -157,7 +157,7 @@ public class Appointments_Controller implements Initializable {
         allCustID_col.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
         allUserID_col.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
         //Populate MONTH TABLEVIEW with info
-        monthTableView.setItems(DBAppointments.getAllAppointments());
+        monthTableView.setItems(DBAppointments.getMonthAppointments());
         monthApptID_col.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
         monthTitle_col.setCellValueFactory(new PropertyValueFactory<>("Title"));
         monthDescription_col.setCellValueFactory(new PropertyValueFactory<>("Description"));

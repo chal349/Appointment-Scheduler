@@ -1,5 +1,6 @@
 package controller;
 
+import DBconnection.DBCustomers;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
@@ -7,12 +8,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Customers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static DBconnection.DBCustomers.getAllCustomers;
 
 public class Customers_Controller implements Initializable {
 
@@ -91,6 +96,13 @@ public class Customers_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        DBCustomers.getAllCustomers();
+        customerTableView.setItems(getAllCustomers());
+        customerID_col.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
+        name_col.setCellValueFactory(new PropertyValueFactory<>("Customer_Name"));
+        address_col.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        postalCode_col.setCellValueFactory(new PropertyValueFactory<>("Postal_Code"));
+        phone_col.setCellValueFactory(new PropertyValueFactory<>("Phone"));
+        divisionID_col.setCellValueFactory(new PropertyValueFactory<>("Division_ID"));
     }
 }

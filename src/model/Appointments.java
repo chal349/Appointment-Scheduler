@@ -10,16 +10,16 @@ public class Appointments {
     private String Description;
     private String Location;
     private String Type;
-    private Timestamp Start;
-    private Timestamp End;
+    private LocalDateTime Start;
+    private LocalDateTime End;
     private int Customer_ID;
     private int User_ID;
     private int Contact_ID;
 
 
     public Appointments(int appointmentID, String title, String description,
-                        String location, String type, Timestamp start,
-                        Timestamp end, int contact, int customerID, int userID) {
+                        String location, String type, LocalDateTime start,
+                        LocalDateTime end, int contact, int customerID, int userID) {
         Appointment_ID = appointmentID;
         Title = title;
         Description = description;
@@ -52,11 +52,11 @@ public class Appointments {
         return Type;
     }
 
-    public Timestamp getStart() {
+    public LocalDateTime getStart() {
         return Start;
     }
 
-    public Timestamp getEnd() {
+    public LocalDateTime getEnd() {
         return End;
     }
 
