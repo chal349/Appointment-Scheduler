@@ -2,12 +2,12 @@ package model;
 
 public class Divisions {
     private int divisionID;
-    private String divisionName;
+    private String name;
     private int countryID;
 
-    public Divisions(int divisionID, String divisionName, int countryID) {
+    public Divisions(int divisionID, String name, int countryID) {
         this.divisionID = divisionID;
-        this.divisionName = divisionName;
+        this.name = name;
         this.countryID = countryID;
     }
 
@@ -16,7 +16,7 @@ public class Divisions {
     }
 
     public String getDivisionName() {
-        return divisionName;
+        return name;
     }
 
     public int getCountryID() {

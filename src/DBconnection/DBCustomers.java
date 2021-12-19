@@ -34,4 +34,19 @@ public class DBCustomers {
         return allCustomers;
     }
 
+    public static void newCustomer(String name, String address, String postalCode, String phone, int divisionID) {
+        try{
+            String sql = "INSERT INTO customers VALUES(NULL, ?, ?, ?, ?, NULL, NULL, NULL, NULL, ?)";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, address);
+            ps.setString(3, postalCode);
+            ps.setString(4, phone);
+            ps.setInt(5, divisionID);
+            ps.execute();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
