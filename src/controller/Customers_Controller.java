@@ -14,10 +14,12 @@ import model.Customers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static DBconnection.DBCustomers.getAllCustomers;
+import static DBconnection.DBCustomers.*;
 
 public class Customers_Controller implements Initializable {
 
@@ -61,9 +63,11 @@ public class Customers_Controller implements Initializable {
     }
 
     @FXML
-    void onActionDelete(ActionEvent event) {
-
-    }
+    void onActionDelete(ActionEvent event) throws SQLException {
+        Customers customer = customerTableView.getSelectionModel().getSelectedItem();
+        getCustomerAppointments(customer);
+        DBCustomers.deleteCustomer(customer);
+        customerTableView.setItems(getAllCustomers());    }
 
     @FXML
     void onActionLogout(ActionEvent event) throws IOException {

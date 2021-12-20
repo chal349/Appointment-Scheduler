@@ -1,8 +1,5 @@
 package model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 public class Customers {
     private int customerID;
     private String name;

@@ -3,11 +3,14 @@ package DBconnection;
 import helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.Customers;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class DBCustomers {
 
@@ -47,6 +50,41 @@ public class DBCustomers {
         }
         catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static int getCustomerAppointments(Customers customer) {
+        String sql = "SELECT COUNT(*) AS total FROM appointments WHERE Customer_ID = ?";
+        try{
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, customer.getCustomerID());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            } else{
+                return 0;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static void deleteCustomer(Customers customer) throws SQLException {
+        if(getCustomerAppointments(customer) == 0) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish delete Customer?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                String sql = "DELETE FROM customers WHERE Customer_ID = ?";
+                PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+                ps.setInt(1, customer.getCustomerID());
+                ps.executeUpdate();
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Customer's appointments must be deleted before deleting customer.");
+            alert.showAndWait();
         }
     }
 }
