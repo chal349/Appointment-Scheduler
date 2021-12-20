@@ -44,6 +44,12 @@ public class Customers_Controller implements Initializable {
     @FXML private TableColumn<model.Customers, Integer> phone_col;
     @FXML private TableColumn<model.Customers, Integer> divisionID_col;
 
+    private static Customers customerToModify;
+    public static Customers getCustomerToModify(){
+        return customerToModify;
+    }
+
+
     @FXML
     void onActionAddCustomerScreen(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -93,13 +99,20 @@ public class Customers_Controller implements Initializable {
 
     @FXML
     void onActionUpdateCustomerScreen(ActionEvent event) throws IOException {
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/UpdateCustomer.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.setTitle("Update Customer");
-        stage.show();
+        customerToModify = customerTableView.getSelectionModel().getSelectedItem();
+        if (customerToModify == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("No Customer was selected.");
+            alert.showAndWait();
+        } else {
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/UpdateCustomer.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.setTitle("Update Customer");
+            stage.show();
+        }
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

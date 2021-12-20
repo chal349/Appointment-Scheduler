@@ -92,7 +92,7 @@
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="stateProvinceBox" layoutX="188.0" layoutY="470.0" prefWidth="150.0" />
+      <ComboBox fx:id="stateProvinceBox" layoutX="188.0" layoutY="470.0" onMouseClicked="#stateProvince_box" prefWidth="150.0" />
       <Button fx:id="cancelButton" layoutX="50.0" layoutY="538.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="25.0" prefWidth="120.0" text="CANCEL">
          <font>
             <Font name="System Bold" size="12.0" />

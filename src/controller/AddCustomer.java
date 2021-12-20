@@ -82,7 +82,6 @@ public class AddCustomer implements Initializable {
             phoneNumberField.getText().isEmpty() ||
             countryBox.getSelectionModel().isEmpty() ||
             stateProvinceBox.getSelectionModel().isEmpty()){
-
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("All fields must be completed.");
             alert.showAndWait();

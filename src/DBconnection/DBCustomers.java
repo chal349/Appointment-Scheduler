@@ -53,6 +53,23 @@ public class DBCustomers {
         }
     }
 
+    public static void updateCustomer(int customerID, String name, String address, String postalCode, String phone, int divisionID){
+        try{
+            String sql = "UPDATE customers set Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, address);
+            ps.setString(3, postalCode);
+            ps.setString(4, phone);
+            ps.setInt(5, divisionID);
+            ps.setInt(6, customerID);
+            ps.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public static int getCustomerAppointments(Customers customer) {
         String sql = "SELECT COUNT(*) AS total FROM appointments WHERE Customer_ID = ?";
         try{
