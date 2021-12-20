@@ -121,13 +121,12 @@
                       </Label>
                   <TableView fx:id="customerTableView" layoutX="11.0" layoutY="34.0" prefHeight="328.0" prefWidth="590.0">
                      <columns>
-                        <TableColumn fx:id="customerID_col" prefWidth="75.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUSTOMER ID" />
-                        <TableColumn fx:id="name_col" prefWidth="79.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="NAME" />
-                        <TableColumn fx:id="address_col" prefWidth="122.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="ADDRESS" />
-                        <TableColumn fx:id="postalCode_col" minWidth="0.0" prefWidth="75.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="POSTAL CODE" />
-                        <TableColumn fx:id="country_col" prefWidth="92.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="COUNTRY" />
-                        <TableColumn fx:id="phone_col" minWidth="3.0" prefWidth="85.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="PHONE" />
-                        <TableColumn fx:id="divisionID_col" prefWidth="61.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DIVISION ID" />
+                        <TableColumn fx:id="customerID_col" prefWidth="76.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUSTOMER ID" />
+                        <TableColumn fx:id="name_col" prefWidth="95.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="NAME" />
+                        <TableColumn fx:id="address_col" prefWidth="168.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="ADDRESS" />
+                        <TableColumn fx:id="postalCode_col" minWidth="0.0" prefWidth="74.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="POSTAL CODE" />
+                        <TableColumn fx:id="phone_col" minWidth="3.0" prefWidth="107.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="PHONE" />
+                        <TableColumn fx:id="divisionID_col" prefWidth="69.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DIVISION ID" />
                      </columns>
                   </TableView>
                </children>

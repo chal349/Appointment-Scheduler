@@ -39,7 +39,6 @@ public class Customers_Controller implements Initializable {
     @FXML private TableColumn<model.Customers, String> name_col;
     @FXML private TableColumn<model.Customers, String> address_col;
     @FXML private TableColumn<model.Customers, Integer> postalCode_col;
-    @FXML private TableColumn<model.Customers, String> country_col;
     @FXML private TableColumn<model.Customers, Integer> phone_col;
     @FXML private TableColumn<model.Customers, Integer> divisionID_col;
 

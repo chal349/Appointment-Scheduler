@@ -1,6 +1,8 @@
 package controller;
 
 import DBconnection.DBCountries;
+import DBconnection.DBCustomers;
+import DBconnection.DBDivisions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +16,7 @@ import javafx.stage.Stage;
 import model.Countries;
 import model.Divisions;
 
-
+import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,13 +41,29 @@ public class AddCustomer implements Initializable {
     @FXML private Label postalCode;
     @FXML private TextField postalCodeField;
     @FXML private Label country;
-    @FXML private ComboBox<?> countryBox;
+    @FXML private ComboBox<Countries> countryBox;
     @FXML private Label stateProvince;
-    @FXML private ComboBox<?> stateProvinceBox;
+    @FXML private ComboBox<Divisions> stateProvinceBox;
     @FXML private Button cancelButton;
 
-    public ObservableList<Divisions> divisions = FXCollections.observableArrayList();
-    public ObservableList<Countries> countries = DBCountries.getAllCountries();
+    ObservableList<Countries> countries = DBCountries.getAllCountries();
+    ObservableList<Divisions> divisions = DBDivisions.getAllDivisions();
+
+
+    public void stateProvince_box(MouseEvent event) {
+        try{
+            divisions.clear();
+            int divisionSelection = countryBox.getSelectionModel().getSelectedItem().getCountryID();
+            for (Divisions division : DBDivisions.getAllDivisions()){
+                if(division.getCountryID() == divisionSelection){
+                    divisions.add(division);
+                }
+            }
+
+        } catch (NullPointerException n){
+        }
+    }
+
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
@@ -57,7 +75,7 @@ public class AddCustomer implements Initializable {
     }
 
     @FXML
-    void onActionSave(ActionEvent event) {
+    void onActionSave(ActionEvent event) throws IOException {
         if (fullNameField.getText().isEmpty() ||
             streetAddressField.getText().isEmpty() ||
             postalCodeField.getText().isEmpty() ||
@@ -70,14 +88,27 @@ public class AddCustomer implements Initializable {
             alert.showAndWait();
         } else{
             String name = fullNameField.getText();
-            String address = streetAddressField.getText();
+            String address = streetAddressField.getText() + ", " + cityTownField.getText();
             String postalCode = postalCodeField.getText();
+            String phone = phoneNumberField.getText();
 
+            Divisions selection = stateProvinceBox.getSelectionModel().getSelectedItem();
+            int divisionID = selection.getDivisionID();
+
+            DBCustomers.newCustomer(name, address, postalCode, phone, divisionID);
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.setTitle("Customers");
+            stage.show();
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        stateProvinceBox.setItems(divisions);
+        countryBox.setItems(countries);
     }
 }

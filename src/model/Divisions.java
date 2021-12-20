@@ -22,4 +22,9 @@ public class Divisions {
     public int getCountryID() {
         return countryID;
     }
+
+    @Override
+    public String toString(){
+        return getDivisionName();
+    }
 }
