@@ -54,16 +54,23 @@ public class UpdateCustomer implements Initializable {
 
     private Customers customerSelected;
 
+    @FXML
+    void country_box(ActionEvent event) {
+        divisions.clear();
+        stateProvinceBox.setItems(divisions);
+    }
+
     public void stateProvince_box(MouseEvent event) {
         try{
-            divisions.clear();
+            divisions.setAll();
             int divisionSelection = countryBox.getSelectionModel().getSelectedItem().getCountryID();
+
             for (Divisions division : DBDivisions.getAllDivisions()){
                 if(division.getCountryID() == divisionSelection){
                     divisions.add(division);
                 }
+                stateProvinceBox.getSelectionModel().select(customerSelected.getDivisionID()-1);
             }
-
         } catch (NullPointerException n){
         }
     }
@@ -112,8 +119,7 @@ public class UpdateCustomer implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         customerSelected = Customers_Controller.getCustomerToModify();
-        stateProvinceBox.setItems(divisions);
-        countryBox.setItems(countries);
+
 
         customerID_field.setText(String.valueOf(customerSelected.getCustomerID()));
         fullNameField.setText(String.valueOf(customerSelected.getName()));
@@ -126,6 +132,7 @@ public class UpdateCustomer implements Initializable {
         String cityFromStreet = city.substring(city.lastIndexOf(',')+ 1).trim();
         cityTownField.setText(cityFromStreet);
         postalCodeField.setText(String.valueOf(customerSelected.getPostalCode()));
+
         divisions = DBDivisions.getAllDivisions();
         for(Divisions D : divisions) {
             if(customerSelected.getDivisionID() == D.getDivisionID()){
@@ -137,6 +144,7 @@ public class UpdateCustomer implements Initializable {
                 }
             }
         }
-
+        stateProvinceBox.setItems(divisions);
+        countryBox.setItems(countries);
     }
 }

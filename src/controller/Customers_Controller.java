@@ -26,28 +26,49 @@ public class Customers_Controller implements Initializable {
     Stage stage;
     Parent scene;
 
-    @FXML private Button addButton;
-    @FXML private Button updateButton;
-    @FXML private Button deleteButton;
-    @FXML private Button appointmentsButton;
-    @FXML private Button customersButton;
-    @FXML private Button reportsButton;
-    @FXML private Button logoutButton;
+    @FXML
+    private Button addButton;
+    @FXML
+    private Button updateButton;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private Button appointmentsButton;
+    @FXML
+    private Button customersButton;
+    @FXML
+    private Button reportsButton;
+    @FXML
+    private Button logoutButton;
 
-    @FXML private Label headerText;
+    @FXML
+    private Label headerText;
 
-    @FXML private TableView<model.Customers> customerTableView;
-    @FXML private TableColumn<model.Customers, Integer> customerID_col;
-    @FXML private TableColumn<model.Customers, String> name_col;
-    @FXML private TableColumn<model.Customers, String> address_col;
-    @FXML private TableColumn<model.Customers, Integer> postalCode_col;
-    @FXML private TableColumn<model.Customers, Integer> phone_col;
-    @FXML private TableColumn<model.Customers, Integer> divisionID_col;
+    @FXML
+    private TableView<model.Customers> customerTableView;
+    @FXML
+    private TableColumn<model.Customers, Integer> customerID_col;
+    @FXML
+    private TableColumn<model.Customers, String> name_col;
+    @FXML
+    private TableColumn<model.Customers, String> address_col;
+    @FXML
+    private TableColumn<model.Customers, Integer> postalCode_col;
+    @FXML
+    private TableColumn<model.Customers, Integer> phone_col;
+    @FXML
+    private TableColumn<model.Customers, Integer> divisionID_col;
 
     private static Customers customerToModify;
-    public static Customers getCustomerToModify(){
+    private static Customers customerToDelete;
+
+    public static Customers getCustomerToModify() {
         return customerToModify;
     }
+    public static Customers getCustomerToDelete() {
+    return customerToDelete;
+    }
+
 
 
     @FXML
@@ -68,12 +89,22 @@ public class Customers_Controller implements Initializable {
         stage.show();
     }
 
+
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
-        Customers customer = customerTableView.getSelectionModel().getSelectedItem();
-        getCustomerAppointments(customer);
-        DBCustomers.deleteCustomer(customer);
-        customerTableView.setItems(getAllCustomers());    }
+        customerToDelete = customerTableView.getSelectionModel().getSelectedItem();
+        if (customerToDelete == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("No Customer was selected.");
+            alert.showAndWait();
+        } else {
+            Customers customer = customerTableView.getSelectionModel().getSelectedItem();
+            getCustomerAppointments(customer);
+            DBCustomers.deleteCustomer(customer);
+            customerTableView.setItems(getAllCustomers());
+        }
+    }
 
     @FXML
     void onActionLogout(ActionEvent event) throws IOException {

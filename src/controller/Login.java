@@ -42,6 +42,7 @@ public class Login implements Initializable {
 
     ResourceBundle login = ResourceBundle.getBundle("properties.lang", Locale.getDefault());
 
+
     @FXML
     void onActionLoginAppointmentsScreen(ActionEvent event) throws IOException {
         if((passwordField.getText().equals("test")) && (usernameField.getText().equals("test"))) {

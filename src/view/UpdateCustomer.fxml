@@ -86,7 +86,7 @@
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="countryBox" layoutX="188.0" layoutY="430.0" prefWidth="150.0" />
+      <ComboBox fx:id="countryBox" layoutX="188.0" layoutY="430.0" onAction="#country_box" prefWidth="150.0" />
       <Label fx:id="stateProvince" layoutX="51.0" layoutY="473.0" text="STATE/PROVINCE" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />

@@ -1,11 +1,11 @@
 package model;
 
-public class USERS {
+public class Users {
     private int userID;
-    private String username;
+    private static String username;
     private String password;
 
-    public USERS(int userID, String username, String password) {
+    public Users(int userID, String username, String password) {
         this.userID = userID;
         this.username = username;
         this.password = password;
@@ -15,7 +15,7 @@ public class USERS {
         return userID;
     }
 
-    public String getUsername() {
+    public static String getUsername() {
         return username;
     }
 
