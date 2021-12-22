@@ -44,20 +44,13 @@ public class DBCustomers {
 
     public static void newCustomer(String name, String address, String postalCode, String phone, int divisionID) {
         try{
-            String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO customers VALUES (NULL, ?, ?, ?, ?, now(), 'user', now(), 'user',?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, name);
             ps.setString(2, address);
             ps.setString(3, postalCode);
             ps.setString(4, phone);
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-            Date stamp = new Date();
-            ps.setString(5,formatter.format(stamp));
-            ps.setString(6, Users.getUsername());
-            ps.setString(7, formatter.format(stamp));
-            ps.setString(8, Users.getUsername());
-            ps.setInt(9, divisionID);
+            ps.setInt(5, divisionID);
             ps.execute();
         }
         catch (SQLException e) {
@@ -67,19 +60,14 @@ public class DBCustomers {
 
     public static void updateCustomer(int customerID, String name, String address, String postalCode, String phone, int divisionID){
         try{
-            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
+            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, name);
             ps.setString(2, address);
             ps.setString(3, postalCode);
             ps.setString(4, phone);
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-            Date stamp = new Date();
-            ps.setString(5,formatter.format(stamp));
-            ps.setString(6, Users.getUsername());
-            ps.setInt(7, divisionID);
-            ps.setInt(8, customerID);
+            ps.setInt(5, divisionID);
+            ps.setInt(6, customerID);
             ps.execute();
 
         } catch (SQLException throwables) {
@@ -106,7 +94,7 @@ public class DBCustomers {
 
     public static void deleteCustomer(Customers customer) throws SQLException {
         if(getCustomerAppointments(customer) == 0) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish delete Customer?");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to delete Customer?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 String sql = "DELETE FROM customers WHERE Customer_ID = ?";
@@ -125,4 +113,5 @@ public class DBCustomers {
             alert.showAndWait();
         }
     }
+
 }

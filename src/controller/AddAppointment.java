@@ -1,5 +1,10 @@
 package controller;
 
+import DBconnection.DBAppointments;
+import DBconnection.DBContacts;
+import DBconnection.DBCustomers;
+import DBconnection.DBUsers;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,9 +18,14 @@ import javafx.event.ActionEvent;
 
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import model.Contacts;
+import model.Customers;
+import model.Users;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AddAppointment implements Initializable {
@@ -23,80 +33,37 @@ public class AddAppointment implements Initializable {
     Stage stage;
     Parent scene;
 
-    @FXML
-    private Label headerText;
+    @FXML private Label headerText;
+    @FXML private Label appointmentID;
+    @FXML private TextField appointmentID_field;
+    @FXML private Label customerID;
+    @FXML private ComboBox<Customers> customerID_box;
+    @FXML private Label userID;
+    @FXML private ComboBox<Users> userID_box;
+    @FXML private Label contact;
+    @FXML private ComboBox<Contacts> contactBox;
+    @FXML private Label type;
+    @FXML private ComboBox<String> typeBox;
+    @FXML private Label location;
+    @FXML private TextField locationField;
+    @FXML private Label title;
+    @FXML private TextField titleField;
+    @FXML private Label description;
+    @FXML private TextField descriptionField;
+    @FXML private Label date;
+    @FXML private DatePicker datePickerBox;
+    @FXML private Label start;
+    @FXML private ComboBox<LocalTime> startTimeBox;
+    @FXML private Label end;
+    @FXML private ComboBox<LocalTime> endTimeBox;
+    @FXML private Button cancelButton;
+    @FXML private Button saveButton;
 
-    @FXML
-    private Label appointmentID;
 
-    @FXML
-    private TextField appointmentID_field;
+    public ObservableList<Users> userList = DBUsers.getAllUsers();
+    public ObservableList<Contacts> contactsList = DBContacts.getAllContacts();
+    public ObservableList<String> typesList = DBAppointments.getAllTypes();
 
-    @FXML
-    private Label customerID;
-
-    @FXML
-    private ComboBox<?> customerID_box;
-
-    @FXML
-    private Label userID;
-
-    @FXML
-    private ComboBox<?> userID_box;
-
-    @FXML
-    private Label contact;
-
-    @FXML
-    private ComboBox<?> contactBox;
-
-    @FXML
-    private Label type;
-
-    @FXML
-    private ComboBox<?> typeBox;
-
-    @FXML
-    private Label location;
-
-    @FXML
-    private TextField locationField;
-
-    @FXML
-    private Label title;
-
-    @FXML
-    private TextField titleField;
-
-    @FXML
-    private Label description;
-
-    @FXML
-    private TextField descriptionField;
-
-    @FXML
-    private Label date;
-
-    @FXML
-    private DatePicker datePickerBox;
-
-    @FXML
-    private Label start;
-
-    @FXML
-    private ComboBox<?> startTimeBox;
-
-    @FXML
-    private Label end;
-
-    @FXML
-    private ComboBox<?> endTimeBox;
-
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button saveButton;
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
@@ -114,6 +81,11 @@ public class AddAppointment implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        datePickerBox.setValue(LocalDate.now());
+        typeBox.setItems(typesList);
+        userID_box.setItems(userList);
+        customerID_box.setItems(DBCustomers.getAllCustomers());
+        contactBox.setItems(contactsList);
 
     }
 }

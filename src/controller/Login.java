@@ -45,6 +45,7 @@ public class Login implements Initializable {
 
     @FXML
     void onActionLoginAppointmentsScreen(ActionEvent event) throws IOException {
+
         if((passwordField.getText().equals("test")) && (usernameField.getText().equals("test"))) {
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));

@@ -14,7 +14,6 @@ import model.Customers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -40,33 +39,22 @@ public class Customers_Controller implements Initializable {
     private Button reportsButton;
     @FXML
     private Button logoutButton;
-
     @FXML
     private Label headerText;
 
-    @FXML
-    private TableView<model.Customers> customerTableView;
-    @FXML
-    private TableColumn<model.Customers, Integer> customerID_col;
-    @FXML
-    private TableColumn<model.Customers, String> name_col;
-    @FXML
-    private TableColumn<model.Customers, String> address_col;
-    @FXML
-    private TableColumn<model.Customers, Integer> postalCode_col;
-    @FXML
-    private TableColumn<model.Customers, Integer> phone_col;
-    @FXML
-    private TableColumn<model.Customers, Integer> divisionID_col;
+    @FXML private TableView<model.Customers> customerTableView;
+    @FXML private TableColumn<model.Customers, Integer> customerID_col;
+    @FXML private TableColumn<model.Customers, String> name_col;
+    @FXML private TableColumn<model.Customers, String> address_col;
+    @FXML private TableColumn<model.Customers, Integer> postalCode_col;
+    @FXML private TableColumn<model.Customers, Integer> phone_col;
+    @FXML private TableColumn<model.Customers, Integer> divisionID_col;
 
     private static Customers customerToModify;
     private static Customers customerToDelete;
 
     public static Customers getCustomerToModify() {
         return customerToModify;
-    }
-    public static Customers getCustomerToDelete() {
-    return customerToDelete;
     }
 
 

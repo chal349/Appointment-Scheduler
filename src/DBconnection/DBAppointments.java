@@ -22,32 +22,96 @@ public class DBAppointments {
         ObservableList<Appointments> allList = FXCollections.observableArrayList();
 
         try{
-            allList.clear();
             String sql = "Select Appointment_ID, Title, Description, Location, Type, Start, End, Contact_ID, Customer_ID, User_ID FROM Appointments";
-            PreparedStatement PS = JDBC.getConnection().prepareStatement(sql);
-            ResultSet RS = PS.executeQuery();
-            while (RS.next()) {
-                int appointmentID = RS.getInt("Appointment_ID");
-                String title = RS.getString("Title");
-                String description = RS.getString("Description");
-                String location = RS.getString("Location");
-                String type = RS.getString("Type");
-
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                format.setTimeZone(TimeZone.getTimeZone("UTC"));
-                Date start = format.parse(RS.getString("Start"));
-                Date end = format.parse(RS.getString("End"));
-
-                int customerID = RS.getInt("Contact_ID");
-                int userID = RS.getInt("User_ID");
-                int contactID = RS.getInt("Customer_ID");
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentID = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                String type = rs.getString("Type");
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                int customerID = rs.getInt("Contact_ID");
+                int userID = rs.getInt("User_ID");
+                int contactID = rs.getInt("Customer_ID");
                 Appointments appointments = new Appointments(appointmentID, title, description, location, type, start, end, contactID, customerID, userID);
                 allList.add(appointments);
             }
-        } catch (SQLException | ParseException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return allList;
+    }
+
+
+    public static ObservableList<Appointments> getMonthAppointments() {
+        ObservableList<Appointments> monthList = FXCollections.observableArrayList();
+
+        try{
+            String sql = "Select Appointment_ID, Title, Description, Location, Type, Start, End, Contact_ID, Customer_ID, User_ID FROM Appointments WHERE MONTH(Start) = MONTH(current_date())";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentID = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                String type = rs.getString("Type");
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                int customerID = rs.getInt("Contact_ID");
+                int userID = rs.getInt("User_ID");
+                int contactID = rs.getInt("Customer_ID");
+                Appointments appointments = new Appointments(appointmentID, title, description, location, type, start, end, contactID, customerID, userID);
+                monthList.add(appointments);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return monthList;
+    }
+
+    public static ObservableList<Appointments> getWeekAppointments() {
+        ObservableList<Appointments> weekList = FXCollections.observableArrayList();
+
+        try{
+            String sql = "Select Appointment_ID, Title, Description, Location, Type, Start, End, Contact_ID, Customer_ID, User_ID FROM Appointments WHERE WEEK(Start) = WEEK(current_date())";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentID = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                String type = rs.getString("Type");
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                int customerID = rs.getInt("Contact_ID");
+                int userID = rs.getInt("User_ID");
+                int contactID = rs.getInt("Customer_ID");
+                Appointments appointments = new Appointments(appointmentID, title, description, location, type, start, end, contactID, customerID, userID);
+                weekList.add(appointments);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return weekList;
+    }
+
+    public static ObservableList<String> getAllTypes() {
+        ObservableList<String> typesList = FXCollections.observableArrayList();
+        String sql = "Select DISTINCT Type FROM appointments";
+        try{
+            ResultSet rs = JDBC.getConnection().createStatement().executeQuery(sql);
+            while(rs.next()){
+                typesList.add(rs.getString("Type"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return typesList;
     }
 
 }

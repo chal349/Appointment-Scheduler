@@ -161,7 +161,7 @@ public class Appointments_Controller implements Initializable {
         allCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         allUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
         //Populate MONTH TABLEVIEW with info
-        monthTableView.setItems(DBAppointments.getAllAppointments());
+        monthTableView.setItems(DBAppointments.getMonthAppointments());
         monthApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         monthTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
         monthDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -173,7 +173,7 @@ public class Appointments_Controller implements Initializable {
         monthCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         monthUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
         //Populate MONTH TABLEVIEW with info
-        weekTableView.setItems(DBAppointments.getAllAppointments());
+        weekTableView.setItems(DBAppointments.getWeekAppointments());
         weekApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         weekTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
         weekDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));

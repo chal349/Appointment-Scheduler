@@ -64,4 +64,9 @@ public class Customers {
     public void setDivisionID(int divisionID) {
         this.divisionID = divisionID;
     }
+
+    @Override
+    public String toString(){
+        return String.valueOf(customerID + " - " + name);
+    }
 }

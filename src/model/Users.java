@@ -22,4 +22,9 @@ public class Users {
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public String toString(){
+        return String.valueOf(userID + " - " + username);
+    }
 }
