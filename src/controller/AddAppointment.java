@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import model.Appointments;
 import model.Contacts;
 import model.Customers;
 import model.Users;
@@ -63,6 +64,9 @@ public class AddAppointment implements Initializable {
     public ObservableList<Users> userList = DBUsers.getAllUsers();
     public ObservableList<Contacts> contactsList = DBContacts.getAllContacts();
     public ObservableList<String> typesList = DBAppointments.getAllTypes();
+    public ObservableList<Customers> customersList = DBCustomers.getAllCustomers();
+    private LocalTime OPEN = LocalTime.of(8, 0);
+    private LocalTime CLOSED = LocalTime.of(21, 45);
 
 
     @FXML
@@ -84,8 +88,21 @@ public class AddAppointment implements Initializable {
         datePickerBox.setValue(LocalDate.now());
         typeBox.setItems(typesList);
         userID_box.setItems(userList);
-        customerID_box.setItems(DBCustomers.getAllCustomers());
+        customerID_box.setItems(customersList);
         contactBox.setItems(contactsList);
+
+        LocalTime startStart = OPEN;
+        LocalTime startEnd = CLOSED;
+        while(startStart.isBefore(startEnd.plusSeconds(1))){
+            startTimeBox.getItems().add(startStart);
+            startStart = startStart.plusMinutes(15);
+        }
+        LocalTime endStart = OPEN.plusMinutes(15);
+        LocalTime endEnd = CLOSED;
+        while(endStart.isBefore(endEnd.plusSeconds(1))){
+            endTimeBox.getItems().add(endStart);
+            endStart = endStart.plusMinutes(15);
+        }
 
     }
 }

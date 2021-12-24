@@ -102,13 +102,13 @@
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="startTimeBox" layoutX="387.0" layoutY="306.0" prefHeight="25.0" prefWidth="66.0" />
-      <Label fx:id="end" layoutX="482.0" layoutY="310.0" text="END" textFill="#3c3c3c">
+      <ComboBox fx:id="startTimeBox" layoutX="387.0" layoutY="306.0" prefHeight="25.0" prefWidth="78.0" />
+      <Label fx:id="end" layoutX="473.0" layoutY="310.0" text="END" textFill="#3c3c3c">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="endTimeBox" layoutX="521.0" layoutY="307.0" prefHeight="25.0" prefWidth="66.0" />
+      <ComboBox fx:id="endTimeBox" layoutX="509.0" layoutY="307.0" prefHeight="25.0" prefWidth="78.0" />
       <Button fx:id="cancelButton" layoutX="283.0" layoutY="380.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="25.0" prefWidth="120.0" text="CANCEL">
          <font>
             <Font name="System Bold" size="12.0" />

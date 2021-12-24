@@ -1,6 +1,9 @@
 package model;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.time.LocalDateTime;
 
 public class Appointments {
@@ -107,4 +110,7 @@ public class Appointments {
     public void setContactID(int contactID) {
         this.contactID = contactID;
     }
+
+
+
 }

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -114,4 +114,72 @@ public class DBAppointments {
         return typesList;
     }
 
+    public static ObservableList<LocalTime> getAllTimes() {
+        ObservableList<LocalTime> timesList = FXCollections.observableArrayList();
+
+        ZoneId EST = ZoneId.of("America/New_York");
+        ZoneId local = ZoneId.of(TimeZone.getDefault().getID());
+
+        LocalTime openEST = LocalTime.of(8, 0);
+        LocalTime closeEST = LocalTime.of(22,0);
+
+        ZonedDateTime openZoned = ZonedDateTime.of(LocalDate.now(), openEST, EST);
+        ZonedDateTime closeZoned = ZonedDateTime.of(LocalDate.now(), closeEST, EST);
+
+        ZonedDateTime OPEN = openZoned.withZoneSameInstant(local);
+        ZonedDateTime CLOSED = closeZoned.withZoneSameInstant(local);
+
+        ZonedDateTime time = OPEN.minusMinutes(15);
+
+        Boolean timeRange = time.isBefore(CLOSED);
+        while (timeRange = true){
+            time = time.plusMinutes(15);
+            timesList.add(LocalTime.from(time));
+            if(time.isAfter(CLOSED) || time.equals(CLOSED)){
+                break;
+            }
+        }
+        return timesList;
+    }
+
+    public static void newAppointment(String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerID, int userID, int contactID){
+        try{
+            String sql = "INSERT INTO appointments VALUES(NULL, ?, ?, ?, ?, ?, ?, now(), 'user', now(), 'user', ?, ?, ?)";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, title);
+            ps.setString(2, description);
+            ps.setString(1, location);
+            ps.setString(1, type);
+            ps.setTimestamp(5, Timestamp.valueOf(start));
+            ps.setTimestamp(6, Timestamp.valueOf(end));
+            ps.setInt(7, customerID);
+            ps.setInt(8,userID);
+            ps.setInt(9, contactID);
+            ps.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void updateAppointment(String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerID, int userID, int contactID, String appointmentID){
+        try{
+            String sql = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, title);
+            ps.setString(2, description);
+            ps.setString(3, location);
+            ps.setString(4, type);
+            ps.setTimestamp(5, Timestamp.valueOf(start));
+            ps.setTimestamp(6, Timestamp.valueOf(end));
+            ps.setInt(7, customerID);
+            ps.setInt(8,userID);
+            ps.setInt(9, contactID);
+            ps.setString(10, appointmentID);
+            ps.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
