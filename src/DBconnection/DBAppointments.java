@@ -114,42 +114,14 @@ public class DBAppointments {
         return typesList;
     }
 
-    public static ObservableList<LocalTime> getAllTimes() {
-        ObservableList<LocalTime> timesList = FXCollections.observableArrayList();
-
-        ZoneId EST = ZoneId.of("America/New_York");
-        ZoneId local = ZoneId.of(TimeZone.getDefault().getID());
-
-        LocalTime openEST = LocalTime.of(8, 0);
-        LocalTime closeEST = LocalTime.of(22,0);
-
-        ZonedDateTime openZoned = ZonedDateTime.of(LocalDate.now(), openEST, EST);
-        ZonedDateTime closeZoned = ZonedDateTime.of(LocalDate.now(), closeEST, EST);
-
-        ZonedDateTime OPEN = openZoned.withZoneSameInstant(local);
-        ZonedDateTime CLOSED = closeZoned.withZoneSameInstant(local);
-
-        ZonedDateTime time = OPEN.minusMinutes(15);
-
-        Boolean timeRange = time.isBefore(CLOSED);
-        while (timeRange = true){
-            time = time.plusMinutes(15);
-            timesList.add(LocalTime.from(time));
-            if(time.isAfter(CLOSED) || time.equals(CLOSED)){
-                break;
-            }
-        }
-        return timesList;
-    }
-
     public static void newAppointment(String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerID, int userID, int contactID){
         try{
             String sql = "INSERT INTO appointments VALUES(NULL, ?, ?, ?, ?, ?, ?, now(), 'user', now(), 'user', ?, ?, ?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, title);
             ps.setString(2, description);
-            ps.setString(1, location);
-            ps.setString(1, type);
+            ps.setString(3, location);
+            ps.setString(4, type);
             ps.setTimestamp(5, Timestamp.valueOf(start));
             ps.setTimestamp(6, Timestamp.valueOf(end));
             ps.setInt(7, customerID);

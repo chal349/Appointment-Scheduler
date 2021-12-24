@@ -4,7 +4,8 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.time.LocalDateTime;
+import java.time.*;
+import java.util.TimeZone;
 
 public class Appointments {
     private int appointmentID;
@@ -111,6 +112,33 @@ public class Appointments {
         this.contactID = contactID;
     }
 
+  /*  public static ObservableList<LocalTime> getAllTimes() {
+        ObservableList<LocalTime> timesList = FXCollections.observableArrayList();
 
+        ZoneId EST = ZoneId.of("America/New_York");
+        ZoneId local = ZoneId.of(TimeZone.getDefault().getID());
+
+        LocalTime openEST = LocalTime.of(8, 0);
+        LocalTime closeEST = LocalTime.of(22,0);
+
+        ZonedDateTime openZoned = ZonedDateTime.of(LocalDate.now(), openEST, EST);
+        ZonedDateTime closeZoned = ZonedDateTime.of(LocalDate.now(), closeEST, EST);
+
+        ZonedDateTime OPEN = openZoned.withZoneSameInstant(local);
+        ZonedDateTime CLOSED = closeZoned.withZoneSameInstant(local);
+
+        ZonedDateTime time = OPEN.minusMinutes(15);
+
+        Boolean timeRange = time.isBefore(CLOSED);
+        while (timeRange = true){
+            time = time.plusMinutes(15);
+            timesList.add(LocalTime.from(time));
+            if(time.isAfter(CLOSED) || time.equals(CLOSED)){
+                break;
+            }
+        }
+        return timesList;
+    }
+*/
 
 }
