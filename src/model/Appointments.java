@@ -15,11 +15,12 @@ public class Appointments {
     private String type;
     private LocalDateTime start;
     private LocalDateTime end;
+    private int contactID;
     private int customerID;
     private int userID;
-    private int contactID;
 
-    public Appointments(int appointmentID, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerID, int userID, int contactID) {
+
+    public Appointments(int appointmentID, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int contactID, int customerID, int userID ) {
         this.appointmentID = appointmentID;
         this.title = title;
         this.description = description;
@@ -27,9 +28,9 @@ public class Appointments {
         this.type = type;
         this.start = start;
         this.end = end;
+        this.contactID = contactID;
         this.customerID = customerID;
         this.userID = userID;
-        this.contactID = contactID;
     }
 
     public int getAppointmentID() {

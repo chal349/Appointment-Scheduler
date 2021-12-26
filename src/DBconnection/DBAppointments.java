@@ -33,9 +33,9 @@ public class DBAppointments {
                 String type = rs.getString("Type");
                 LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
                 LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
-                int customerID = rs.getInt("Contact_ID");
+                int contactID = rs.getInt("Contact_ID");
+                int customerID = rs.getInt("Customer_ID");
                 int userID = rs.getInt("User_ID");
-                int contactID = rs.getInt("Customer_ID");
                 Appointments appointments = new Appointments(appointmentID, title, description, location, type, start, end, contactID, customerID, userID);
                 allList.add(appointments);
             }
@@ -61,9 +61,10 @@ public class DBAppointments {
                 String type = rs.getString("Type");
                 LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
                 LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
-                int customerID = rs.getInt("Contact_ID");
+                int contactID = rs.getInt("Contact_ID");
+                int customerID = rs.getInt("Customer_ID");
                 int userID = rs.getInt("User_ID");
-                int contactID = rs.getInt("Customer_ID");
+
                 Appointments appointments = new Appointments(appointmentID, title, description, location, type, start, end, contactID, customerID, userID);
                 monthList.add(appointments);
             }
@@ -88,9 +89,10 @@ public class DBAppointments {
                 String type = rs.getString("Type");
                 LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
                 LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
-                int customerID = rs.getInt("Contact_ID");
+                int contactID = rs.getInt("Contact_ID");
+                int customerID = rs.getInt("Customer_ID");
                 int userID = rs.getInt("User_ID");
-                int contactID = rs.getInt("Customer_ID");
+
                 Appointments appointments = new Appointments(appointmentID, title, description, location, type, start, end, contactID, customerID, userID);
                 weekList.add(appointments);
             }
@@ -126,7 +128,9 @@ public class DBAppointments {
             ps.setTimestamp(6, Timestamp.valueOf(end));
             ps.setInt(7, customerID);
             ps.setInt(8,userID);
+
             ps.setInt(9, contactID);
+
             ps.execute();
 
         } catch (SQLException throwables) {
@@ -136,7 +140,7 @@ public class DBAppointments {
 
     public static void updateAppointment(String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerID, int userID, int contactID, String appointmentID){
         try{
-            String sql = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
+            String sql = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Contact_ID = ?, Customer_ID = ?, User_ID = ?  WHERE Appointment_ID = ?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, title);
             ps.setString(2, description);
@@ -144,14 +148,43 @@ public class DBAppointments {
             ps.setString(4, type);
             ps.setTimestamp(5, Timestamp.valueOf(start));
             ps.setTimestamp(6, Timestamp.valueOf(end));
-            ps.setInt(7, customerID);
-            ps.setInt(8,userID);
-            ps.setInt(9, contactID);
+            ps.setInt(7, contactID);
+            ps.setInt(8, customerID);
+            ps.setInt(9,userID);
             ps.setString(10, appointmentID);
             ps.execute();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public static ObservableList<Appointments> getAllAppointmentsByCustomer(int customer_ID) {
+        ObservableList<Appointments> allList = FXCollections.observableArrayList();
+
+        try{
+            String sql = "Select * FROM appointments WHERE Customer_ID = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, customer_ID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentID = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                String type = rs.getString("Type");
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                int contactID = rs.getInt("Contact_ID");
+                int customerID = rs.getInt("Customer_ID");
+                int userID = rs.getInt("User_ID");
+
+                Appointments appointments = new Appointments(appointmentID, title, description, location, type, start, end, contactID, customerID, userID);
+                allList.add(appointments);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allList;
     }
 }

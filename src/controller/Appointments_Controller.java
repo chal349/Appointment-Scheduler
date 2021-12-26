@@ -154,10 +154,10 @@ public class Appointments_Controller implements Initializable {
         allTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
         allDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
         allLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
-        allContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         allType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
         allStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
         allEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        allContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         allCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         allUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
         //Populate MONTH TABLEVIEW with info
