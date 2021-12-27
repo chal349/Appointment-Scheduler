@@ -3,7 +3,10 @@ package DBconnection;
 import helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.Appointments;
+import model.Customers;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.Date;
+import java.util.Optional;
 import java.util.TimeZone;
 
 public class DBAppointments {
@@ -186,5 +190,20 @@ public class DBAppointments {
             e.printStackTrace();
         }
         return allList;
+    }
+
+    public static void deleteAppointment(Appointments appointment) throws SQLException {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to delete Appointment?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            String sql = "DELETE FROM appointments WHERE Appointment_ID = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, appointment.getAppointmentID());
+            ps.executeUpdate();
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setContentText("Appointment #" + appointment.getAppointmentID() + " has been deleted.");
+            alert2.showAndWait();
+        }
     }
 }

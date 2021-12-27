@@ -4,6 +4,7 @@ import DBconnection.DBAppointments;
 import DBconnection.DBContacts;
 import DBconnection.DBCustomers;
 import DBconnection.DBUsers;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,9 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
-
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+
 import model.Appointments;
 import model.Contacts;
 import model.Customers;
@@ -56,7 +57,6 @@ public class AddAppointment implements Initializable {
     @FXML private ComboBox<LocalTime> startTimeBox;
     @FXML private ComboBox<LocalTime> endTimeBox;
 
-
     public ObservableList<Users> userList = DBUsers.getAllUsers();
     public ObservableList<Contacts> contactsList = DBContacts.getAllContacts();
     public ObservableList<String> typesList = DBAppointments.getAllTypes();
@@ -64,13 +64,6 @@ public class AddAppointment implements Initializable {
 
     private LocalTime openEST = LocalTime.of(8, 0);
     private LocalTime closedEST = LocalTime.of(22, 0);
-   // private LocalDateTime startDateAndTime;
-   // private LocalDateTime endDateAndTime;
-  //  private int customerID;
-
-
-
-
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
@@ -83,10 +76,6 @@ public class AddAppointment implements Initializable {
 
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
-
-
-
-
         if
                (titleField.getText().isEmpty()                     ||
                 descriptionField.getText().isEmpty()               ||
@@ -124,12 +113,12 @@ public class AddAppointment implements Initializable {
         LocalTime endTimeSelection = endTimeBox.getSelectionModel().getSelectedItem();
         LocalDate dateSelection = datePickerBox.getValue();
         // combines date and time selection
-        LocalDateTime startDateAndTime = LocalDateTime.of(dateSelection, startTimeSelection);
-        LocalDateTime endDateAndTime = LocalDateTime.of(dateSelection, endTimeSelection);
+        LocalDateTime new_StartDateAndTime = LocalDateTime.of(dateSelection, startTimeSelection);
+        LocalDateTime new_EndDateAndTime = LocalDateTime.of(dateSelection, endTimeSelection);
         // convert times to system default
         ZoneId myZoneId = ZoneId.systemDefault();
-        ZonedDateTime myZoneStart = ZonedDateTime.of(startDateAndTime, myZoneId);
-        ZonedDateTime myZoneEnd = ZonedDateTime.of(endDateAndTime, myZoneId);
+        ZonedDateTime myZoneStart = ZonedDateTime.of(new_StartDateAndTime, myZoneId);
+        ZonedDateTime myZoneEnd = ZonedDateTime.of(new_EndDateAndTime, myZoneId);
         // convert times to EST
         ZoneId EST = ZoneId.of("America/New_York");
         ZonedDateTime estStart = myZoneStart.withZoneSameInstant(EST);
@@ -138,24 +127,24 @@ public class AddAppointment implements Initializable {
         LocalTime selectedStart = estStart.toLocalDateTime().toLocalTime();
         LocalTime selectedEnd = estEnd.toLocalDateTime().toLocalTime();
 
+
         ObservableList<Appointments> appointmentConflicts = DBAppointments.getAllAppointmentsByCustomer(customerID);
+        for (Appointments a : appointmentConflicts){
+            LocalDateTime startOfBookedAppointment = a.getStart();
+            LocalDateTime endOfBookedAppointment = a.getEnd();
 
-        for (Appointments appt : appointmentConflicts){
-            LocalDateTime startAppt = appt.getStart();
-            LocalDateTime endAppt = appt.getEnd();
-
-            if(startDateAndTime.isBefore(startAppt.plusMinutes(1)) && endDateAndTime.isAfter(endAppt.minusMinutes(1))) {
+            if(new_StartDateAndTime.isBefore(startOfBookedAppointment.plusMinutes(1)) && new_EndDateAndTime.isAfter(endOfBookedAppointment.minusMinutes(1))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("jklasdf;ljsdfklj.");
                 alert.showAndWait();
                 return;
 
-            } else if (startDateAndTime.isAfter(startAppt.minusMinutes(1)) && startDateAndTime.isBefore(endAppt.plusMinutes(1))) {
+            } else if (new_StartDateAndTime.isAfter(startOfBookedAppointment.minusMinutes(1)) && new_StartDateAndTime.isBefore(endOfBookedAppointment.plusMinutes(1))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("jklasdf;ljsdfklj.");
                 alert.showAndWait();
                 return;
-            } else if (endDateAndTime.isAfter(startAppt.minusMinutes(1)) && endDateAndTime.isBefore(endAppt.plusMinutes(1))){
+            } else if (new_EndDateAndTime.isAfter(startOfBookedAppointment.minusMinutes(1)) && new_EndDateAndTime.isBefore(endOfBookedAppointment.plusMinutes(1))){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("jklasdf;ljsdfklj.");
                 alert.showAndWait();
@@ -179,7 +168,7 @@ public class AddAppointment implements Initializable {
 
 
         else {
-            DBAppointments.newAppointment(title, description, location, type, startDateAndTime, endDateAndTime, customerID, userID, contactID);
+            DBAppointments.newAppointment(title, description, location, type, new_StartDateAndTime, new_EndDateAndTime, customerID, userID, contactID);
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
             stage.setScene(new Scene(scene));

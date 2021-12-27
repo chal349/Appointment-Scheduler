@@ -11,11 +11,12 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
+import model.Appointments;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -43,46 +44,85 @@ public class Appointments_Controller implements Initializable {
     private Button deleteButton;
 
     //ALL TABLEVIEW
-    @FXML private Tab allTab;
-    @FXML private TableView<model.Appointments> allTableView;
-    @FXML private TableColumn<model.Appointments, Integer> allApptID_col;
-    @FXML private TableColumn<model.Appointments, String> allTitle_col;
-    @FXML private TableColumn<model.Appointments, String> allDescription_col;
-    @FXML private TableColumn<model.Appointments, String> allLocation_col;
-    @FXML private TableColumn<model.Appointments, String> allType_col;
-    @FXML private TableColumn<model.Appointments, String> allStart_col;
-    @FXML private TableColumn<model.Appointments, String> allEnd_col;
-    @FXML private TableColumn<model.Appointments, Integer> allContact_col;
-    @FXML private TableColumn<model.Appointments, Integer> allCustID_col;
-    @FXML private TableColumn<model.Appointments, Integer> allUserID_col;
+    @FXML
+    private Tab allTab;
+    @FXML
+    private TableView<model.Appointments> allTableView;
+    @FXML
+    private TableColumn<model.Appointments, Integer> allApptID_col;
+    @FXML
+    private TableColumn<model.Appointments, String> allTitle_col;
+    @FXML
+    private TableColumn<model.Appointments, String> allDescription_col;
+    @FXML
+    private TableColumn<model.Appointments, String> allLocation_col;
+    @FXML
+    private TableColumn<model.Appointments, String> allType_col;
+    @FXML
+    private TableColumn<model.Appointments, String> allStart_col;
+    @FXML
+    private TableColumn<model.Appointments, String> allEnd_col;
+    @FXML
+    private TableColumn<model.Appointments, Integer> allContact_col;
+    @FXML
+    private TableColumn<model.Appointments, Integer> allCustID_col;
+    @FXML
+    private TableColumn<model.Appointments, Integer> allUserID_col;
 
     //WEEK TABLEVIEW
-    @FXML private Tab weekTab;
-    @FXML private TableView<model.Appointments> weekTableView;
-    @FXML private TableColumn<model.Appointments, Integer> weekApptID_col;
-    @FXML private TableColumn<model.Appointments, String> weekTitle_col;
-    @FXML private TableColumn<model.Appointments, String> weekDescription_col;
-    @FXML private TableColumn<model.Appointments, String> weekLocation_col;
-    @FXML private TableColumn<model.Appointments, String> weekType_Col;
-    @FXML private TableColumn<model.Appointments, String> weekStart_col;
-    @FXML private TableColumn<model.Appointments, String> weekEnd_col;
-    @FXML private TableColumn<model.Appointments, Integer> weekContact_col;
-    @FXML private TableColumn<model.Appointments, Integer> weekCustID_col;
-    @FXML private TableColumn<model.Appointments, Integer> weekUserID_col;
+    @FXML
+    private Tab weekTab;
+    @FXML
+    private TableView<model.Appointments> weekTableView;
+    @FXML
+    private TableColumn<model.Appointments, Integer> weekApptID_col;
+    @FXML
+    private TableColumn<model.Appointments, String> weekTitle_col;
+    @FXML
+    private TableColumn<model.Appointments, String> weekDescription_col;
+    @FXML
+    private TableColumn<model.Appointments, String> weekLocation_col;
+    @FXML
+    private TableColumn<model.Appointments, String> weekType_Col;
+    @FXML
+    private TableColumn<model.Appointments, String> weekStart_col;
+    @FXML
+    private TableColumn<model.Appointments, String> weekEnd_col;
+    @FXML
+    private TableColumn<model.Appointments, Integer> weekContact_col;
+    @FXML
+    private TableColumn<model.Appointments, Integer> weekCustID_col;
+    @FXML
+    private TableColumn<model.Appointments, Integer> weekUserID_col;
 
     // MONTH TABLEVIEW
-    @FXML private Tab monthTab;
-    @FXML private TableView<model.Appointments> monthTableView;
-    @FXML private TableColumn<model.Appointments, Integer> monthApptID_col;
-    @FXML private TableColumn<model.Appointments, String> monthTitle_col;
-    @FXML private TableColumn<model.Appointments, String> monthDescription_col;
-    @FXML private TableColumn<model.Appointments, String> monthLocation_col;
-    @FXML private TableColumn<model.Appointments, String> monthType_col;
-    @FXML private TableColumn<model.Appointments, String> monthStart_col;
-    @FXML private TableColumn<model.Appointments, String> monthEnd_col;
-    @FXML private TableColumn<model.Appointments, Integer> monthContact_col;
-    @FXML private TableColumn<model.Appointments, Integer> monthCustID_col;
-    @FXML private TableColumn<model.Appointments, Integer> monthUserID_col;
+    @FXML
+    private Tab monthTab;
+    @FXML
+    private TableView<model.Appointments> monthTableView;
+    @FXML
+    private TableColumn<model.Appointments, Integer> monthApptID_col;
+    @FXML
+    private TableColumn<model.Appointments, String> monthTitle_col;
+    @FXML
+    private TableColumn<model.Appointments, String> monthDescription_col;
+    @FXML
+    private TableColumn<model.Appointments, String> monthLocation_col;
+    @FXML
+    private TableColumn<model.Appointments, String> monthType_col;
+    @FXML
+    private TableColumn<model.Appointments, String> monthStart_col;
+    @FXML
+    private TableColumn<model.Appointments, String> monthEnd_col;
+    @FXML
+    private TableColumn<model.Appointments, Integer> monthContact_col;
+    @FXML
+    private TableColumn<model.Appointments, Integer> monthCustID_col;
+    @FXML
+    private TableColumn<model.Appointments, Integer> monthUserID_col;
+
+    private static Appointments appointmentToDelete;
+    private static Appointments appointmentToModify;
 
     @FXML
     private Button logoutButton;
@@ -109,9 +149,45 @@ public class Appointments_Controller implements Initializable {
     }
 
     @FXML
-    void onActionDelete(ActionEvent event) {
+    void onActionDelete(ActionEvent event) throws SQLException {
 
-    }
+        if (allTab.isSelected()) {
+            appointmentToDelete = allTableView.getSelectionModel().getSelectedItem();
+            if(appointmentToDelete == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("No Appointment was selected.");
+                alert.showAndWait();
+                return;
+            }
+        } else if (monthTab.isSelected()) {
+            appointmentToDelete = monthTableView.getSelectionModel().getSelectedItem();
+            if(appointmentToDelete == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("No Appointment was selected.");
+                alert.showAndWait();
+                return;
+            }
+        } else if (weekTab.isSelected()) {
+            appointmentToDelete = weekTableView.getSelectionModel().getSelectedItem();
+            if(appointmentToDelete == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("No Appointment was selected.");
+                alert.showAndWait();
+                return;
+            }
+        }
+                    Appointments appointment = appointmentToDelete;
+                    DBAppointments.deleteAppointment(appointment);
+                    allTableView.setItems(DBAppointments.getAllAppointments());
+                    monthTableView.setItems(DBAppointments.getMonthAppointments());
+                    weekTableView.setItems(DBAppointments.getWeekAppointments());
+        }
+
+
+
 
     @FXML
     void onActionLogout(ActionEvent event) throws IOException {
@@ -137,11 +213,40 @@ public class Appointments_Controller implements Initializable {
 
     @FXML
     void onActionUpdateScreen(ActionEvent event) throws IOException {
+        if (allTab.isSelected()) {
+            appointmentToModify = allTableView.getSelectionModel().getSelectedItem();
+            if(appointmentToModify == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("No Appointment was selected.");
+                alert.showAndWait();
+                return;
+            }
+        } else if (monthTab.isSelected()) {
+            appointmentToModify = monthTableView.getSelectionModel().getSelectedItem();
+            if(appointmentToModify == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("No Appointment was selected.");
+                alert.showAndWait();
+                return;
+            }
+        } else if (weekTab.isSelected()) {
+            appointmentToModify = weekTableView.getSelectionModel().getSelectedItem();
+            if(appointmentToModify == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("No Appointment was selected.");
+                alert.showAndWait();
+                return;
+            }
+        }
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/UpdateAppointment.fxml"));
         stage.setScene(new Scene(scene));
         stage.setTitle("Update Appointment");
         stage.show();
+
     }
 
     @Override
@@ -160,7 +265,9 @@ public class Appointments_Controller implements Initializable {
         allContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         allCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         allUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
-        //Populate MONTH TABLEVIEW with info
+
+
+       //Populate MONTH TABLEVIEW with info
         monthTableView.setItems(DBAppointments.getMonthAppointments());
         monthApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         monthTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -184,5 +291,8 @@ public class Appointments_Controller implements Initializable {
         weekEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
         weekCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         weekUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
+
+
+
     }
 }
