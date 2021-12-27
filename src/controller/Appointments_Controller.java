@@ -123,6 +123,7 @@ public class Appointments_Controller implements Initializable {
 
     private static Appointments appointmentToDelete;
     private static Appointments appointmentToModify;
+    public static Appointments getAppointmentToModify() { return appointmentToModify;}
 
     @FXML
     private Button logoutButton;

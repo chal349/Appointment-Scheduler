@@ -52,7 +52,6 @@ public class Customers_Controller implements Initializable {
 
     private static Customers customerToModify;
     private static Customers customerToDelete;
-
     public static Customers getCustomerToModify() {
         return customerToModify;
     }

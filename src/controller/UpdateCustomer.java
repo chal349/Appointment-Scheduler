@@ -120,7 +120,6 @@ public class UpdateCustomer implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         customerSelected = Customers_Controller.getCustomerToModify();
 
-
         customerID_field.setText(String.valueOf(customerSelected.getCustomerID()));
         fullNameField.setText(String.valueOf(customerSelected.getName()));
         phoneNumberField.setText(String.valueOf(customerSelected.getPhone()));

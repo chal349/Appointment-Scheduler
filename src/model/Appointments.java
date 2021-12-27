@@ -1,11 +1,7 @@
 package model;
 
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.time.*;
-import java.util.TimeZone;
 
 public class Appointments {
     private int appointmentID;
