@@ -40,7 +40,7 @@ public class Login implements Initializable {
     @FXML
     private Button loginButton;
 
-    ResourceBundle login = ResourceBundle.getBundle("properties.lang", Locale.getDefault());
+    ResourceBundle rb = ResourceBundle.getBundle("properties.lang", Locale.getDefault());
 
 
     @FXML
@@ -55,21 +55,19 @@ public class Login implements Initializable {
         } else if((!passwordField.getText().equals("test")) || (!usernameField.getText().equals("test"))) {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Incorrect Username or Password.");
+                alert.setHeaderText(rb.getString("ErrorHeader"));
+                alert.setTitle(rb.getString("ErrorTitle"));
+                alert.setContentText(rb.getString("LoginError"));
                 alert.show();
             }
         }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-                username.setText(login.getString("Username"));
-                password.setText(login.getString("Password"));
-                loginButton.setText(login.getString("Button"));
-                String location = login.getString("Location") + ": " + ZoneId.systemDefault();
-                LocalTimeZone.setText(location);
-
+                username.setText(rb.getString("Username"));
+                password.setText(rb.getString("Password"));
+                loginButton.setText(rb.getString("Button"));
+                LocalTimeZone.setText(rb.getString("Location") + ":  " + ZoneId.systemDefault().getId());
 
         } catch (MissingResourceException e) {
 

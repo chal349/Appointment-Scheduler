@@ -30,32 +30,56 @@ public class UpdateAppointment implements Initializable {
     Stage stage;
     Parent scene;
 
-    @FXML private Label headerText;
+    @FXML
+    private Label headerText;
 
-    @FXML private TextField appointmentID_field;
-    @FXML private Label customerID;
-    @FXML private Label userID;
-    @FXML private Label contact;
-    @FXML private Label type;
-    @FXML private Label location;
-    @FXML private TextField locationField;
-    @FXML private Label title;
-    @FXML private TextField titleField;
-    @FXML private Label description;
-    @FXML private TextField descriptionField;
-    @FXML private Label date;
-    @FXML private Label start;
-    @FXML private Label end;
-    @FXML private Button cancelButton;
-    @FXML private Button saveButton;
+    @FXML
+    private TextField appointmentID_field;
+    @FXML
+    private Label customerID;
+    @FXML
+    private Label userID;
+    @FXML
+    private Label contact;
+    @FXML
+    private Label type;
+    @FXML
+    private Label location;
+    @FXML
+    private TextField locationField;
+    @FXML
+    private Label title;
+    @FXML
+    private TextField titleField;
+    @FXML
+    private Label description;
+    @FXML
+    private TextField descriptionField;
+    @FXML
+    private Label date;
+    @FXML
+    private Label start;
+    @FXML
+    private Label end;
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private Button saveButton;
 
-    @FXML private ComboBox<Customers> customerID_box;
-    @FXML private ComboBox<Users> userID_box;
-    @FXML private ComboBox<Contacts> contactBox;
-    @FXML private ComboBox<String> typeBox;
-    @FXML private DatePicker datePickerBox;
-    @FXML private ComboBox<LocalTime> startTimeBox;
-    @FXML private ComboBox<LocalTime> endTimeBox;
+    @FXML
+    private ComboBox<Customers> customerID_box;
+    @FXML
+    private ComboBox<Users> userID_box;
+    @FXML
+    private ComboBox<Contacts> contactBox;
+    @FXML
+    private ComboBox<String> typeBox;
+    @FXML
+    private DatePicker datePickerBox;
+    @FXML
+    private ComboBox<LocalTime> startTimeBox;
+    @FXML
+    private ComboBox<LocalTime> endTimeBox;
 
     public ObservableList<Users> userList = DBUsers.getAllUsers();
     public ObservableList<Contacts> contactsList = DBContacts.getAllContacts();
@@ -78,15 +102,15 @@ public class UpdateAppointment implements Initializable {
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
         if
-                (titleField.getText().isEmpty()                    ||
-                descriptionField.getText().isEmpty()               ||
-                locationField.getText().isEmpty()                  ||
-                typeBox.getSelectionModel().isEmpty()              ||
-                customerID_box.getSelectionModel().isEmpty()       ||
-                userID_box.getSelectionModel().isEmpty()           ||
-                contactBox.getSelectionModel().isEmpty()           ||
-                datePickerBox.getChronology().equals(null)         ||
-                startTimeBox.getSelectionModel().isEmpty()         ||
+               (titleField.getText().isEmpty() ||
+                descriptionField.getText().isEmpty() ||
+                locationField.getText().isEmpty() ||
+                typeBox.getSelectionModel().isEmpty() ||
+                customerID_box.getSelectionModel().isEmpty() ||
+                userID_box.getSelectionModel().isEmpty() ||
+                contactBox.getSelectionModel().isEmpty() ||
+                datePickerBox.getChronology().equals(null) ||
+                startTimeBox.getSelectionModel().isEmpty() ||
                 endTimeBox.getSelectionModel().isEmpty())
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -131,50 +155,40 @@ public class UpdateAppointment implements Initializable {
 
 
         ObservableList<Appointments> appointmentConflicts = DBAppointments.getAllAppointmentsByCustomer(customerID);
-        for (Appointments a : appointmentConflicts){
+        for (Appointments a : appointmentConflicts) {
             LocalDateTime startOfBookedAppointment = a.getStart();
             LocalDateTime endOfBookedAppointment = a.getEnd();
+            int ID = a.getAppointmentID();
 
-                if (new_StartDateAndTime.isBefore(startOfBookedAppointment.plusMinutes(1)) && new_EndDateAndTime.isAfter(endOfBookedAppointment.minusMinutes(1))) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("jklasdf;ljsdfklj.");
-                    alert.showAndWait();
-                    return;
-
-                }
-                if (new_StartDateAndTime.isAfter(startOfBookedAppointment.minusMinutes(1)) && new_StartDateAndTime.isBefore(endOfBookedAppointment.plusMinutes(1))) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("jklasdf;ljsdfklj.");
-                    alert.showAndWait();
-                    return;
-                }
-                if (new_EndDateAndTime.isAfter(startOfBookedAppointment.minusMinutes(1)) && new_EndDateAndTime.isBefore(endOfBookedAppointment.plusMinutes(1))) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("jklasdf;ljsdfklj.");
-                    alert.showAndWait();
-                    return;
-                }
-
+            if (ID == appointmentSelected.getAppointmentID()) {
+                break;
             }
-
+              else if ((startOfBookedAppointment.isAfter(new_StartDateAndTime) && startOfBookedAppointment.isBefore(new_EndDateAndTime)) ||
+                      (endOfBookedAppointment.isAfter(new_StartDateAndTime) && endOfBookedAppointment.isBefore(new_EndDateAndTime))      ||
+                      (startOfBookedAppointment.isBefore(new_StartDateAndTime) && endOfBookedAppointment.isAfter(new_EndDateAndTime))    ||
+                      (startOfBookedAppointment.isEqual(new_StartDateAndTime)) || (endOfBookedAppointment.isEqual(new_EndDateAndTime))) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Appointment Time Conflict");
+                alert.setContentText("The times selected conflict with existing appointment times for Customer, Please select a different time.");
+                alert.showAndWait();
+                return;
+            }
+        }
 
         //compares selected start and end to Open/Closed hours
-        if(selectedStart.isBefore(openEST) || selectedEnd.isAfter(closedEST)){
+        if (selectedStart.isBefore(openEST) || selectedEnd.isAfter(closedEST)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Selected times must be within open business hours. 8am - 10pm EST");
             alert.showAndWait();
             return;
         }
-        if(selectedStart.equals(selectedEnd) || selectedStart.isAfter(selectedEnd)){
+        if (selectedStart.equals(selectedEnd) || selectedStart.isAfter(selectedEnd)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Selected Start time must be before selected End time.");
             alert.showAndWait();
             return;
-        }
-
-
-        else {
-            DBAppointments.updateAppointment(title, description, location, type, new_StartDateAndTime, new_EndDateAndTime, customerID, userID, contactID, appointmentID );
+        } else {
+            DBAppointments.updateAppointment(title, description, location, type, new_StartDateAndTime, new_EndDateAndTime, customerID, userID, contactID, appointmentID);
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
             stage.setScene(new Scene(scene));
@@ -192,7 +206,7 @@ public class UpdateAppointment implements Initializable {
         start.add(times);
         end.add(times);
         times = times.plusMinutes(15);
-        while(!times.equals(LocalTime.MIDNIGHT)) {
+        while (!times.equals(LocalTime.MIDNIGHT)) {
             start.add(times);
             end.add(times);
             times = times.plusMinutes(15);
@@ -218,20 +232,20 @@ public class UpdateAppointment implements Initializable {
         datePickerBox.setValue(appointmentSelected.getStart().toLocalDate());
 
         // set customerID combo box to selected appointment to modify
-        for (Customers customer : customerID_box.getItems()){
-            if (appointmentSelected.getCustomerID() == customer.getCustomerID()){
+        for (Customers customer : customerID_box.getItems()) {
+            if (appointmentSelected.getCustomerID() == customer.getCustomerID()) {
                 customerID_box.setValue(customer);
             }
         }
         // set contactID combo box to selected appointment to modify
-        for (Contacts contact : contactBox.getItems()){
-            if (appointmentSelected.getContactID() == contact.getContactID()){
+        for (Contacts contact : contactBox.getItems()) {
+            if (appointmentSelected.getContactID() == contact.getContactID()) {
                 contactBox.setValue(contact);
             }
         }
         // set userID combo box to selected appointment to modify
-        for (Users user : userID_box.getItems()){
-            if (appointmentSelected.getUserID() == user.getUserID()){
+        for (Users user : userID_box.getItems()) {
+            if (appointmentSelected.getUserID() == user.getUserID()) {
                 userID_box.setValue(user);
             }
         }

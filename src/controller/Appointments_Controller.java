@@ -266,8 +266,6 @@ public class Appointments_Controller implements Initializable {
         allContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         allCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         allUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
-
-
        //Populate MONTH TABLEVIEW with info
         monthTableView.setItems(DBAppointments.getMonthAppointments());
         monthApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));

@@ -133,20 +133,13 @@ public class AddAppointment implements Initializable {
             LocalDateTime startOfBookedAppointment = a.getStart();
             LocalDateTime endOfBookedAppointment = a.getEnd();
 
-            if(new_StartDateAndTime.isBefore(startOfBookedAppointment.plusMinutes(1)) && new_EndDateAndTime.isAfter(endOfBookedAppointment.minusMinutes(1))) {
+                if ((startOfBookedAppointment.isAfter(new_StartDateAndTime) && startOfBookedAppointment.isBefore(new_EndDateAndTime)) ||
+                    (endOfBookedAppointment.isAfter(new_StartDateAndTime) && endOfBookedAppointment.isBefore(new_EndDateAndTime))      ||
+                    (startOfBookedAppointment.isBefore(new_StartDateAndTime) && endOfBookedAppointment.isAfter(new_EndDateAndTime))    ||
+                    (startOfBookedAppointment.isEqual(new_StartDateAndTime)) || (endOfBookedAppointment.isEqual(new_EndDateAndTime))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("jklasdf;ljsdfklj.");
-                alert.showAndWait();
-                return;
-
-            } else if (new_StartDateAndTime.isAfter(startOfBookedAppointment.minusMinutes(1)) && new_StartDateAndTime.isBefore(endOfBookedAppointment.plusMinutes(1))) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("jklasdf;ljsdfklj.");
-                alert.showAndWait();
-                return;
-            } else if (new_EndDateAndTime.isAfter(startOfBookedAppointment.minusMinutes(1)) && new_EndDateAndTime.isBefore(endOfBookedAppointment.plusMinutes(1))){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("jklasdf;ljsdfklj.");
+                alert.setHeaderText("Appointment Time Conflict");
+                alert.setContentText("The times selected conflict with existing appointment times for Customer, Please select a different time.");
                 alert.showAndWait();
                 return;
             }
