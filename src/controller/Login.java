@@ -1,5 +1,6 @@
 package controller;
 
+import DBconnection.DBUsers;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
@@ -10,8 +11,12 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -46,21 +51,34 @@ public class Login implements Initializable {
     @FXML
     void onActionLoginAppointmentsScreen(ActionEvent event) throws IOException {
 
-        if((passwordField.getText().equals("test")) && (usernameField.getText().equals("test"))) {
+        String filename = "login_activity.txt";
+        FileWriter fileWriter = new FileWriter(filename, true);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        boolean validLogin = DBUsers.checkLogin(usernameField.getText(), passwordField.getText());
+
+        if(validLogin) {
+
+            printWriter.append(usernameField.getText() + " successfully logged in on " + LocalDate.now() + ", at " + LocalTime.now() + "\n");
+
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
             stage.setScene(new Scene(scene));
             stage.setTitle("Appointments");
             stage.show();
-        } else if((!passwordField.getText().equals("test")) || (!usernameField.getText().equals("test"))) {
+
+        } else {
+
+                printWriter.append(usernameField.getText() + " has been denied access on " + LocalDate.now() + ", at " + LocalTime.now() + "\n");
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(rb.getString("ErrorHeader"));
                 alert.setTitle(rb.getString("ErrorTitle"));
                 alert.setContentText(rb.getString("LoginError"));
                 alert.show();
-            }
+
         }
+        printWriter.close();
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

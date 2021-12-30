@@ -6,6 +6,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -35,11 +36,6 @@
       </Circle>
       <TextField fx:id="usernameField" layoutX="166.0" layoutY="200.0" prefHeight="25.0" prefWidth="167.0" />
       <PasswordField fx:id="passwordField" layoutX="166.0" layoutY="241.0" prefHeight="25.0" prefWidth="167.0" />
-      <Label fx:id="LocalTimeZone" layoutX="145.0" layoutY="351.0" text="LOCATION:  UTC" textFill="#ae0000">
-         <font>
-            <Font name="System Bold Italic" size="14.0" />
-         </font>
-      </Label>
       <Button fx:id="loginButton" layoutX="140.0" layoutY="296.0" mnemonicParsing="false" onAction="#onActionLoginAppointmentsScreen" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #593972;" text="LOGIN" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -65,5 +61,14 @@
             <Insets top="5.0" />
          </padding>
       </VBox>
+      <HBox alignment="CENTER" layoutX="-1.0" layoutY="320.0" prefHeight="78.0" prefWidth="400.0">
+         <children>
+            <Label fx:id="LocalTimeZone" text="LOCATION:  UTC" textFill="#ae0000">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

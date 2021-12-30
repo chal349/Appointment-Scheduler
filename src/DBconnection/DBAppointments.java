@@ -194,7 +194,7 @@ public class DBAppointments {
 
     public static void deleteAppointment(Appointments appointment) throws SQLException {
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to delete Appointment?");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to cancel Appointment?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             String sql = "DELETE FROM appointments WHERE Appointment_ID = ?";
@@ -202,7 +202,7 @@ public class DBAppointments {
             ps.setInt(1, appointment.getAppointmentID());
             ps.executeUpdate();
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-            alert2.setContentText("Appointment #" + appointment.getAppointmentID() + " has been deleted.");
+            alert2.setContentText("Appointment #" + appointment.getAppointmentID() + " - " + appointment.getType() + ", has been canceled.");
             alert2.showAndWait();
         }
     }
