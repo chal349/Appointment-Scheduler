@@ -6,18 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import model.Appointments;
-import model.Customers;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.*;
-import java.util.Date;
 import java.util.Optional;
-import java.util.TimeZone;
 
 public class DBAppointments {
 
@@ -205,5 +200,23 @@ public class DBAppointments {
             alert2.setContentText("Appointment #" + appointment.getAppointmentID() + " - " + appointment.getType() + ", has been canceled.");
             alert2.showAndWait();
         }
+    }
+
+    public static ObservableList<Appointments> checkForUpcomingAppointments() {
+        ObservableList<Appointments> appointments = FXCollections.observableArrayList();
+        String sql = "Select Appointment_ID, Start From appointments WHERE Start <= now() + INTERVAL 15 MINUTE AND Start > now()";
+        try{
+            ResultSet rs = JDBC.getConnection().createStatement().executeQuery(sql);
+            while(rs.next()){
+                int appointmentID = rs.getInt("Appointment_ID");
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                Appointments a = new Appointments(appointmentID, start);
+                appointments.add(a);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return appointments;
     }
 }

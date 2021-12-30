@@ -29,6 +29,11 @@ public class Appointments {
         this.userID = userID;
     }
 
+    public Appointments(int appointmentID, LocalDateTime start){
+        this.appointmentID = appointmentID;
+        this.start = start;
+    }
+
     public int getAppointmentID() {
         return appointmentID;
     }
