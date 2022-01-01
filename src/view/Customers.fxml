@@ -60,21 +60,27 @@
                                 <Font name="System Bold Italic" size="16.0" />
                             </font>
                             <VBox.margin>
-                                <Insets top="-1.0" />
+                                <Insets top="5.0" />
                             </VBox.margin>
                         </Button>
-                  <Button fx:id="customersButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #352243;" text="CUSTOMERS" textFill="WHITE">
+                  <Button fx:id="customersButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: #352243;" text="CUSTOMERS" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
+                     <VBox.margin>
+                        <Insets top="-1.0" />
+                     </VBox.margin>
                   </Button>
                   <Button fx:id="reportsButton" mnemonicParsing="false" onAction="#onActionReportsScreen" prefHeight="60.0" prefWidth="160.0" text="REPORTS" textFill="#545454">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets top="-1.0" />
+                     </VBox.margin>
                   </Button>
                     </children>
                 </VBox>
@@ -98,7 +104,7 @@
                                 </LinearGradient>
                             </fill>
                             <VBox.margin>
-                                <Insets left="36.0" top="60.0" />
+                                <Insets left="36.0" top="65.0" />
                             </VBox.margin>
                         </Circle>
                     </children>

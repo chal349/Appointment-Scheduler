@@ -39,7 +39,7 @@
                         <Insets />
                      </opaqueInsets>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets top="5.0" />
                      </VBox.margin>
                   </Button>
                   <Button fx:id="customersButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionGoToCustomerScreen" prefHeight="60.0" prefWidth="160.0" text="CUSTOMERS" textFill="#545454">
@@ -105,7 +105,7 @@
                         </LinearGradient>
                      </fill>
                      <VBox.margin>
-                        <Insets left="36.0" top="60.0" />
+                        <Insets left="36.0" top="65.0" />
                      </VBox.margin>
                   </Circle>
                </children>
@@ -134,7 +134,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                <Tab fx:id="weekTab" style="-fx-font-weight: bold;" text=" VIEW BY WEEK ">
+                <Tab fx:id="weekTab" style="-fx-font-weight: bold;" text=" THIS WEEK ">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="595.0">
                            <children>
@@ -156,7 +156,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab fx:id="monthTab" style="-fx-font-weight: bold;" text=" VIEW BY MONTH ">
+                <Tab fx:id="monthTab" style="-fx-font-weight: bold;" text=" THIS MONTH ">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

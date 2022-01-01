@@ -32,6 +32,8 @@ public class Appointments {
     public Appointments(int appointmentID, LocalDateTime start){
         this.appointmentID = appointmentID;
         this.start = start;
+
+
     }
 
     public int getAppointmentID() {

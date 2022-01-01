@@ -37,59 +37,6 @@
                   <Insets right="10.0" />
                </padding>
             </ButtonBar>
-            <VBox layoutY="207.0" prefHeight="392.0" prefWidth="160.0" style="-fx-background-color: #dddddd;">
-               <children>
-                  <Button fx:id="appointmentsButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionAppointmentsScreen" prefHeight="60.0" prefWidth="160.0" text="APPOINTMENTS" textFill="#545454">
-                     <font>
-                        <Font name="System Bold Italic" size="16.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="-1.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="customersButton" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#onActionCustomersScreen" prefHeight="60.0" prefWidth="160.0" text="CUSTOMERS" textFill="#545454">
-                     <font>
-                        <Font name="System Bold Italic" size="16.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="-1.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="reportsButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #352243;" text="REPORTS" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold Italic" size="16.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-               </children>
-            </VBox>
-            <VBox layoutY="-4.0" prefHeight="212.0" prefWidth="160.0" style="-fx-background-color: #dddddd;">
-               <children>
-                  <Circle radius="45.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
-                     <fill>
-                        <LinearGradient endX="1.0" endY="0.7904761904761904" startX="0.30952380952380953" startY="0.2857142857142857">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.2078431397676468" green="0.13333334028720856" blue="0.26274511218070984" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8666666746139526" green="0.8666666746139526" blue="0.8666666746139526" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                     <VBox.margin>
-                        <Insets left="36.0" top="60.0" />
-                     </VBox.margin>
-                  </Circle>
-               </children>
-            </VBox>
             <TabPane layoutX="207.0" layoutY="87.0" prefHeight="380.0" prefWidth="595.0" style="-fx-background-color: #dddddd;" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab fx:id="allAppointmentsTab" style="-fx-font-weight: bold;" text="ALL APPOINTMENTS">
@@ -150,6 +97,62 @@
                   </Tab>
               </tabs>
             </TabPane>
+            <VBox layoutY="207.0" prefHeight="392.0" prefWidth="160.0" style="-fx-background-color: #dddddd;">
+               <children>
+                  <Button fx:id="appointmentsButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionAppointmentsScreen" prefHeight="60.0" prefWidth="160.0" text="APPOINTMENTS" textFill="#545454">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="customersButton" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#onActionCustomersScreen" prefHeight="60.0" prefWidth="160.0" text="CUSTOMERS" textFill="#545454">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="-1.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="reportsButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: #352243;" text="REPORTS" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets top="-1.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox layoutY="-4.0" prefHeight="212.0" prefWidth="160.0" style="-fx-background-color: #dddddd;">
+               <children>
+                  <Circle radius="45.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="0.7904761904761904" startX="0.30952380952380953" startY="0.2857142857142857">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.2078431397676468" green="0.13333334028720856" blue="0.26274511218070984" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8666666746139526" green="0.8666666746139526" blue="0.8666666746139526" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                     <VBox.margin>
+                        <Insets left="36.0" top="65.0" />
+                     </VBox.margin>
+                  </Circle>
+               </children>
+            </VBox>
             <Button fx:id="logoutButton" layoutX="728.0" layoutY="538.0" mnemonicParsing="false" onAction="#onActionLogout" text="LOGOUT">
                <font>
                   <Font name="System Bold" size="14.0" />

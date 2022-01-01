@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class DBAppointments {
@@ -202,11 +203,14 @@ public class DBAppointments {
         }
     }
 
-    public static ObservableList<Appointments> checkForUpcomingAppointments() {
+    public static ObservableList<Appointments> checkForUpcomingAppointments(int userID) {
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
-        String sql = "Select Appointment_ID, Start From appointments WHERE Start <= now() + INTERVAL 15 MINUTE AND Start > now()";
+
         try{
-            ResultSet rs = JDBC.getConnection().createStatement().executeQuery(sql);
+            String sql = "Select Appointment_ID, Start From appointments WHERE Start <= now() + INTERVAL 15 MINUTE AND Start > now() AND User_ID = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, userID);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 int appointmentID = rs.getInt("Appointment_ID");
                 LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();

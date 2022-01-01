@@ -11,6 +11,8 @@ import model.Users;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class DBUsers {
@@ -36,7 +38,7 @@ public class DBUsers {
 
     public static boolean checkLogin(String username, String password){
         try{
-            String sql = "SELECT 1 FROM users WHERE User_Name = ? AND Password = ?";
+            String sql = "SELECT * FROM users WHERE User_Name = ? AND Password = ?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, username);
             ps.setString(2, password);
@@ -48,28 +50,21 @@ public class DBUsers {
             return false;
         }
     }
-
-   public static int getUserIdFromUsername(String username) throws SQLException {
-        String sql = "SELECT User_ID FROM users WHERE User_Name = ?";
-        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-        ps.setString(2, username);
-        ResultSet rs = ps.executeQuery();
-        return rs.getInt(1);
-   }
-
-    public static boolean checkForUpcomingAppointment(int userID){
-
+    public static ObservableList<Users> findUsername() {
+        ObservableList<Users> users = FXCollections.observableArrayList();
+        String sql = "SELECT User_ID FROM users WHERE User_Name = '$User_Name'";
         try{
-            String sql = "SELECT Appointment_ID, Start FROM appointments WHERE User_ID = ?";
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            ps.setInt(1, userID);
-            ResultSet rs = ps.executeQuery();
-            return rs.next();
-
+            ResultSet rs = JDBC.getConnection().createStatement().executeQuery(sql);
+            while(rs.next()){
+                int userID = rs.getInt("User_ID");
+                Users user = new Users(userID);
+                users.add(user);
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return false;
         }
+
+        return users;
     }
 
 }

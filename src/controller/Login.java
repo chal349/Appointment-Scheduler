@@ -24,6 +24,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -52,7 +53,8 @@ public class Login implements Initializable {
     private Button loginButton;
 
     ResourceBundle rb = ResourceBundle.getBundle("properties.lang", Locale.getDefault());
-     int a;
+     int id;
+     int userID = 1;
     LocalDateTime start;
 
     @FXML
@@ -61,43 +63,50 @@ public class Login implements Initializable {
         String filename = "login_activity.txt";
         FileWriter fileWriter = new FileWriter(filename, true);
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        boolean validLogin = DBUsers.checkLogin(usernameField.getText(), passwordField.getText());
-        ObservableList<Appointments> check = DBAppointments.checkForUpcomingAppointments();
-
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        if(username.equals("admin")){
+            userID = 2;
+        }
+        boolean validLogin = DBUsers.checkLogin(username, password);
+        //boolean validLogin = DBUsers.checkLogin(username, password, userID);
+        ObservableList<Appointments> checkForUpcomingAppointments = DBAppointments.checkForUpcomingAppointments(userID);
 
 
         if(validLogin) {
 
-            printWriter.append(usernameField.getText() + " successfully logged in on " + LocalDate.now() + ", at " + LocalTime.now() + "\n");
+            printWriter.append(username + " successfully logged in on " + LocalDate.now() + ", at " + LocalTime.now() + "\n");
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
             stage.setScene(new Scene(scene));
-            stage.setTitle("Appointments");
+            stage.setTitle("Scheduler");
             stage.show();
 
-            if (check.size() > 0){
-                for (Appointments appt : check){
-                     a = appt.getAppointmentID();
-                     start = appt.getStart();
+            if (checkForUpcomingAppointments.size() > 0){
+                for (Appointments appointment : checkForUpcomingAppointments){
+                     id = appointment.getAppointmentID();
+                     start = appointment.getStart();
+                    // userID = appointment.getUserID();
+
 
                 }
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Alert");
-                alert.setHeaderText("User Appointments");
-                alert.setContentText("Hello, " + usernameField.getText() +" - you have appointment #" + a + " upcoming soon." + "\n" +  start );
+                alert.setHeaderText("Welcome to the Scheduler");
+                alert.setContentText("Hello " + username.toUpperCase() +" - you have appointment #" + id + " upcoming soon." + "\n" +  start );
                 alert.show();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Alert");
-                alert.setHeaderText("User Appointments");
-                alert.setContentText("Hello " + usernameField.getText() + " - you have no upcoming appointments.");
+                alert.setHeaderText("Welcome to the Scheduler");
+                alert.setContentText("Hello " + username.toUpperCase() + " - you have no appointments starting in the next 15 minutes.");
                 alert.show();
             }
 
         } else {
 
-                printWriter.append(usernameField.getText() + " has been denied access on " + LocalDate.now() + ", at " + LocalTime.now() + "\n");
+                printWriter.append(username + " has been denied access on " + LocalDate.now() + ", at " + LocalTime.now() + "\n");
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(rb.getString("ErrorHeader"));
@@ -109,9 +118,6 @@ public class Login implements Initializable {
         printWriter.close();
     }
 
-    private String getCheck(String check) {
-        return check;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
