@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -19,7 +20,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Reports">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Reports_Controller">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -39,15 +40,15 @@
             </ButtonBar>
             <TabPane layoutX="207.0" layoutY="87.0" prefHeight="380.0" prefWidth="595.0" style="-fx-background-color: #dddddd;" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab fx:id="allAppointmentsTab" style="-fx-font-weight: bold;" text="ALL APPOINTMENTS">
+                <Tab fx:id="allAppointmentsTab" style="-fx-font-weight: bold;" text="APPTS BY MONTH &amp; TYPE">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="595.0">
                            <children>
-                              <TableView fx:id="allTableView" layoutX="12.0" layoutY="18.0" prefHeight="328.0" prefWidth="573.0">
+                              <TableView fx:id="allTableView" layoutX="32.0" layoutY="31.0" prefHeight="317.0" prefWidth="531.0">
                                 <columns>
-                                  <TableColumn fx:id="allType_col" prefWidth="174.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
-                                  <TableColumn fx:id="allMonth_col" prefWidth="150.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="MONTH" />
-                                    <TableColumn fx:id="allNumber_col" prefWidth="172.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="NUMBER OF APPOINTMENTS" />
+                                  <TableColumn fx:id="allMonth_col" prefWidth="174.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="MONTH" />
+                                  <TableColumn fx:id="allType_col" prefWidth="168.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
+                                    <TableColumn fx:id="allNumber_col" minWidth="5.0" prefWidth="187.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="NUMBER OF APPOINTMENTS" />
                                 </columns>
                               </TableView>
                            </children>
@@ -58,19 +59,26 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="contactTableView" layoutX="12.0" layoutY="18.0" prefHeight="328.0" prefWidth="573.0">
+                              <TableView fx:id="contactTableView" layoutX="19.0" layoutY="70.0" prefHeight="282.0" prefWidth="557.0">
                                  <columns>
-                                     <TableColumn fx:id="contactContact_col" prefWidth="62.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CONTACT" />
-                                     <TableColumn fx:id="contactAppID_col" prefWidth="42.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="APP ID" />
-                                     <TableColumn fx:id="contactTitle_col" prefWidth="56.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TITLE" />
-                                     <TableColumn fx:id="contactType_col" prefWidth="41.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
-                                     <TableColumn fx:id="contactDescription_col" prefWidth="114.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DESCRIPTION" />
-                                     <TableColumn fx:id="contactDate_col" prefWidth="79.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DATE" />
-                                     <TableColumn fx:id="contactStart_col" prefWidth="56.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="START" />
-                                     <TableColumn fx:id="contactEnd_col" prefWidth="59.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="END" />
-                                     <TableColumn fx:id="contactCustID_col" prefWidth="63.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
+                                     <TableColumn fx:id="contactAppID_col" prefWidth="47.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="APP ID" />
+                                     <TableColumn fx:id="contactTitle_col" prefWidth="63.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TITLE" />
+                                     <TableColumn fx:id="contactType_col" prefWidth="76.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
+                                     <TableColumn fx:id="contactDescription_col" prefWidth="93.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DESCRIPTION" />
+                                     <TableColumn fx:id="contactStart_col" prefWidth="121.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="START" />
+                                     <TableColumn fx:id="contactEnd_col" prefWidth="68.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="END" />
+                                     <TableColumn fx:id="contactCustID_col" prefWidth="66.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
                                  </columns>
                               </TableView>
+                              <Label fx:id="headerText1" layoutX="149.0" layoutY="25.0" style="-fx-background-color: #dddddd;" text="SELECT CONTACT" textFill="#545454">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </Label>
+                              <ComboBox fx:id="contactComboBox" layoutX="297.0" layoutY="23.0" prefWidth="150.0" />
                            </children>
                         </AnchorPane>
                   </content>

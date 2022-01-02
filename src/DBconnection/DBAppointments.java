@@ -6,13 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import model.Appointments;
+import model.Reports;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class DBAppointments {
@@ -223,4 +223,56 @@ public class DBAppointments {
 
         return appointments;
     }
+
+
+    public static ObservableList<Reports> getAppointmentsByTypeAndMonth() {
+        ObservableList<Reports> list = FXCollections.observableArrayList();
+
+        try{
+            String sql = "SELECT monthname(start) AS Month, Type, count(Type) AS Total FROM appointments GROUP BY Month(start), Type;";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            while(rs.next()){
+                String type = rs.getString("Type");
+                String month = rs.getString("Month");
+                String total = rs.getString("Total");
+                Reports report = new Reports(type, month, total);
+                list.add(report);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public static ObservableList<Appointments> getAllAppointmentsByContact() {
+        ObservableList<Appointments> allList = FXCollections.observableArrayList();
+
+        try{
+            String sql = "Select Appointment_ID, Title, Description, Location, Type, Start, End, Contact_ID, Customer_ID, User_ID FROM Appointments";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentID = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                String type = rs.getString("Type");
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                int contactID = rs.getInt("Contact_ID");
+                int customerID = rs.getInt("Customer_ID");
+                int userID = rs.getInt("User_ID");
+                Appointments appointments = new Appointments(appointmentID, title, description, location, type, start, end, contactID, customerID, userID);
+                allList.add(appointments);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allList;
+    }
+
+
+
 }
