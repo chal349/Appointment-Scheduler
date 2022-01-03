@@ -138,7 +138,9 @@ public class Reports_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         contactComboBox.setItems(contactsList);
+        contactTableView.setPlaceholder(new Label("Please select a Contact"));
         customerComboBox.setItems(customersList);
+        customerTableView.setPlaceholder(new Label("Please select a Customer"));
 
         allTableView.setItems(DBAppointments.getAppointmentsByTypeAndMonth());
         allType_col.setCellValueFactory(new PropertyValueFactory<>("type"));

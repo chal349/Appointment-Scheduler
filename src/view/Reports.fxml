@@ -70,7 +70,7 @@
                                      <TableColumn fx:id="contactCustID_col" prefWidth="50.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
                                  </columns>
                               </TableView>
-                              <Label fx:id="headerText1" layoutX="135.0" layoutY="25.0" style="-fx-background-color: #dddddd;" text="SELECT CONTACT" textFill="#545454">
+                              <Label fx:id="headerText1" layoutX="123.0" layoutY="28.0" style="-fx-background-color: #dddddd;" text="SELECT CONTACT" textFill="#545454">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
@@ -78,7 +78,7 @@
                                     <Insets left="20.0" right="20.0" />
                                  </padding>
                               </Label>
-                              <ComboBox fx:id="contactComboBox" layoutX="287.0" layoutY="23.0" onAction="#onContactSelectionFilterTableview" prefHeight="25.0" prefWidth="129.0" />
+                              <ComboBox fx:id="contactComboBox" layoutX="288.0" layoutY="25.0" onAction="#onContactSelectionFilterTableview" prefHeight="25.0" prefWidth="152.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -98,7 +98,7 @@
                                      <TableColumn fx:id="customerContactID_col" prefWidth="66.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CONTACT ID" />
                                  </columns>
                               </TableView>
-                              <Label fx:id="headerText11" layoutX="133.0" layoutY="27.0" style="-fx-background-color: #dddddd;" text="SELECT CUSTOMER" textFill="#545454">
+                              <Label fx:id="headerText11" layoutX="123.0" layoutY="28.0" style="-fx-background-color: #dddddd;" text="SELECT CUSTOMER" textFill="#545454">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
@@ -106,7 +106,7 @@
                                     <Insets left="20.0" right="20.0" />
                                  </padding>
                               </Label>
-                              <ComboBox fx:id="customerComboBox" layoutX="298.0" layoutY="24.0" onAction="#onCustomerSelectionFilterTableview" prefHeight="25.0" prefWidth="129.0" />
+                              <ComboBox fx:id="customerComboBox" layoutX="288.0" layoutY="25.0" onAction="#onCustomerSelectionFilterTableview" prefHeight="25.0" prefWidth="152.0" />
                            </children>
                         </AnchorPane>
                      </content>

@@ -91,10 +91,14 @@ public class Login implements Initializable {
 
 
                 }
+                DateTimeFormatter hoursMinutes = DateTimeFormatter.ofPattern("HH:mm a");
+                String time = start.format(hoursMinutes);
+
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Welcome");
                 alert.setHeaderText("Hello " + username.toUpperCase());
-                alert.setContentText("You have appointment #" + id + " upcoming soon." + "\n" +  start);
+                alert.setContentText("You have appointment #" + id + " at " +  time);
                 alert.show();
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
