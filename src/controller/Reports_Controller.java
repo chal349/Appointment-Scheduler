@@ -2,7 +2,7 @@ package controller;
 
 import DBconnection.DBAppointments;
 import DBconnection.DBContacts;
-import DBconnection.DBDivisions;
+import DBconnection.DBCustomers;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,10 +13,7 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.Appointments;
-import model.Contacts;
-import model.Divisions;
-import model.Reports;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,31 +33,32 @@ public class Reports_Controller implements Initializable {
     @FXML private TableColumn<Reports, String> allType_col;
     @FXML private TableColumn<Reports, String> allMonth_col;
     @FXML private TableColumn<Reports, String> allNumber_col;
+
     @FXML private Tab contactScheduleTab;
     @FXML private ComboBox<Contacts> contactComboBox;
     @FXML private TableView<Appointments> contactTableView;
-    @FXML private TableColumn<?, ?> contactContact_col;
-    @FXML private TableColumn<?, ?> contactAppID_col;
-    @FXML private TableColumn<?, ?> contactTitle_col;
-    @FXML private TableColumn<?, ?> contactType_col;
-    @FXML private TableColumn<?, ?> contactDescription_col;
-    @FXML private TableColumn<?, ?> contactDate_col;
-    @FXML private TableColumn<?, ?> contactStart_col;
-    @FXML private TableColumn<?, ?> contactEnd_col;
-    @FXML private TableColumn<?, ?> contactCustID_col;
-    @FXML private Tab userScheduleTab;
-    @FXML private TableView<?> UserTableView;
-    @FXML private TableColumn<?, ?> userUserID_col;
-    @FXML private TableColumn<?, ?> userAppID_col;
-    @FXML private TableColumn<?, ?> userCustomerID_col;
-    @FXML private TableColumn<?, ?> userTitle_col;
-    @FXML private TableColumn<?, ?> userDescription_col;
-    @FXML private TableColumn<?, ?> userDate_col;
-    @FXML private TableColumn<?, ?> userStart_col;
-    @FXML private TableColumn<?, ?> userEnd_col;
+    @FXML private TableColumn<Appointments, Integer> contactAppID_col;
+    @FXML private TableColumn<Appointments, String> contactTitle_col;
+    @FXML private TableColumn<Appointments, String> contactType_col;
+    @FXML private TableColumn<Appointments, String> contactDescription_col;
+    @FXML private TableColumn<Appointments, String> contactStart_col;
+    @FXML private TableColumn<Appointments, String> contactEnd_col;
+    @FXML private TableColumn<Appointments, Integer> contactCustID_col;
+
+    @FXML private Tab customerScheduleTab;
+    @FXML private ComboBox<Customers> customerComboBox;
+    @FXML private TableView<Appointments> customerTableView;
+    @FXML private TableColumn<Appointments, Integer> customerAppID_col;
+    @FXML private TableColumn<Appointments, String> customerType_col;
+    @FXML private TableColumn<Appointments, String> customerTitle_col;
+    @FXML private TableColumn<Appointments, String> customerDescription_col;
+    @FXML private TableColumn<Appointments, String> customerStart_col;
+    @FXML private TableColumn<Appointments, String> customerEnd_col;
+    @FXML private TableColumn<Appointments, Integer> customerContactID_col;
     @FXML private Button logoutButton;
     @FXML private Label headerText;
     public ObservableList<Contacts> contactsList = DBContacts.getAllContacts();
+    public ObservableList<Customers> customersList = DBCustomers.getAllCustomers();
 
 
     @FXML
@@ -69,21 +67,41 @@ public class Reports_Controller implements Initializable {
         contactTableView.setItems(DBAppointments.getAllAppointmentsByContact(contactID));
 
         contactAppID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        contactType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
         contactTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
         contactDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
-        contactType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
         contactStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
         contactEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
         contactCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
             if (DBAppointments.getAllAppointmentsByContact(contactID).isEmpty()){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Alert");
-                alert.setHeaderText("Welcome to the Scheduler");
-                alert.setContentText("Hello " + contactID + " - you have no appointments starting in the next 15 minutes.");
+                alert.setHeaderText(contactComboBox.getSelectionModel().getSelectedItem().getName() + " - has no appointments scheduled.");
+                //alert.setContentText();
                 alert.show();
             }
     }
 
+    @FXML
+    void onCustomerSelectionFilterTableview(ActionEvent event) {
+        int customerID = customerComboBox.getSelectionModel().getSelectedItem().getCustomerID();
+        customerTableView.setItems(DBAppointments.getAllAppointmentsByCustomer(customerID));
+
+        customerAppID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        customerType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
+        customerTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        customerDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        customerStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
+        customerEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        customerContactID_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
+        if (DBAppointments.getAllAppointmentsByCustomer(customerID).isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Alert");
+            alert.setHeaderText(customerComboBox.getSelectionModel().getSelectedItem().getName() + " - has no appointments scheduled.");
+            //alert.setContentText();
+            alert.show();
+        }
+    }
 
     @FXML
     void onActionAppointmentsScreen(ActionEvent event) throws IOException {
@@ -120,6 +138,7 @@ public class Reports_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         contactComboBox.setItems(contactsList);
+        customerComboBox.setItems(customersList);
 
         allTableView.setItems(DBAppointments.getAppointmentsByTypeAndMonth());
         allType_col.setCellValueFactory(new PropertyValueFactory<>("type"));

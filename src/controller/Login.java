@@ -91,16 +91,16 @@ public class Login implements Initializable {
 
 
                 }
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Alert");
-                alert.setHeaderText("Welcome to the Scheduler");
-                alert.setContentText("Hello " + username.toUpperCase() +" - you have appointment #" + id + " upcoming soon." + "\n" +  start );
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Welcome");
+                alert.setHeaderText("Hello " + username.toUpperCase());
+                alert.setContentText("You have appointment #" + id + " upcoming soon." + "\n" +  start);
                 alert.show();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Alert");
-                alert.setHeaderText("Welcome to the Scheduler");
-                alert.setContentText("Hello " + username.toUpperCase() + " - you have no appointments starting in the next 15 minutes.");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Welcome");
+                alert.setHeaderText("Hello " + username.toUpperCase());
+                alert.setContentText("You have no appointments that start in the next 15 minutes.");
                 alert.show();
             }
 
