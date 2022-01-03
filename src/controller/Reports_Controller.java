@@ -2,6 +2,7 @@ package controller;
 
 import DBconnection.DBAppointments;
 import DBconnection.DBContacts;
+import DBconnection.DBDivisions;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,7 +13,9 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Appointments;
 import model.Contacts;
+import model.Divisions;
 import model.Reports;
 
 import java.io.IOException;
@@ -35,7 +38,7 @@ public class Reports_Controller implements Initializable {
     @FXML private TableColumn<Reports, String> allNumber_col;
     @FXML private Tab contactScheduleTab;
     @FXML private ComboBox<Contacts> contactComboBox;
-    @FXML private TableView<?> contactTableView;
+    @FXML private TableView<Appointments> contactTableView;
     @FXML private TableColumn<?, ?> contactContact_col;
     @FXML private TableColumn<?, ?> contactAppID_col;
     @FXML private TableColumn<?, ?> contactTitle_col;
@@ -57,8 +60,30 @@ public class Reports_Controller implements Initializable {
     @FXML private TableColumn<?, ?> userEnd_col;
     @FXML private Button logoutButton;
     @FXML private Label headerText;
-
     public ObservableList<Contacts> contactsList = DBContacts.getAllContacts();
+
+
+    @FXML
+    void onContactSelectionFilterTableview(ActionEvent event) {
+        int contactID = contactComboBox.getSelectionModel().getSelectedItem().getContactID();
+        contactTableView.setItems(DBAppointments.getAllAppointmentsByContact(contactID));
+
+        contactAppID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        contactTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        contactDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        contactType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
+        contactStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
+        contactEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        contactCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+            if (DBAppointments.getAllAppointmentsByContact(contactID).isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Alert");
+                alert.setHeaderText("Welcome to the Scheduler");
+                alert.setContentText("Hello " + contactID + " - you have no appointments starting in the next 15 minutes.");
+                alert.show();
+            }
+    }
+
 
     @FXML
     void onActionAppointmentsScreen(ActionEvent event) throws IOException {

@@ -246,12 +246,13 @@ public class DBAppointments {
         return list;
     }
 
-    public static ObservableList<Appointments> getAllAppointmentsByContact() {
-        ObservableList<Appointments> allList = FXCollections.observableArrayList();
+    public static ObservableList<Appointments> getAllAppointmentsByContact(int contactSelected) {
+        ObservableList<Appointments> contactList = FXCollections.observableArrayList();
 
         try{
-            String sql = "Select Appointment_ID, Title, Description, Location, Type, Start, End, Contact_ID, Customer_ID, User_ID FROM Appointments";
+            String sql = "Select * FROM Appointments WHERE Contact_ID = ?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, contactSelected);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int appointmentID = rs.getInt("Appointment_ID");
@@ -265,12 +266,12 @@ public class DBAppointments {
                 int customerID = rs.getInt("Customer_ID");
                 int userID = rs.getInt("User_ID");
                 Appointments appointments = new Appointments(appointmentID, title, description, location, type, start, end, contactID, customerID, userID);
-                allList.add(appointments);
+                contactList.add(appointments);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return allList;
+        return contactList;
     }
 
 

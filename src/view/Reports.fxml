@@ -70,7 +70,7 @@
                                      <TableColumn fx:id="contactCustID_col" prefWidth="66.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
                                  </columns>
                               </TableView>
-                              <Label fx:id="headerText1" layoutX="149.0" layoutY="25.0" style="-fx-background-color: #dddddd;" text="SELECT CONTACT" textFill="#545454">
+                              <Label fx:id="headerText1" layoutX="133.0" layoutY="25.0" style="-fx-background-color: #dddddd;" text="SELECT CONTACT" textFill="#545454">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
@@ -78,7 +78,7 @@
                                     <Insets left="20.0" right="20.0" />
                                  </padding>
                               </Label>
-                              <ComboBox fx:id="contactComboBox" layoutX="297.0" layoutY="23.0" prefWidth="150.0" />
+                              <ComboBox fx:id="contactComboBox" layoutX="285.0" layoutY="23.0" onAction="#onContactSelectionFilterTableview" prefWidth="150.0" />
                            </children>
                         </AnchorPane>
                   </content>
