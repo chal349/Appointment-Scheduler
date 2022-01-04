@@ -108,6 +108,8 @@ public class AddAppointment implements Initializable {
         // gets selection from contactID combo box
         Contacts C = contactBox.getSelectionModel().getSelectedItem();
         int contactID = C.getContactID();
+
+
         // gets start/end time and date selection
         LocalTime startTimeSelection = startTimeBox.getSelectionModel().getSelectedItem();
         LocalTime endTimeSelection = endTimeBox.getSelectionModel().getSelectedItem();
@@ -115,6 +117,7 @@ public class AddAppointment implements Initializable {
         // combines date and time selection
         LocalDateTime new_StartDateAndTime = LocalDateTime.of(dateSelection, startTimeSelection);
         LocalDateTime new_EndDateAndTime = LocalDateTime.of(dateSelection, endTimeSelection);
+
         // convert times to system default
         ZoneId myZoneId = ZoneId.systemDefault();
         ZonedDateTime myZoneStart = ZonedDateTime.of(new_StartDateAndTime, myZoneId);

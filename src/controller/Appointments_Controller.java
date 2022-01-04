@@ -21,6 +21,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+
+
 public class Appointments_Controller implements Initializable {
 
     Stage stage;
@@ -191,7 +193,7 @@ public class Appointments_Controller implements Initializable {
 
 
 
-    @FXML
+   @FXML
     void onActionLogout(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to Logout?");
         Optional<ButtonType> result = alert.showAndWait();
@@ -254,7 +256,6 @@ public class Appointments_Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
         //Populate ALL TABLEVIEW with info
         allTableView.setItems(DBAppointments.getAllAppointments());
         allApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
@@ -262,8 +263,10 @@ public class Appointments_Controller implements Initializable {
         allDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
         allLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
         allType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
-        allStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
-        allEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        //LAMBDAS to format Start and End times
+        allStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
+        allEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
+
         allContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         allCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         allUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
@@ -275,8 +278,9 @@ public class Appointments_Controller implements Initializable {
         monthLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
         monthContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         monthType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
-        monthStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
-        monthEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        //LAMBDAS to format Start and End times
+        monthStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
+        monthEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
         monthCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         monthUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
         //Populate MONTH TABLEVIEW with info
@@ -287,12 +291,16 @@ public class Appointments_Controller implements Initializable {
         weekLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
         weekContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         weekType_Col.setCellValueFactory(new PropertyValueFactory<>("type"));
-        weekStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
-        weekEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        //LAMBDAS to format Start and End times
+        weekStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
+        weekEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
         weekCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         weekUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
 
 
     }
+
+
+
 }

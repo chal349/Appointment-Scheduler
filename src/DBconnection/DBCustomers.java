@@ -19,7 +19,7 @@ import java.util.TimeZone;
 
 public class DBCustomers {
 
-    public static ObservableList<Customers> getAllCustomers() {
+    /*public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
         String sql = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, Division_ID FROM customers";
         try {
@@ -34,6 +34,32 @@ public class DBCustomers {
                 int divisionID = rs.getInt("Division_ID");
 
                 Customers customer = new Customers(customerID, name, address, postalCode, phone, divisionID);
+                allCustomers.add(customer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allCustomers;
+    }*/
+
+    public static ObservableList<Customers> getAllCustomers() {
+        ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM customers  INNER JOIN first_level_divisions  ON customers.Division_ID = first_level_divisions.Division_ID INNER JOIN countries ON first_level_divisions.Country_ID = countries.Country_ID order by Customer_ID";
+        try {
+            PreparedStatement PS = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = PS.executeQuery();
+            while (rs.next()) {
+                int customerID = rs.getInt("Customer_ID");
+                String name = rs.getString("Customer_Name");
+                String address = rs.getString("Address");
+                String postalCode = rs.getString("Postal_Code");
+                String phone = rs.getString("Phone");
+                int divisionID = rs.getInt("Division_ID");
+                String divisionName = rs.getString("Division");
+                int countryID = rs.getInt("Country_ID");
+                String countryName = rs.getString("Country");
+
+                Customers customer = new Customers(customerID, name, address, postalCode, phone, divisionID, divisionName, countryID, countryName);
                 allCustomers.add(customer);
             }
         } catch (SQLException e) {

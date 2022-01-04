@@ -125,14 +125,15 @@
                               <Insets left="20.0" right="20.0" />
                           </padding>
                       </Label>
-                  <TableView fx:id="customerTableView" layoutX="11.0" layoutY="34.0" prefHeight="328.0" prefWidth="590.0">
+                  <TableView fx:id="customerTableView" layoutX="11.0" layoutY="34.0" prefHeight="328.0" prefWidth="590.0" style="-fx-selection-bar: #dbceeb; -fx-selection-bar-non-focused: #dbceeb; -fx-focus-color: #dbceeb;">
                      <columns>
-                        <TableColumn fx:id="customerID_col" prefWidth="76.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUSTOMER ID" />
-                        <TableColumn fx:id="name_col" prefWidth="95.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="NAME" />
-                        <TableColumn fx:id="address_col" prefWidth="168.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="ADDRESS" />
-                        <TableColumn fx:id="postalCode_col" minWidth="0.0" prefWidth="74.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="POSTAL CODE" />
-                        <TableColumn fx:id="phone_col" minWidth="3.0" prefWidth="107.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="PHONE" />
-                        <TableColumn fx:id="divisionID_col" prefWidth="69.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DIVISION ID" />
+                        <TableColumn fx:id="customerID_col" prefWidth="44.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
+                        <TableColumn fx:id="name_col" prefWidth="98.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="NAME" />
+                        <TableColumn fx:id="address_col" prefWidth="149.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="ADDRESS" />
+                        <TableColumn fx:id="postalCode_col" minWidth="0.0" prefWidth="59.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="POST CODE" />
+                        <TableColumn fx:id="divisionName_col" prefWidth="83.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DIVISION" />
+                        <TableColumn fx:id="countryName_col" prefWidth="63.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="COUNTRY" />
+                        <TableColumn fx:id="phone_col" minWidth="3.0" prefWidth="93.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="PHONE" />
                      </columns>
                   </TableView>
                </children>

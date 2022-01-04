@@ -70,8 +70,9 @@ public class Reports_Controller implements Initializable {
         contactType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
         contactTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
         contactDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
-        contactStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
-        contactEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        //LAMBDAS to format Start and End times
+        contactStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
+        contactEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
         contactCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
             if (DBAppointments.getAllAppointmentsByContact(contactID).isEmpty()){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -91,8 +92,9 @@ public class Reports_Controller implements Initializable {
         customerType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
         customerTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
         customerDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
-        customerStart_col.setCellValueFactory(new PropertyValueFactory<>("start"));
-        customerEnd_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        //LAMBDAS to format Start and End times
+        customerStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
+        customerEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
         customerContactID_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         if (DBAppointments.getAllAppointmentsByCustomer(customerID).isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR);

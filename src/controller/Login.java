@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import main.Main;
 import model.Appointments;
 import model.Users;
 
@@ -20,10 +21,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -53,9 +51,10 @@ public class Login implements Initializable {
     private Button loginButton;
 
     ResourceBundle rb = ResourceBundle.getBundle("properties.lang", Locale.getDefault());
-     int id;
-     int userID = 1;
+    int id;
+    int userID = 1;
     LocalDateTime start;
+
 
     @FXML
     void onActionLoginAppointmentsScreen(ActionEvent event) throws IOException, SQLException {
@@ -75,7 +74,7 @@ public class Login implements Initializable {
 
         if(validLogin) {
 
-            printWriter.append(username + " successfully logged in on " + LocalDate.now() + ", at " + LocalTime.now() + "\n");
+            printWriter.append(username + "- successfully logged in on at " + ZonedDateTime.now() + "\n");
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
@@ -110,7 +109,7 @@ public class Login implements Initializable {
 
         } else {
 
-                printWriter.append(username + " has been denied access on " + LocalDate.now() + ", at " + LocalTime.now() + "\n");
+                printWriter.append(username + "- has been denied access on " + ZonedDateTime.now() + "\n");
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(rb.getString("ErrorHeader"));

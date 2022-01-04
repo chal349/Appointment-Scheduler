@@ -43,12 +43,14 @@ public class Customers_Controller implements Initializable {
     private Label headerText;
 
     @FXML private TableView<model.Customers> customerTableView;
-    @FXML private TableColumn<model.Customers, Integer> customerID_col;
-    @FXML private TableColumn<model.Customers, String> name_col;
-    @FXML private TableColumn<model.Customers, String> address_col;
-    @FXML private TableColumn<model.Customers, Integer> postalCode_col;
-    @FXML private TableColumn<model.Customers, Integer> phone_col;
-    @FXML private TableColumn<model.Customers, Integer> divisionID_col;
+    @FXML private TableColumn<Customers, Integer> customerID_col;
+    @FXML private TableColumn<Customers, String> name_col;
+    @FXML private TableColumn<Customers, String> address_col;
+    @FXML private TableColumn<Customers, Integer> postalCode_col;
+    @FXML private TableColumn<Customers, Integer> phone_col;
+    @FXML private TableColumn<Customers, String> divisionName_col;
+    @FXML private TableColumn<Customers, String> countryName_col;
+
 
     private static Customers customerToModify;
     private static Customers customerToDelete;
@@ -141,6 +143,7 @@ public class Customers_Controller implements Initializable {
         address_col.setCellValueFactory(new PropertyValueFactory<>("address"));
         postalCode_col.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phone_col.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        divisionID_col.setCellValueFactory(new PropertyValueFactory<>("divisionID"));
+        divisionName_col.setCellValueFactory(new PropertyValueFactory<>("divisionName"));
+        countryName_col.setCellValueFactory(new PropertyValueFactory<>("countryName"));
     }
 }

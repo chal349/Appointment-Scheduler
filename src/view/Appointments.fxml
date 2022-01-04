@@ -116,7 +116,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="351.0" prefWidth="685.0">
                            <children>
-                              <TableView fx:id="allTableView" layoutX="12.0" layoutY="18.0" prefHeight="328.0" prefWidth="614.0" style="-fx-selection-bar: #f7e9f7; -fx-selection-bar-non-focused: #f7e9f7; -fx-focus-color: #f7e9f7;">
+                              <TableView fx:id="allTableView" layoutX="12.0" layoutY="18.0" prefHeight="328.0" prefWidth="614.0" style="-fx-selection-bar: #dbceeb; -fx-selection-bar-non-focused: #dbceeb; -fx-focus-color: #dbceeb;">
                                  <columns>
                                      <TableColumn fx:id="allApptID_col" prefWidth="40.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="APPT ID" />
                                      <TableColumn fx:id="allTitle_col" prefWidth="40.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TITLE" />
@@ -138,7 +138,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="595.0">
                            <children>
-                              <TableView fx:id="weekTableView" layoutX="12.0" layoutY="18.0" prefHeight="328.0" prefWidth="614.0">
+                              <TableView fx:id="weekTableView" layoutX="12.0" layoutY="18.0" prefHeight="328.0" prefWidth="614.0" style="-fx-selection-bar: #dbceeb; -fx-selection-bar-non-focused: #dbceeb; -fx-focus-color: #dbceeb;">
                                 <columns>
                                   <TableColumn fx:id="weekApptID_col" prefWidth="40.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="APPT ID" />
                                   <TableColumn fx:id="weekTitle_col" prefWidth="40.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TITLE" />
@@ -160,7 +160,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="monthTableView" layoutX="12.0" layoutY="18.0" prefHeight="328.0" prefWidth="614.0">
+                              <TableView fx:id="monthTableView" layoutX="12.0" layoutY="18.0" prefHeight="328.0" prefWidth="614.0" style="-fx-selection-bar: #dbceeb; -fx-selection-bar-non-focused: #dbceeb; -fx-focus-color: #dbceeb;">
                                  <columns>
                                      <TableColumn fx:id="monthApptID_col" prefWidth="41.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="APPT ID" />
                                      <TableColumn fx:id="monthTitle_col" prefWidth="39.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TITLE" />
@@ -180,7 +180,7 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <Button fx:id="logoutButton" layoutX="749.0" layoutY="540.0" mnemonicParsing="false" onAction="#onActionLogout" text="LOGOUT">
+            <Button fx:id="logoutButton" layoutX="749.0" layoutY="540.0" mnemonicParsing="false" onAction="#onActionLogout" style="-fx-focus-color: #dbceeb;" text="LOGOUT">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

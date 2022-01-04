@@ -1,7 +1,12 @@
 package model;
 
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
+
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class Appointments {
     private int appointmentID;
@@ -117,4 +122,17 @@ public class Appointments {
     }
 
 
+    public StringProperty getStartFormatted() {
+        StringProperty start = new SimpleStringProperty();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
+        start.setValue(this.start.format(formatter));
+        return start;
+    }
+
+    public StringProperty getEndFormatted() {
+        StringProperty end = new SimpleStringProperty();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
+        end.setValue(this.end.format(formatter));
+        return end;
+    }
 }

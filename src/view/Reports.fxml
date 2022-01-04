@@ -44,7 +44,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="595.0">
                            <children>
-                              <TableView fx:id="allTableView" layoutX="32.0" layoutY="31.0" prefHeight="317.0" prefWidth="531.0">
+                              <TableView fx:id="allTableView" layoutX="32.0" layoutY="31.0" prefHeight="317.0" prefWidth="531.0" style="-fx-selection-bar: #dbceeb; -fx-selection-bar-non-focused: #dbceeb; -fx-focus-color: #dbceeb;">
                                 <columns>
                                   <TableColumn fx:id="allMonth_col" prefWidth="174.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="MONTH" />
                                   <TableColumn fx:id="allType_col" prefWidth="168.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
@@ -59,7 +59,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="contactTableView" layoutX="19.0" layoutY="70.0" prefHeight="282.0" prefWidth="557.0">
+                              <TableView fx:id="contactTableView" layoutX="19.0" layoutY="70.0" prefHeight="282.0" prefWidth="557.0" style="-fx-selection-bar: #dbceeb; -fx-selection-bar-non-focused: #dbceeb; -fx-focus-color: #dbceeb;">
                                  <columns>
                                      <TableColumn fx:id="contactAppID_col" prefWidth="47.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="APP ID" />
                                      <TableColumn fx:id="contactType_col" prefWidth="101.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
@@ -87,7 +87,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="customerTableView" layoutX="19.0" layoutY="70.0" prefHeight="282.0" prefWidth="557.0">
+                              <TableView fx:id="customerTableView" layoutX="19.0" layoutY="70.0" prefHeight="282.0" prefWidth="557.0" style="-fx-selection-bar: #dbceeb; -fx-selection-bar-non-focused: #dbceeb; -fx-focus-color: #dbceeb;">
                                  <columns>
                                      <TableColumn fx:id="customerAppID_col" prefWidth="47.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="APP ID" />
                                     <TableColumn fx:id="customerType_col" prefWidth="101.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
@@ -174,12 +174,12 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Label fx:id="headerText" layoutX="650.0" layoutY="100.0" style="-fx-background-color: #dddddd;" text="REPORTS" textFill="#545454">
+            <Label fx:id="headerText" layoutX="683.0" layoutY="100.0" style="-fx-background-color: #dddddd;" text="REPORTS" textFill="#545454">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
                <padding>
-                  <Insets left="20.0" right="20.0" />
+                  <Insets left="5.0" right="5.0" />
                </padding>
             </Label>
          </children>
