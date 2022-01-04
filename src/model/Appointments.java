@@ -7,6 +7,9 @@ import javafx.beans.value.ObservableValue;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class Appointments {
     private int appointmentID;
@@ -125,14 +128,14 @@ public class Appointments {
     public StringProperty getStartFormatted() {
         StringProperty start = new SimpleStringProperty();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
-        start.setValue(this.start.format(formatter));
+        start.setValue(this.start.format(formatter) + " " + ZoneId.systemDefault().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.getDefault()));
         return start;
     }
 
     public StringProperty getEndFormatted() {
         StringProperty end = new SimpleStringProperty();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
-        end.setValue(this.end.format(formatter));
+        end.setValue(this.end.format(formatter)+ " " + ZoneId.systemDefault().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.getDefault()));
         return end;
     }
 }

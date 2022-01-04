@@ -119,15 +119,15 @@
                               <TableView fx:id="allTableView" layoutX="12.0" layoutY="18.0" prefHeight="328.0" prefWidth="614.0" style="-fx-selection-bar: #dbceeb; -fx-selection-bar-non-focused: #dbceeb; -fx-focus-color: #dbceeb;">
                                  <columns>
                                      <TableColumn fx:id="allApptID_col" prefWidth="40.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="APPT ID" />
-                                     <TableColumn fx:id="allTitle_col" prefWidth="40.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TITLE" />
-                                     <TableColumn fx:id="allDescription_col" prefWidth="67.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DESCRIPTION" />
-                                     <TableColumn fx:id="allLocation_col" prefWidth="56.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="LOCATION" />
-                                     <TableColumn fx:id="allType_col" prefWidth="88.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
-                                     <TableColumn fx:id="allStart_col" prefWidth="90.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="START" />
-                                     <TableColumn fx:id="allEnd_col" prefWidth="88.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="END" />
-                                     <TableColumn fx:id="allContact_col" prefWidth="55.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CONTACT" />
-                                     <TableColumn fx:id="allCustID_col" prefWidth="48.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
-                                     <TableColumn fx:id="allUserID_col" prefWidth="41.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="USER ID" />
+                                     <TableColumn fx:id="allTitle_col" prefWidth="39.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TITLE" />
+                                     <TableColumn fx:id="allDescription_col" prefWidth="69.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DESCRIPTION" />
+                                     <TableColumn fx:id="allLocation_col" prefWidth="53.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="LOCATION" />
+                                     <TableColumn fx:id="allType_col" prefWidth="82.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
+                                     <TableColumn fx:id="allStart_col" prefWidth="98.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="START" />
+                                     <TableColumn fx:id="allEnd_col" prefWidth="98.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="END" />
+                                     <TableColumn fx:id="allContact_col" prefWidth="51.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CONTACT" />
+                                     <TableColumn fx:id="allCustID_col" prefWidth="41.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
+                                     <TableColumn fx:id="allUserID_col" prefWidth="43.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="USER ID" />
                                  </columns>
                               </TableView>
                            </children>
