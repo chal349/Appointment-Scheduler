@@ -180,7 +180,7 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <Button fx:id="logoutButton" layoutX="749.0" layoutY="540.0" mnemonicParsing="false" onAction="#onActionLogout" style="-fx-focus-color: #dbceeb;" text="LOGOUT">
+            <Button fx:id="logoutButton" layoutX="749.0" layoutY="540.0" mnemonicParsing="false" style="-fx-focus-color: #dbceeb;" text="LOGOUT">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

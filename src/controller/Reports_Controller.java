@@ -20,6 +20,9 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static controller.ScreenLoader.display;
+import static controller.ScreenLoader.exit;
+
 public class Reports_Controller implements Initializable {
 
     Stage stage;
@@ -105,7 +108,25 @@ public class Reports_Controller implements Initializable {
         }
     }
 
-    @FXML
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        customersButton.setOnAction(actionEvent -> display("Customers", "../view/Customers.fxml"));
+        appointmentsButton.setOnAction(actionEvent -> display("Appointments", "../view/Appointments.fxml"));
+        logoutButton.setOnAction(actionEvent -> exit());
+
+        contactComboBox.setItems(contactsList);
+        contactTableView.setPlaceholder(new Label("PLEASE SELECT A CONTACT"));
+        customerComboBox.setItems(customersList);
+        customerTableView.setPlaceholder(new Label("PLEASE SELECT A CUSTOMER"));
+
+        allTableView.setItems(DBAppointments.getAppointmentsByTypeAndMonth());
+        allType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
+        allMonth_col.setCellValueFactory(new PropertyValueFactory<>("month"));
+        allNumber_col.setCellValueFactory(new PropertyValueFactory<>("total"));
+    }
+}
+/*    @FXML
     void onActionAppointmentsScreen(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
@@ -134,23 +155,4 @@ public class Reports_Controller implements Initializable {
             stage.setTitle("SCHEDULER");
             stage.show();
         }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-        contactComboBox.setItems(contactsList);
-        contactTableView.setPlaceholder(new Label("Please select a Contact"));
-        customerComboBox.setItems(customersList);
-        customerTableView.setPlaceholder(new Label("Please select a Customer"));
-
-        allTableView.setItems(DBAppointments.getAppointmentsByTypeAndMonth());
-        allType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
-        allMonth_col.setCellValueFactory(new PropertyValueFactory<>("month"));
-        allNumber_col.setCellValueFactory(new PropertyValueFactory<>("total"));
-
-
-
-    }
-}
+    }*/

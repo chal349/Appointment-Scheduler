@@ -32,32 +32,20 @@ public class Login implements Initializable {
     Stage stage;
     Parent scene;
 
-    @FXML
-    private Label username;
-
-    @FXML
-    private TextField usernameField;
-
-    @FXML
-    private Label password;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private Label LocalTimeZone;
-
-    @FXML
-    private Button loginButton;
+    @FXML private Label username;
+    @FXML private TextField usernameField;
+    @FXML private Label password;
+    @FXML private PasswordField passwordField;
+    @FXML private Label LocalTimeZone;
+    @FXML private Button loginButton;
 
     ResourceBundle rb = ResourceBundle.getBundle("properties.lang", Locale.getDefault());
     int id;
     int userID = 1;
     LocalDateTime start;
 
-
     @FXML
-    void onActionLoginAppointmentsScreen(ActionEvent event) throws IOException, SQLException {
+    void onActionLoginAppointmentsScreen(ActionEvent event) throws IOException{
 
         String filename = "login_activity.txt";
         FileWriter fileWriter = new FileWriter(filename, true);
@@ -67,10 +55,9 @@ public class Login implements Initializable {
         if(username.equals("admin")){
             userID = 2;
         }
-        boolean validLogin = DBUsers.checkLogin(username, password);
-        //boolean validLogin = DBUsers.checkLogin(username, password, userID);
-        ObservableList<Appointments> checkForUpcomingAppointments = DBAppointments.checkForUpcomingAppointments(userID);
 
+        boolean validLogin = DBUsers.checkLogin(username, password);
+        ObservableList<Appointments> checkForUpcomingAppointments = DBAppointments.checkForUpcomingAppointments(userID);
 
         if(validLogin) {
 
@@ -86,13 +73,10 @@ public class Login implements Initializable {
                 for (Appointments appointment : checkForUpcomingAppointments){
                      id = appointment.getAppointmentID();
                      start = appointment.getStart();
-                    // userID = appointment.getUserID();
-
-
                 }
+
                 DateTimeFormatter hoursMinutes = DateTimeFormatter.ofPattern("HH:mm a");
                 String time = start.format(hoursMinutes);
-
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Welcome");
@@ -106,17 +90,13 @@ public class Login implements Initializable {
                 alert.setContentText("You have no appointments that start in the next 15 minutes.");
                 alert.show();
             }
-
         } else {
-
                 printWriter.append(username + "- has been denied access on " + ZonedDateTime.now() + "\n");
-
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(rb.getString("ErrorHeader"));
                 alert.setTitle(rb.getString("ErrorTitle"));
                 alert.setContentText(rb.getString("LoginError"));
                 alert.show();
-
         }
         printWriter.close();
     }

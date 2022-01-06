@@ -30,7 +30,7 @@
             <children>
                 <ButtonBar layoutX="198.0" layoutY="458.0" prefHeight="48.0" prefWidth="612.0" style="-fx-background-color: #dddddd;">
                     <buttons>
-                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#onActionAddCustomerScreen" text="ADD ">
+                        <Button fx:id="addButton" mnemonicParsing="false" text="ADD ">
                             <font>
                                 <Font name="System Bold Italic" size="14.0" />
                             </font>
@@ -55,7 +55,7 @@
                 </ButtonBar>
                 <VBox layoutY="208.0" prefHeight="391.0" prefWidth="160.0" style="-fx-background-color: #dddddd;">
                     <children>
-                        <Button fx:id="appointmentsButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionAppointmentsScreen" prefHeight="60.0" prefWidth="160.0" text="APPOINTMENTS" textFill="#545454">
+                        <Button fx:id="appointmentsButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" text="APPOINTMENTS" textFill="#545454">
                             <font>
                                 <Font name="System Bold Italic" size="16.0" />
                             </font>
@@ -74,7 +74,7 @@
                         <Insets top="-1.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="reportsButton" mnemonicParsing="false" onAction="#onActionReportsScreen" prefHeight="60.0" prefWidth="160.0" text="REPORTS" textFill="#545454">
+                  <Button fx:id="reportsButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" text="REPORTS" textFill="#545454">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -109,7 +109,7 @@
                         </Circle>
                     </children>
                 </VBox>
-                <Button fx:id="logoutButton" layoutX="735.0" layoutY="537.0" mnemonicParsing="false" onAction="#onActionLogout" text="LOGOUT">
+                <Button fx:id="logoutButton" layoutX="735.0" layoutY="537.0" mnemonicParsing="false" text="LOGOUT">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>

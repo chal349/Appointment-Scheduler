@@ -115,7 +115,7 @@
             </TabPane>
             <VBox layoutY="207.0" prefHeight="392.0" prefWidth="160.0" style="-fx-background-color: #dddddd;">
                <children>
-                  <Button fx:id="appointmentsButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionAppointmentsScreen" prefHeight="60.0" prefWidth="160.0" text="APPOINTMENTS" textFill="#545454">
+                  <Button fx:id="appointmentsButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" text="APPOINTMENTS" textFill="#545454">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -123,7 +123,7 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="customersButton" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#onActionCustomersScreen" prefHeight="60.0" prefWidth="160.0" text="CUSTOMERS" textFill="#545454">
+                  <Button fx:id="customersButton" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" text="CUSTOMERS" textFill="#545454">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -169,7 +169,7 @@
                   </Circle>
                </children>
             </VBox>
-            <Button fx:id="logoutButton" layoutX="728.0" layoutY="538.0" mnemonicParsing="false" onAction="#onActionLogout" text="LOGOUT">
+            <Button fx:id="logoutButton" layoutX="728.0" layoutY="538.0" mnemonicParsing="false" text="LOGOUT">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

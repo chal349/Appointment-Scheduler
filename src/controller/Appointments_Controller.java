@@ -14,116 +14,65 @@ import model.Appointments;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Optional;
 import java.util.ResourceBundle;
-import static controller.Loader.display;
+import static controller.ScreenLoader.display;
+import static controller.ScreenLoader.exit;
 
 public class Appointments_Controller implements Initializable {
 
     Stage stage;
     Parent scene;
 
-    @FXML
-    private Button appointmentsButton;
-
-    @FXML
-    private Button customersButton;
-
-    @FXML
-    private Button reportsButton;
-
-    @FXML
-    private Button addButton;
-
-    @FXML
-    private Button updateButton;
-
-    @FXML
-    private Button deleteButton;
-
-    @FXML
-    private Button logoutButton;
-
-    @FXML
-    private Label headerText;
+    @FXML private Button appointmentsButton;
+    @FXML private Button customersButton;
+    @FXML private Button reportsButton;
+    @FXML private Button addButton;
+    @FXML private Button updateButton;
+    @FXML private Button deleteButton;
+    @FXML private Button logoutButton;
+    @FXML private Label headerText;
 
     //ALL TABLEVIEW
-    @FXML
-    private Tab allTab;
-    @FXML
-    private TableView<model.Appointments> allTableView;
-    @FXML
-    private TableColumn<model.Appointments, Integer> allApptID_col;
-    @FXML
-    private TableColumn<model.Appointments, String> allTitle_col;
-    @FXML
-    private TableColumn<model.Appointments, String> allDescription_col;
-    @FXML
-    private TableColumn<model.Appointments, String> allLocation_col;
-    @FXML
-    private TableColumn<model.Appointments, String> allType_col;
-    @FXML
-    private TableColumn<model.Appointments, String> allStart_col;
-    @FXML
-    private TableColumn<model.Appointments, String> allEnd_col;
-    @FXML
-    private TableColumn<model.Appointments, Integer> allContact_col;
-    @FXML
-    private TableColumn<model.Appointments, Integer> allCustID_col;
-    @FXML
-    private TableColumn<model.Appointments, Integer> allUserID_col;
+    @FXML private Tab allTab;
+    @FXML private TableView<model.Appointments> allTableView;
+    @FXML private TableColumn<model.Appointments, Integer> allApptID_col;
+    @FXML private TableColumn<model.Appointments, String> allTitle_col;
+    @FXML private TableColumn<model.Appointments, String> allDescription_col;
+    @FXML private TableColumn<model.Appointments, String> allLocation_col;
+    @FXML private TableColumn<model.Appointments, String> allType_col;
+    @FXML private TableColumn<model.Appointments, String> allStart_col;
+    @FXML private TableColumn<model.Appointments, String> allEnd_col;
+    @FXML private TableColumn<model.Appointments, Integer> allContact_col;
+    @FXML private TableColumn<model.Appointments, Integer> allCustID_col;
+    @FXML private TableColumn<model.Appointments, Integer> allUserID_col;
 
     //WEEK TABLEVIEW
-    @FXML
-    private Tab weekTab;
-    @FXML
-    private TableView<model.Appointments> weekTableView;
-    @FXML
-    private TableColumn<model.Appointments, Integer> weekApptID_col;
-    @FXML
-    private TableColumn<model.Appointments, String> weekTitle_col;
-    @FXML
-    private TableColumn<model.Appointments, String> weekDescription_col;
-    @FXML
-    private TableColumn<model.Appointments, String> weekLocation_col;
-    @FXML
-    private TableColumn<model.Appointments, String> weekType_Col;
-    @FXML
-    private TableColumn<model.Appointments, String> weekStart_col;
-    @FXML
-    private TableColumn<model.Appointments, String> weekEnd_col;
-    @FXML
-    private TableColumn<model.Appointments, Integer> weekContact_col;
-    @FXML
-    private TableColumn<model.Appointments, Integer> weekCustID_col;
-    @FXML
-    private TableColumn<model.Appointments, Integer> weekUserID_col;
+    @FXML private Tab weekTab;
+    @FXML private TableView<model.Appointments> weekTableView;
+    @FXML private TableColumn<model.Appointments, Integer> weekApptID_col;
+    @FXML private TableColumn<model.Appointments, String> weekTitle_col;
+    @FXML private TableColumn<model.Appointments, String> weekDescription_col;
+    @FXML private TableColumn<model.Appointments, String> weekLocation_col;
+    @FXML private TableColumn<model.Appointments, String> weekType_Col;
+    @FXML private TableColumn<model.Appointments, String> weekStart_col;
+    @FXML private TableColumn<model.Appointments, String> weekEnd_col;
+    @FXML private TableColumn<model.Appointments, Integer> weekContact_col;
+    @FXML private TableColumn<model.Appointments, Integer> weekCustID_col;
+    @FXML private TableColumn<model.Appointments, Integer> weekUserID_col;
 
     // MONTH TABLEVIEW
-    @FXML
-    private Tab monthTab;
-    @FXML
-    private TableView<model.Appointments> monthTableView;
-    @FXML
-    private TableColumn<model.Appointments, Integer> monthApptID_col;
-    @FXML
-    private TableColumn<model.Appointments, String> monthTitle_col;
-    @FXML
-    private TableColumn<model.Appointments, String> monthDescription_col;
-    @FXML
-    private TableColumn<model.Appointments, String> monthLocation_col;
-    @FXML
-    private TableColumn<model.Appointments, String> monthType_col;
-    @FXML
-    private TableColumn<model.Appointments, String> monthStart_col;
-    @FXML
-    private TableColumn<model.Appointments, String> monthEnd_col;
-    @FXML
-    private TableColumn<model.Appointments, Integer> monthContact_col;
-    @FXML
-    private TableColumn<model.Appointments, Integer> monthCustID_col;
-    @FXML
-    private TableColumn<model.Appointments, Integer> monthUserID_col;
+    @FXML private Tab monthTab;
+    @FXML private TableView<model.Appointments> monthTableView;
+    @FXML private TableColumn<model.Appointments, Integer> monthApptID_col;
+    @FXML private TableColumn<model.Appointments, String> monthTitle_col;
+    @FXML private TableColumn<model.Appointments, String> monthDescription_col;
+    @FXML private TableColumn<model.Appointments, String> monthLocation_col;
+    @FXML private TableColumn<model.Appointments, String> monthType_col;
+    @FXML private TableColumn<model.Appointments, String> monthStart_col;
+    @FXML private TableColumn<model.Appointments, String> monthEnd_col;
+    @FXML private TableColumn<model.Appointments, Integer> monthContact_col;
+    @FXML private TableColumn<model.Appointments, Integer> monthCustID_col;
+    @FXML private TableColumn<model.Appointments, Integer> monthUserID_col;
 
     private static Appointments appointmentToDelete;
     private static Appointments appointmentToModify;
@@ -166,19 +115,6 @@ public class Appointments_Controller implements Initializable {
                     monthTableView.setItems(DBAppointments.getMonthAppointments());
                     weekTableView.setItems(DBAppointments.getWeekAppointments());
         }
-
-   @FXML
-    void onActionLogout(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to Logout?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.setTitle("SCHEDULER");
-            stage.show();
-        }
-    }
 
     @FXML
     void onActionUpdateScreen(ActionEvent event) throws IOException {
@@ -224,6 +160,7 @@ public class Appointments_Controller implements Initializable {
         customersButton.setOnAction(actionEvent -> display("Customers", "../view/Customers.fxml"));
         reportsButton.setOnAction(actionEvent -> display("Reports", "../view/Reports.fxml"));
         addButton.setOnAction(actionEvent -> display("Add Appointment", "../view/AddAppointment.fxml"));
+        logoutButton.setOnAction(actionEvent -> exit());
 
         //Populate ALL TABLEVIEW with info
         allTableView.setItems(DBAppointments.getAllAppointments());
@@ -295,4 +232,17 @@ public class Appointments_Controller implements Initializable {
         stage.setScene(new Scene(scene));
         stage.setTitle("Customers");
         stage.show();
+    }*/
+
+/*   @FXML
+    void onActionLogout(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to Logout?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.setTitle("SCHEDULER");
+            stage.show();
+        }
     }*/

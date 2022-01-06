@@ -11,36 +11,27 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Customers;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Optional;
 import java.util.ResourceBundle;
-
 import static DBconnection.DBCustomers.*;
+import static controller.ScreenLoader.display;
+import static controller.ScreenLoader.exit;
 
 public class Customers_Controller implements Initializable {
 
     Stage stage;
     Parent scene;
 
-    @FXML
-    private Button addButton;
-    @FXML
-    private Button updateButton;
-    @FXML
-    private Button deleteButton;
-    @FXML
-    private Button appointmentsButton;
-    @FXML
-    private Button customersButton;
-    @FXML
-    private Button reportsButton;
-    @FXML
-    private Button logoutButton;
-    @FXML
-    private Label headerText;
+    @FXML private Button addButton;
+    @FXML private Button updateButton;
+    @FXML private Button deleteButton;
+    @FXML private Button appointmentsButton;
+    @FXML private Button customersButton;
+    @FXML private Button reportsButton;
+    @FXML private Button logoutButton;
+    @FXML private Label headerText;
 
     @FXML private TableView<model.Customers> customerTableView;
     @FXML private TableColumn<Customers, Integer> customerID_col;
@@ -51,33 +42,11 @@ public class Customers_Controller implements Initializable {
     @FXML private TableColumn<Customers, String> divisionName_col;
     @FXML private TableColumn<Customers, String> countryName_col;
 
-
     private static Customers customerToModify;
     private static Customers customerToDelete;
     public static Customers getCustomerToModify() {
         return customerToModify;
     }
-
-
-
-    @FXML
-    void onActionAddCustomerScreen(ActionEvent event) throws IOException {
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/AddCustomer.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.setTitle("Add Customer");
-        stage.show();
-    }
-
-    @FXML
-    void onActionAppointmentsScreen(ActionEvent event) throws IOException {
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.setTitle("Appointments");
-        stage.show();
-    }
-
 
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
@@ -93,28 +62,6 @@ public class Customers_Controller implements Initializable {
             DBCustomers.deleteCustomer(customer);
             customerTableView.setItems(getAllCustomers());
         }
-    }
-
-    @FXML
-    void onActionLogout(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to Logout?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.setTitle("SCHEDULER");
-            stage.show();
-        }
-    }
-
-    @FXML
-    void onActionReportsScreen(ActionEvent event) throws IOException {
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.setTitle("Reports");
-        stage.show();
     }
 
     @FXML
@@ -137,6 +84,11 @@ public class Customers_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        appointmentsButton.setOnAction(actionEvent -> display("Appointments", "../view/Appointments.fxml"));
+        reportsButton.setOnAction(actionEvent -> display("Reports", "../view/Reports.fxml"));
+        addButton.setOnAction(actionEvent -> display("Add Customer", "../view/AddCustomer.fxml"));
+        logoutButton.setOnAction(actionEvent -> exit());
+
         customerTableView.setItems(getAllCustomers());
         customerID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         name_col.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -147,3 +99,42 @@ public class Customers_Controller implements Initializable {
         countryName_col.setCellValueFactory(new PropertyValueFactory<>("countryName"));
     }
 }
+/* @FXML
+    void onActionAddCustomerScreen(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/AddCustomer.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.setTitle("Add Customer");
+        stage.show();
+    }
+
+    @FXML
+    void onActionAppointmentsScreen(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.setTitle("Appointments");
+        stage.show();
+    }
+*/
+/* @FXML
+    void onActionReportsScreen(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.setTitle("Reports");
+        stage.show();
+    }*/
+
+/* @FXML
+    void onActionLogout(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to Logout?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.setTitle("SCHEDULER");
+            stage.show();
+        }
+    }*/
