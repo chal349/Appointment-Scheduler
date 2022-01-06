@@ -139,6 +139,7 @@ public class Reports_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         contactComboBox.setItems(contactsList);
         contactTableView.setPlaceholder(new Label("Please select a Contact"));
         customerComboBox.setItems(customersList);

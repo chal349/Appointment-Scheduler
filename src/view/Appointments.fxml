@@ -42,7 +42,7 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="customersButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionGoToCustomerScreen" prefHeight="60.0" prefWidth="160.0" text="CUSTOMERS" textFill="#545454">
+                  <Button fx:id="customersButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" text="CUSTOMERS" textFill="#545454">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -50,7 +50,7 @@
                         <Insets top="-1.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="reportsButton" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#onActionReportsScreen" prefHeight="60.0" prefWidth="160.0" text="REPORTS" textFill="#545454">
+                  <Button fx:id="reportsButton" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" text="REPORTS" textFill="#545454">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -62,7 +62,7 @@
             </VBox>
             <ButtonBar layoutX="186.0" layoutY="460.0" prefHeight="48.0" prefWidth="638.0" style="-fx-background-color: #dddddd;">
               <buttons>
-                <Button fx:id="addButton" mnemonicParsing="false" onAction="#onActionAddAppointmentScreen" text="ADD">
+                <Button fx:id="addButton" mnemonicParsing="false" text="ADD">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
@@ -127,7 +127,7 @@
                                      <TableColumn fx:id="allEnd_col" prefWidth="98.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="END" />
                                      <TableColumn fx:id="allContact_col" prefWidth="51.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CONTACT" />
                                      <TableColumn fx:id="allCustID_col" prefWidth="41.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
-                                     <TableColumn fx:id="allUserID_col" prefWidth="43.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="USER ID" />
+                                     <TableColumn fx:id="allUserID_col" prefWidth="41.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="USER ID" />
                                  </columns>
                               </TableView>
                            </children>
@@ -141,15 +141,15 @@
                               <TableView fx:id="weekTableView" layoutX="12.0" layoutY="18.0" prefHeight="328.0" prefWidth="614.0" style="-fx-selection-bar: #dbceeb; -fx-selection-bar-non-focused: #dbceeb; -fx-focus-color: #dbceeb;">
                                 <columns>
                                   <TableColumn fx:id="weekApptID_col" prefWidth="40.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="APPT ID" />
-                                  <TableColumn fx:id="weekTitle_col" prefWidth="40.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TITLE" />
-                                    <TableColumn fx:id="weekDescription_col" prefWidth="67.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DESCRIPTION" />
-                                    <TableColumn fx:id="weekLocation_col" prefWidth="56.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="LOCATION" />
-                                    <TableColumn fx:id="weekType_Col" prefWidth="88.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
-                                    <TableColumn fx:id="weekStart_col" prefWidth="90.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="START" />
-                                    <TableColumn fx:id="weekEnd_col" prefWidth="88.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="END" />
-                                    <TableColumn fx:id="weekContact_col" prefWidth="55.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CONTACT" />
-                                    <TableColumn fx:id="weekCustID_col" prefWidth="47.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
-                                    <TableColumn fx:id="weekUserID_col" prefWidth="42.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="USER ID" />
+                                  <TableColumn fx:id="weekTitle_col" prefWidth="39.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TITLE" />
+                                    <TableColumn fx:id="weekDescription_col" prefWidth="69.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DESCRIPTION" />
+                                    <TableColumn fx:id="weekLocation_col" prefWidth="53.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="LOCATION" />
+                                    <TableColumn fx:id="weekType_Col" prefWidth="82.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
+                                    <TableColumn fx:id="weekStart_col" prefWidth="98.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="START" />
+                                    <TableColumn fx:id="weekEnd_col" prefWidth="98.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="END" />
+                                    <TableColumn fx:id="weekContact_col" prefWidth="51.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CONTACT" />
+                                    <TableColumn fx:id="weekCustID_col" prefWidth="41.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
+                                    <TableColumn fx:id="weekUserID_col" prefWidth="41.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="USER ID" />
                                 </columns>
                               </TableView>
                            </children>
@@ -162,16 +162,16 @@
                            <children>
                               <TableView fx:id="monthTableView" layoutX="12.0" layoutY="18.0" prefHeight="328.0" prefWidth="614.0" style="-fx-selection-bar: #dbceeb; -fx-selection-bar-non-focused: #dbceeb; -fx-focus-color: #dbceeb;">
                                  <columns>
-                                     <TableColumn fx:id="monthApptID_col" prefWidth="41.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="APPT ID" />
+                                     <TableColumn fx:id="monthApptID_col" prefWidth="40.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="APPT ID" />
                                      <TableColumn fx:id="monthTitle_col" prefWidth="39.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TITLE" />
-                                     <TableColumn fx:id="monthDescription_col" prefWidth="67.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DESCRIPTION" />
-                                     <TableColumn fx:id="monthLocation_col" prefWidth="57.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="LOCATION" />
-                                     <TableColumn fx:id="monthType_col" prefWidth="88.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
-                                     <TableColumn fx:id="monthStart_col" prefWidth="90.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="START" />
-                                     <TableColumn fx:id="monthEnd_col" prefWidth="88.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="END" />
-                                     <TableColumn fx:id="monthContact_col" prefWidth="55.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CONTACT" />
-                                     <TableColumn fx:id="monthCustID_col" prefWidth="46.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
-                                     <TableColumn fx:id="monthUserID_col" prefWidth="42.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="USER ID" />
+                                     <TableColumn fx:id="monthDescription_col" prefWidth="69.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="DESCRIPTION" />
+                                     <TableColumn fx:id="monthLocation_col" prefWidth="53.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="LOCATION" />
+                                     <TableColumn fx:id="monthType_col" prefWidth="82.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="TYPE" />
+                                     <TableColumn fx:id="monthStart_col" prefWidth="98.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="START" />
+                                     <TableColumn fx:id="monthEnd_col" prefWidth="98.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="END" />
+                                     <TableColumn fx:id="monthContact_col" prefWidth="51.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CONTACT" />
+                                     <TableColumn fx:id="monthCustID_col" prefWidth="41.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="CUST ID" />
+                                     <TableColumn fx:id="monthUserID_col" prefWidth="41.0" style="-fx-font-size: 10; -fx-font-weight: normal;" text="USER ID" />
                                  </columns>
                               </TableView>
                            </children>

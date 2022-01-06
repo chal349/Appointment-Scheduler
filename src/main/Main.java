@@ -4,10 +4,16 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import helper.JDBC;
 
+import java.io.IOException;
+import java.util.Objects;
+
 public class Main extends Application {
+
+    private static Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -15,8 +21,12 @@ public class Main extends Application {
         primaryStage.setTitle("SCHEDULER");
         primaryStage.setScene(new Scene(root, 400, 400));
         primaryStage.show();
+        Main.primaryStage = primaryStage;
     }
 
+    public static Stage getPrimaryStage(){
+        return Main.primaryStage;
+    }
 
     public static void main(String[] args) {
         JDBC.makeConnection();
