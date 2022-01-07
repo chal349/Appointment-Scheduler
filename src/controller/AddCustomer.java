@@ -19,11 +19,19 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @author Corey Hall
+ */
+
+/**
+ * AddCustomer Controller Class - adds new customer to the database
+ */
 public class AddCustomer implements Initializable {
 
     Stage stage;
     Parent scene;
 
+    //VARIABLES
     @FXML private Label headerText;
     @FXML private Label customerID;
     @FXML private TextField customerID_field;
@@ -44,10 +52,14 @@ public class AddCustomer implements Initializable {
     @FXML private ComboBox<Divisions> stateProvinceBox;
     @FXML private Button cancelButton;
 
+    //Lists for populating combo boxes
     ObservableList<Countries> countries = DBCountries.getAllCountries();
     ObservableList<Divisions> divisions = DBDivisions.getAllDivisions();
 
-
+    /**
+     * stateProvince combo box re-populates based on country combo box selection
+     * @param event
+     */
     public void stateProvince_box(MouseEvent event) {
         try{
             divisions.clear();
@@ -62,7 +74,11 @@ public class AddCustomer implements Initializable {
         }
     }
 
-
+    /**
+     * actionEvent returns to Customers screen on click
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -72,8 +88,14 @@ public class AddCustomer implements Initializable {
         stage.show();
     }
 
+    /**
+     * actionEvent saves new customer to database if all fields and selections are valid
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
+        //checks that all fields and choices have been made
         if (fullNameField.getText().isEmpty() ||
             streetAddressField.getText().isEmpty() ||
             postalCodeField.getText().isEmpty() ||
@@ -83,15 +105,14 @@ public class AddCustomer implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("All fields must be completed.");
             alert.showAndWait();
+            //saves new customer to database and returns to Customers screen
         } else{
             String name = fullNameField.getText();
             String address = streetAddressField.getText() + ", " + cityTownField.getText();
             String postalCode = postalCodeField.getText();
             String phone = phoneNumberField.getText();
-
             Divisions selection = stateProvinceBox.getSelectionModel().getSelectedItem();
             int divisionID = selection.getDivisionID();
-
             DBCustomers.newCustomer(name, address, postalCode, phone, divisionID);
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -102,9 +123,14 @@ public class AddCustomer implements Initializable {
         }
     }
 
+    /**
+     * initializes AddCustomers screen
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        //Populates combo boxes
         stateProvinceBox.setItems(divisions);
         countryBox.setItems(countries);
     }

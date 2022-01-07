@@ -8,8 +8,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DBDivisions {
+/**
+ * @author Corey Hall
+ */
 
+/**
+ * DBDivisions Class - contains methods used to access database information.
+ */
+public class DBDivisions {
+    /**
+     * getAllDivisions
+     * @return all divisions
+     */
     public static ObservableList<Divisions> getAllDivisions() {
         ObservableList<Divisions> list = FXCollections.observableArrayList();
 

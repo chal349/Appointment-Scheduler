@@ -6,15 +6,24 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import main.Main;
-
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * @author Corey Hall
+ */
 
+/**
+ * ScreenLoader Class - used for LAMBDA navigation buttons
+ */
 public class ScreenLoader {
 
+    /**
+     * display method gets the title and fxml file for the next screen - gets the primaryStage from Main class
+     * @param title
+     * @param fxml
+     */
     public static void display(String title, String fxml){
-
         try {
             Parent root = FXMLLoader.load(ScreenLoader.class.getResource(fxml));
             Main.getPrimaryStage().setScene(new Scene(root));
@@ -25,6 +34,9 @@ public class ScreenLoader {
         }
     }
 
+    /**
+     * exit method displays alert for confirmation then exits to Login screen
+     */
     public static void exit(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to Logout?");
         Optional<ButtonType> result = alert.showAndWait();

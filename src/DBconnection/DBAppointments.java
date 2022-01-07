@@ -14,9 +14,19 @@ import java.sql.Timestamp;
 import java.time.*;
 import java.util.Optional;
 
+/**
+ * @author Corey Hall
+ */
+
+/**
+ * DBAppointments Class - contains methods used to access database information.
+ */
 public class DBAppointments {
 
-
+    /**
+     * getAllAppointments
+     * @return all appointments
+     */
     public static ObservableList<Appointments> getAllAppointments() {
         ObservableList<Appointments> allList = FXCollections.observableArrayList();
 
@@ -44,7 +54,10 @@ public class DBAppointments {
         return allList;
     }
 
-
+    /**
+     * getMonthAppointments
+     * @return all appointments by month
+     */
     public static ObservableList<Appointments> getMonthAppointments() {
         ObservableList<Appointments> monthList = FXCollections.observableArrayList();
 
@@ -73,6 +86,10 @@ public class DBAppointments {
         return monthList;
     }
 
+    /**
+     * getWeekAppointments
+     * @return all appointments by week
+     */
     public static ObservableList<Appointments> getWeekAppointments() {
         ObservableList<Appointments> weekList = FXCollections.observableArrayList();
 
@@ -101,6 +118,10 @@ public class DBAppointments {
         return weekList;
     }
 
+    /**
+     * getAllTypes
+     * @return all types of appointments
+     */
     public static ObservableList<String> getAllTypes() {
         ObservableList<String> typesList = FXCollections.observableArrayList();
         String sql = "Select DISTINCT Type FROM appointments";
@@ -115,6 +136,18 @@ public class DBAppointments {
         return typesList;
     }
 
+    /**
+     * Creates a newAppointment
+     * @param title
+     * @param description
+     * @param location
+     * @param type
+     * @param start
+     * @param end
+     * @param customerID
+     * @param userID
+     * @param contactID
+     */
     public static void newAppointment(String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerID, int userID, int contactID){
         try{
             String sql = "INSERT INTO appointments VALUES(NULL, ?, ?, ?, ?, ?, ?, now(), 'user', now(), 'user', ?, ?, ?)";
@@ -135,6 +168,19 @@ public class DBAppointments {
         }
     }
 
+    /**
+     * Updates an appointment
+     * @param title
+     * @param description
+     * @param location
+     * @param type
+     * @param start
+     * @param end
+     * @param customerID
+     * @param userID
+     * @param contactID
+     * @param appointmentID
+     */
     public static void updateAppointment(String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerID, int userID, int contactID, String appointmentID){
         try{
             String sql = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Contact_ID = ?, Customer_ID = ?, User_ID = ?  WHERE Appointment_ID = ?";
@@ -156,6 +202,11 @@ public class DBAppointments {
         }
     }
 
+    /**
+     * getAllAppointments by specific customer using customerID
+     * @param customer_ID
+     * @return
+     */
     public static ObservableList<Appointments> getAllAppointmentsByCustomer(int customer_ID) {
         ObservableList<Appointments> allList = FXCollections.observableArrayList();
 
@@ -185,6 +236,11 @@ public class DBAppointments {
         return allList;
     }
 
+    /**
+     * Deletes an appointment from database
+     * @param appointment
+     * @throws SQLException
+     */
     public static void deleteAppointment(Appointments appointment) throws SQLException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to cancel Appointment?");
@@ -200,6 +256,11 @@ public class DBAppointments {
         }
     }
 
+    /**
+     * checks for upcoming appointments by userID
+     * @param userID
+     * @return appointments upcoming within next 15 mins
+     */
     public static ObservableList<Appointments> checkForUpcomingAppointments(int userID) {
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
 
@@ -217,11 +278,13 @@ public class DBAppointments {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return appointments;
     }
 
-
+    /**
+     * getAppointments by type and month
+     * @return number of appointments sorted by type and month
+     */
     public static ObservableList<Reports> getAppointmentsByTypeAndMonth() {
         ObservableList<Reports> list = FXCollections.observableArrayList();
 
@@ -239,10 +302,14 @@ public class DBAppointments {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return list;
     }
 
+    /**
+     * getAllAppointments by specific contact selected
+     * @param contactSelected
+     * @return appointments for chosen contact
+     */
     public static ObservableList<Appointments> getAllAppointmentsByContact(int contactSelected) {
         ObservableList<Appointments> contactList = FXCollections.observableArrayList();
 

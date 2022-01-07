@@ -19,11 +19,19 @@ import static DBconnection.DBCustomers.*;
 import static controller.ScreenLoader.display;
 import static controller.ScreenLoader.exit;
 
+/**
+ * @author Corey Hall
+ */
+
+/**
+ * Customers Controller Class - User can view and select customers for adding, updating, or deleting - Contains LAMBDAS in Initialize
+ */
 public class Customers_Controller implements Initializable {
 
     Stage stage;
     Parent scene;
 
+    //VARIABLES
     @FXML private Button addButton;
     @FXML private Button updateButton;
     @FXML private Button deleteButton;
@@ -33,6 +41,7 @@ public class Customers_Controller implements Initializable {
     @FXML private Button logoutButton;
     @FXML private Label headerText;
 
+    //Customer Tableview
     @FXML private TableView<model.Customers> customerTableView;
     @FXML private TableColumn<Customers, Integer> customerID_col;
     @FXML private TableColumn<Customers, String> name_col;
@@ -42,20 +51,28 @@ public class Customers_Controller implements Initializable {
     @FXML private TableColumn<Customers, String> divisionName_col;
     @FXML private TableColumn<Customers, String> countryName_col;
 
+    //Variables for selecting Customer to modify in UpdateCustomer screen
     private static Customers customerToModify;
     private static Customers customerToDelete;
     public static Customers getCustomerToModify() {
         return customerToModify;
     }
 
+    /**
+     * onAction deletes customer from database if customer has no appointments scheduled
+     * @param event
+     * @throws SQLException
+     */
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
         customerToDelete = customerTableView.getSelectionModel().getSelectedItem();
+        //checks to see if a customer has been selected
         if (customerToDelete == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText("No Customer was selected.");
             alert.showAndWait();
+            //if customer has no appointments scheduled - customer is deleted, table is refreshed
         } else {
             Customers customer = customerTableView.getSelectionModel().getSelectedItem();
             getCustomerAppointments(customer);
@@ -64,8 +81,14 @@ public class Customers_Controller implements Initializable {
         }
     }
 
+    /**
+     * onAction goes to UpdateCustomer screen with selected customer
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionUpdateCustomerScreen(ActionEvent event) throws IOException {
+        // checks to see if customer has been selected
         customerToModify = customerTableView.getSelectionModel().getSelectedItem();
         if (customerToModify == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -81,14 +104,22 @@ public class Customers_Controller implements Initializable {
         }
     }
 
+    /**
+     * Initializes Customers Controller screen -Contains LAMBDAS for moving throughout application
+     * LAMBDA- setOnAction button Lambdas replaces each navigation button with one line of code.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        //LAMBDAS for navigation buttons
         appointmentsButton.setOnAction(actionEvent -> display("Appointments", "../view/Appointments.fxml"));
         reportsButton.setOnAction(actionEvent -> display("Reports", "../view/Reports.fxml"));
         addButton.setOnAction(actionEvent -> display("Add Customer", "../view/AddCustomer.fxml"));
         logoutButton.setOnAction(actionEvent -> exit());
 
+        //Populates Customers Tableview
         customerTableView.setItems(getAllCustomers());
         customerID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         name_col.setCellValueFactory(new PropertyValueFactory<>("name"));

@@ -18,11 +18,19 @@ import java.util.ResourceBundle;
 import static controller.ScreenLoader.display;
 import static controller.ScreenLoader.exit;
 
+/**
+ * @author Corey Hall
+ */
+
+/**
+ * Appointments Controller Class - User can view and select appointments for adding, updating, or deleting - Contains LAMBDAS in Initialize
+ */
 public class Appointments_Controller implements Initializable {
 
     Stage stage;
     Parent scene;
 
+    //VARIABLES
     @FXML private Button appointmentsButton;
     @FXML private Button customersButton;
     @FXML private Button reportsButton;
@@ -74,13 +82,19 @@ public class Appointments_Controller implements Initializable {
     @FXML private TableColumn<model.Appointments, Integer> monthCustID_col;
     @FXML private TableColumn<model.Appointments, Integer> monthUserID_col;
 
+    //Variables for selecting appointment to update in UpdateAppointment screen
     private static Appointments appointmentToDelete;
     private static Appointments appointmentToModify;
     public static Appointments getAppointmentToModify() {return appointmentToModify;}
 
+    /**
+     * actionEvent deletes appointment from database based on which tableview is selected
+     * @param event
+     * @throws SQLException
+     */
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
-
+        //ALL TABLEVIEW
         if (allTab.isSelected()) {
             appointmentToDelete = allTableView.getSelectionModel().getSelectedItem();
             if(appointmentToDelete == null){
@@ -90,6 +104,7 @@ public class Appointments_Controller implements Initializable {
                 alert.showAndWait();
                 return;
             }
+            //MONTH TABLEVIEW
         } else if (monthTab.isSelected()) {
             appointmentToDelete = monthTableView.getSelectionModel().getSelectedItem();
             if(appointmentToDelete == null){
@@ -99,6 +114,7 @@ public class Appointments_Controller implements Initializable {
                 alert.showAndWait();
                 return;
             }
+            //WEEK TABLEVIEW
         } else if (weekTab.isSelected()) {
             appointmentToDelete = weekTableView.getSelectionModel().getSelectedItem();
             if(appointmentToDelete == null){
@@ -116,9 +132,14 @@ public class Appointments_Controller implements Initializable {
                     weekTableView.setItems(DBAppointments.getWeekAppointments());
         }
 
+    /**
+     * actionEvent takes appointment selected based on table selected to UpdateAppointment screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionUpdateScreen(ActionEvent event) throws IOException {
-
+        //ALL TABLEVIEW
         if (allTab.isSelected()) {
             appointmentToModify = allTableView.getSelectionModel().getSelectedItem();
             if(appointmentToModify == null){
@@ -128,6 +149,7 @@ public class Appointments_Controller implements Initializable {
                 alert.showAndWait();
                 return;
             }
+            //MONTH TABLEVIEW
         } else if (monthTab.isSelected()) {
             appointmentToModify = monthTableView.getSelectionModel().getSelectedItem();
             if(appointmentToModify == null){
@@ -137,6 +159,7 @@ public class Appointments_Controller implements Initializable {
                 alert.showAndWait();
                 return;
             }
+            //WEEK TABLEVIEW
         } else if (weekTab.isSelected()) {
             appointmentToModify = weekTableView.getSelectionModel().getSelectedItem();
             if(appointmentToModify == null){
@@ -155,8 +178,16 @@ public class Appointments_Controller implements Initializable {
 
     }
 
+    /**
+     * Initializes Appointments Controller screen -Contains LAMBDAS for moving throughout application and for formatting start and end date and time
+     * LAMBDA- time formatting Lambdas are used for concise code.
+     * LAMBDA- setOnAction button Lambdas replaces each navigation button with one line of code.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //LAMBDAS for navigation buttons
         customersButton.setOnAction(actionEvent -> display("Customers", "../view/Customers.fxml"));
         reportsButton.setOnAction(actionEvent -> display("Reports", "../view/Reports.fxml"));
         addButton.setOnAction(actionEvent -> display("Add Appointment", "../view/AddAppointment.fxml"));
@@ -172,7 +203,6 @@ public class Appointments_Controller implements Initializable {
         //LAMBDAS to format Start and End times
         allStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
         allEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
-
         allContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         allCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         allUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));

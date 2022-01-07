@@ -7,7 +7,19 @@ import model.Contacts;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author Corey Hall
+ */
+
+/**
+ * DBContacts Class - contains methods used to access database information.
+ */
 public class DBContacts {
+
+    /**
+     * getAllContacts
+     * @return all contacts
+     */
     public static ObservableList<Contacts> getAllContacts(){
         ObservableList<Contacts> list = FXCollections.observableArrayList();
         String sql = "SELECT Contact_ID, Contact_Name, Email FROM contacts";

@@ -8,10 +8,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author Corey Hall
+ */
 
+/**
+ * DBUsers Class - contains methods used to access database information.
+ */
 public class DBUsers {
 
-
+    /**
+     * getAllUsers
+     * @return all users
+     */
     public static ObservableList<Users> getAllUsers(){
         ObservableList<Users> list = FXCollections.observableArrayList();
         String sql = "SELECT User_ID, User_Name, Password FROM users";
@@ -30,6 +39,12 @@ public class DBUsers {
         return list;
     }
 
+    /**
+     * checkLogin checks for valid login
+     * @param username
+     * @param password
+     * @return true or false
+     */
     public static boolean checkLogin(String username, String password){
         try{
             String sql = "SELECT * FROM users WHERE User_Name = ? AND Password = ?";
@@ -44,21 +59,4 @@ public class DBUsers {
             return false;
         }
     }
-    public static ObservableList<Users> findUsername() {
-        ObservableList<Users> users = FXCollections.observableArrayList();
-        String sql = "SELECT User_ID FROM users WHERE User_Name = '$User_Name'";
-        try{
-            ResultSet rs = JDBC.getConnection().createStatement().executeQuery(sql);
-            while(rs.next()){
-                int userID = rs.getInt("User_ID");
-                Users user = new Users(userID);
-                users.add(user);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        return users;
-    }
-
 }

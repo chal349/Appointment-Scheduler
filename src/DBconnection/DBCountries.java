@@ -8,8 +8,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author Corey Hall
+ */
+
+/**
+ * DBCountries Class - contains methods used to access database information.
+ */
 public class DBCountries {
 
+    /**
+     * getAllCountries
+     * @return all countries
+     */
     public static ObservableList<Countries>getAllCountries() {
         ObservableList<Countries> list = FXCollections.observableArrayList();
 

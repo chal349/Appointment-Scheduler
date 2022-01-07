@@ -11,10 +11,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
+/**
+ * @author Corey Hall
+ */
 
+/**
+ * DBCustomers Class - contains methods used to access database information.
+ */
 public class DBCustomers {
 
-
+    /**
+     * getAllCustomers
+     * @return all customers
+     */
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
         String sql = "SELECT * FROM customers  INNER JOIN first_level_divisions  ON customers.Division_ID = first_level_divisions.Division_ID INNER JOIN countries ON first_level_divisions.Country_ID = countries.Country_ID order by Customer_ID";
@@ -41,6 +50,14 @@ public class DBCustomers {
         return allCustomers;
     }
 
+    /**
+     * Creates a newCustomer
+     * @param name
+     * @param address
+     * @param postalCode
+     * @param phone
+     * @param divisionID
+     */
     public static void newCustomer(String name, String address, String postalCode, String phone, int divisionID) {
         try{
             String sql = "INSERT INTO customers VALUES (NULL, ?, ?, ?, ?, now(), 'user', now(), 'user',?)";
@@ -57,6 +74,15 @@ public class DBCustomers {
         }
     }
 
+    /**
+     * Updates a Customer
+     * @param customerID
+     * @param name
+     * @param address
+     * @param postalCode
+     * @param phone
+     * @param divisionID
+     */
     public static void updateCustomer(int customerID, String name, String address, String postalCode, String phone, int divisionID){
         try{
             String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
@@ -74,6 +100,11 @@ public class DBCustomers {
         }
     }
 
+    /**
+     * getCustomerAppointments by specific customerID
+     * @param customer
+     * @return all appointments for specific customer
+     */
     public static int getCustomerAppointments(Customers customer) {
         String sql = "SELECT COUNT(*) AS total FROM appointments WHERE Customer_ID = ?";
         try{
@@ -91,6 +122,11 @@ public class DBCustomers {
         return 0;
     }
 
+    /**
+     * deletes Customer
+     * @param customer
+     * @throws SQLException if customer has appointments
+     */
     public static void deleteCustomer(Customers customer) throws SQLException {
         if(getCustomerAppointments(customer) == 0) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to delete Customer?");

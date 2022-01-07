@@ -20,13 +20,19 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @author Corey Hall
+ */
 
-
+/**
+ * UpdateCustomer Class - used for updating Customers in the database
+ */
 public class UpdateCustomer implements Initializable {
 
     Stage stage;
     Parent scene;
 
+    //VARIABLES
     @FXML private Label headerText;
     @FXML private Label customerID;
     @FXML private TextField customerID_field;
@@ -46,18 +52,26 @@ public class UpdateCustomer implements Initializable {
     @FXML private Label stateProvince;
     @FXML private ComboBox<Divisions> stateProvinceBox;
     @FXML private Button cancelButton;
-
+    private Customers customerSelected;
+    
+    //Lists for populating combo boxes
     ObservableList<Countries> countries = DBCountries.getAllCountries();
     ObservableList<Divisions> divisions = DBDivisions.getAllDivisions();
 
-    private Customers customerSelected;
-
+    /**
+     * actionEvent clears stateProvince combo box and repopulates based on country selection
+     * @param event
+     */
     @FXML
     void country_box(ActionEvent event) {
         divisions.clear();
         stateProvinceBox.setItems(divisions);
     }
 
+    /**
+     * mouseEvent populates stateProvince box based on country selection
+     * @param event
+     */
     public void stateProvince_box(MouseEvent event) {
         try{
             divisions.setAll();
@@ -73,6 +87,11 @@ public class UpdateCustomer implements Initializable {
         }
     }
 
+    /**
+     * onaction Cancel and return to Customers screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -82,27 +101,34 @@ public class UpdateCustomer implements Initializable {
         stage.show();
     }
 
+    /**
+     * onAction Save customer to database and return to Customers screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionSave(ActionEvent event)throws IOException {
-        if (fullNameField.getText().isEmpty() ||
-                streetAddressField.getText().isEmpty() ||
-                postalCodeField.getText().isEmpty() ||
-                phoneNumberField.getText().isEmpty() ||
-                countryBox.getSelectionModel().isEmpty() ||
-                stateProvinceBox.getSelectionModel().isEmpty()){
+        //checks all text fields and combo boxes for inputs
+        if      (fullNameField.getText().isEmpty()          || 
+                streetAddressField.getText().isEmpty()      ||
+                postalCodeField.getText().isEmpty()         ||
+                phoneNumberField.getText().isEmpty()        ||
+                countryBox.getSelectionModel().isEmpty()    ||
+                stateProvinceBox.getSelectionModel().isEmpty())
+        {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("All fields must be completed.");
             alert.showAndWait();
-        } else{
+        } 
+        //gets inputs from all text fields and combo boxes and Updates customer in database - returns to Customers screen
+        else{
             int customerID = customerSelected.getCustomerID();
             String name = fullNameField.getText();
             String address = streetAddressField.getText() + ", " + cityTownField.getText();
             String postalCode = postalCodeField.getText();
             String phone = phoneNumberField.getText();
-
             Divisions selection = stateProvinceBox.getSelectionModel().getSelectedItem();
             int divisionID = selection.getDivisionID();
-
             DBCustomers.updateCustomer(customerID, name, address, postalCode, phone, divisionID);
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -113,15 +139,19 @@ public class UpdateCustomer implements Initializable {
         }
     }
 
-
+    /**
+     * Initializes UpdateCustomer screen
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //gets customer selected from customers screen
         customerSelected = Customers_Controller.getCustomerToModify();
-
+        //populates all text fields with customers info from database
         customerID_field.setText(String.valueOf(customerSelected.getCustomerID()));
         fullNameField.setText(String.valueOf(customerSelected.getName()));
         phoneNumberField.setText(String.valueOf(customerSelected.getPhone()));
-
         String street = customerSelected.getAddress();
         String streetRevised = street.substring(0, street.indexOf(","));
         streetAddressField.setText(streetRevised);
@@ -129,13 +159,15 @@ public class UpdateCustomer implements Initializable {
         String cityFromStreet = city.substring(city.lastIndexOf(',')+ 1).trim();
         cityTownField.setText(cityFromStreet);
         postalCodeField.setText(String.valueOf(customerSelected.getPostalCode()));
-
+        
+        //populates state/province combo box and country combo box with available choices based on customers previous selection
         divisions = DBDivisions.getAllDivisions();
-        for(Divisions D : divisions) {
-            if(customerSelected.getDivisionID() == D.getDivisionID()){
-                stateProvinceBox.setValue(D);
+        for(Divisions divisionSelected : divisions) {
+            if(customerSelected.getDivisionID() == divisionSelected.getDivisionID()){
+                stateProvinceBox.setValue(divisionSelected);
+                
                 for(Countries C : countries){
-                    if(D.getCountryID() == C.getCountryID()) {
+                    if(divisionSelected.getCountryID() == C.getCountryID()) {
                         countryBox.setValue(C);
                     }
                 }

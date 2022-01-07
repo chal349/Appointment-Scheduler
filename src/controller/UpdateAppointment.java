@@ -18,18 +18,24 @@ import model.Appointments;
 import model.Contacts;
 import model.Customers;
 import model.Users;
-
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.*;
 import java.util.ResourceBundle;
 
+/**
+ * @author Corey Hall
+ */
+
+/**
+ * UpdateAppointment Class - used for updating an appointment in the database
+ */
 public class UpdateAppointment implements Initializable {
 
     Stage stage;
     Parent scene;
 
+    //VARIABLES
     @FXML private Label headerText;
     @FXML private TextField appointmentID_field;
     @FXML private Label customerID;
@@ -47,7 +53,6 @@ public class UpdateAppointment implements Initializable {
     @FXML private Label end;
     @FXML private Button cancelButton;
     @FXML private Button saveButton;
-
     @FXML private ComboBox<Customers> customerID_box;
     @FXML private ComboBox<Users> userID_box;
     @FXML private ComboBox<Contacts> contactBox;
@@ -56,15 +61,22 @@ public class UpdateAppointment implements Initializable {
     @FXML private ComboBox<LocalTime> startTimeBox;
     @FXML private ComboBox<LocalTime> endTimeBox;
 
+    //Lists for populating combo boxes
     public ObservableList<Users> userList = DBUsers.getAllUsers();
     public ObservableList<Contacts> contactsList = DBContacts.getAllContacts();
     public ObservableList<String> typesList = DBAppointments.getAllTypes();
     public ObservableList<Customers> customersList = DBCustomers.getAllCustomers();
 
+    //Variables for user selected appointment and establishing EST business hours
     private Appointments appointmentSelected;
     private LocalTime openEST = LocalTime.of(8, 0);
     private LocalTime closedEST = LocalTime.of(22, 0);
 
+    /**
+     * onAction Cancel and return to Appointments screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -74,8 +86,14 @@ public class UpdateAppointment implements Initializable {
         stage.show();
     }
 
+    /**
+     * onAction Save if all inputs are valid
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
+        // Checks that all text fields and combo boxes have selections/entries
         if
                (titleField.getText().isEmpty() ||
                 descriptionField.getText().isEmpty() ||
@@ -100,41 +118,48 @@ public class UpdateAppointment implements Initializable {
         String description = descriptionField.getText();
         String location = locationField.getText();
         String type = typeBox.getSelectionModel().getSelectedItem();
+
         // gets selection from customerID combo box
-        Customers c = customerID_box.getSelectionModel().getSelectedItem();
-        int customerID = c.getCustomerID();
+        Customers customerSelected = customerID_box.getSelectionModel().getSelectedItem();
+        int customerID = customerSelected.getCustomerID();
+
         // gets selection from userID combo box
-        Users u = userID_box.getSelectionModel().getSelectedItem();
-        int userID = u.getUserID();
+        Users userSelected = userID_box.getSelectionModel().getSelectedItem();
+        int userID = userSelected.getUserID();
+
         // gets selection from contactID combo box
-        Contacts C = contactBox.getSelectionModel().getSelectedItem();
-        int contactID = C.getContactID();
-        // gets start/end time and date selection
+        Contacts contactSelected = contactBox.getSelectionModel().getSelectedItem();
+        int contactID = contactSelected.getContactID();
+
+        // gets start/end time and date selection then combines them
         LocalTime startTimeSelection = startTimeBox.getSelectionModel().getSelectedItem();
         LocalTime endTimeSelection = endTimeBox.getSelectionModel().getSelectedItem();
         LocalDate dateSelection = datePickerBox.getValue();
-        // combines date and time selection
         LocalDateTime new_StartDateAndTime = LocalDateTime.of(dateSelection, startTimeSelection);
         LocalDateTime new_EndDateAndTime = LocalDateTime.of(dateSelection, endTimeSelection);
-        // convert times to system default
-        ZoneId myZoneId = ZoneId.systemDefault();
-        ZonedDateTime myZoneStart = ZonedDateTime.of(new_StartDateAndTime, myZoneId);
-        ZonedDateTime myZoneEnd = ZonedDateTime.of(new_EndDateAndTime, myZoneId);
-        // convert times to EST
+
+        // convert chosen times to system default
+        ZoneId zoneID = ZoneId.systemDefault();
+        ZonedDateTime zoneStart = ZonedDateTime.of(new_StartDateAndTime, zoneID);
+        ZonedDateTime zoneEnd = ZonedDateTime.of(new_EndDateAndTime, zoneID);
+
+        // convert chosen times to EST
         ZoneId EST = ZoneId.of("America/New_York");
-        ZonedDateTime estStart = myZoneStart.withZoneSameInstant(EST);
-        ZonedDateTime estEnd = myZoneEnd.withZoneSameInstant(EST);
+        ZonedDateTime estStart = zoneStart.withZoneSameInstant(EST);
+        ZonedDateTime estEnd = zoneEnd.withZoneSameInstant(EST);
+
         // convert EST back to Local Date Time to validate chosen times
         LocalTime selectedStart = estStart.toLocalDateTime().toLocalTime();
         LocalTime selectedEnd = estEnd.toLocalDateTime().toLocalTime();
 
-
+        // checks for appointments in database based on customer selected. Checks chosen times against already booked appointments for that customer
         ObservableList<Appointments> appointmentConflicts = DBAppointments.getAllAppointmentsByCustomer(customerID);
         for (Appointments a : appointmentConflicts) {
             LocalDateTime startOfBookedAppointment = a.getStart();
             LocalDateTime endOfBookedAppointment = a.getEnd();
             int ID = a.getAppointmentID();
 
+            // checks all appointments in database except current appointmentID. Checks chosen times against other already booked appointments for that customer
             if (ID == appointmentSelected.getAppointmentID()) {
                 break;
             }
@@ -149,7 +174,6 @@ public class UpdateAppointment implements Initializable {
                 return;
             }
         }
-
         //compares selected start and end to Open/Closed hours
         if (selectedStart.isBefore(openEST) || selectedEnd.isAfter(closedEST)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -162,6 +186,7 @@ public class UpdateAppointment implements Initializable {
             alert.setContentText("Selected Start time must be before selected End time.");
             alert.showAndWait();
             return;
+            //If all selections were made and valid - new appointment is added and user returns to Appointments screen.
         } else {
             DBAppointments.updateAppointment(title, description, location, type, new_StartDateAndTime, new_EndDateAndTime, customerID, userID, contactID, appointmentID);
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -172,9 +197,14 @@ public class UpdateAppointment implements Initializable {
         }
     }
 
+    /**
+     * Initializes UpdateAppointment screen
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        //populates start and end time boxes
         ObservableList<LocalTime> start = FXCollections.observableArrayList();
         ObservableList<LocalTime> end = FXCollections.observableArrayList();
         LocalTime times = LocalTime.MIDNIGHT;
@@ -188,15 +218,15 @@ public class UpdateAppointment implements Initializable {
         }
         startTimeBox.setItems(start);
         endTimeBox.setItems(end);
-
+        //Populates date picker and combo boxes with database info
         datePickerBox.setValue(LocalDate.now());
         typeBox.setItems(typesList);
         userID_box.setItems(userList);
         customerID_box.setItems(customersList);
         contactBox.setItems(contactsList);
 
+        //Populates all text fields and combo boxes to have appointment to modify selections preselected
         appointmentSelected = Appointments_Controller.getAppointmentToModify();
-
         appointmentID_field.setText(String.valueOf(appointmentSelected.getAppointmentID()));
         typeBox.setValue(appointmentSelected.getType());
         titleField.setText(String.valueOf(appointmentSelected.getTitle()));
