@@ -7,13 +7,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import model.Appointments;
 import model.Reports;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class DBAppointments {
@@ -129,9 +127,7 @@ public class DBAppointments {
             ps.setTimestamp(6, Timestamp.valueOf(end));
             ps.setInt(7, customerID);
             ps.setInt(8,userID);
-
             ps.setInt(9, contactID);
-
             ps.execute();
 
         } catch (SQLException throwables) {
@@ -274,7 +270,4 @@ public class DBAppointments {
         }
         return contactList;
     }
-
-
-
 }

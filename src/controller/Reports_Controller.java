@@ -81,7 +81,6 @@ public class Reports_Controller implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Alert");
                 alert.setHeaderText(contactComboBox.getSelectionModel().getSelectedItem().getName() + " - has no appointments scheduled.");
-                //alert.setContentText();
                 alert.show();
             }
     }
@@ -103,7 +102,6 @@ public class Reports_Controller implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Alert");
             alert.setHeaderText(customerComboBox.getSelectionModel().getSelectedItem().getName() + " - has no appointments scheduled.");
-            //alert.setContentText();
             alert.show();
         }
     }
@@ -126,33 +124,3 @@ public class Reports_Controller implements Initializable {
         allNumber_col.setCellValueFactory(new PropertyValueFactory<>("total"));
     }
 }
-/*    @FXML
-    void onActionAppointmentsScreen(ActionEvent event) throws IOException {
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.setTitle("Appointments");
-        stage.show();
-    }
-
-    @FXML
-    void onActionCustomersScreen(ActionEvent event) throws IOException {
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.setTitle("Customers");
-        stage.show();
-    }
-
-    @FXML
-    void onActionLogout(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you wish to Logout?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.setTitle("SCHEDULER");
-            stage.show();
-        }
-    }*/

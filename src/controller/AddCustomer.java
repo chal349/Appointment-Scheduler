@@ -3,7 +3,6 @@ package controller;
 import DBconnection.DBCountries;
 import DBconnection.DBCustomers;
 import DBconnection.DBDivisions;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import model.Countries;
 import model.Divisions;
-
 import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;

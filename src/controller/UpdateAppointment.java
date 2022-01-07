@@ -30,56 +30,31 @@ public class UpdateAppointment implements Initializable {
     Stage stage;
     Parent scene;
 
-    @FXML
-    private Label headerText;
+    @FXML private Label headerText;
+    @FXML private TextField appointmentID_field;
+    @FXML private Label customerID;
+    @FXML private Label userID;
+    @FXML private Label contact;
+    @FXML private Label type;
+    @FXML private Label location;
+    @FXML private TextField locationField;
+    @FXML private Label title;
+    @FXML private TextField titleField;
+    @FXML private Label description;
+    @FXML private TextField descriptionField;
+    @FXML private Label date;
+    @FXML private Label start;
+    @FXML private Label end;
+    @FXML private Button cancelButton;
+    @FXML private Button saveButton;
 
-    @FXML
-    private TextField appointmentID_field;
-    @FXML
-    private Label customerID;
-    @FXML
-    private Label userID;
-    @FXML
-    private Label contact;
-    @FXML
-    private Label type;
-    @FXML
-    private Label location;
-    @FXML
-    private TextField locationField;
-    @FXML
-    private Label title;
-    @FXML
-    private TextField titleField;
-    @FXML
-    private Label description;
-    @FXML
-    private TextField descriptionField;
-    @FXML
-    private Label date;
-    @FXML
-    private Label start;
-    @FXML
-    private Label end;
-    @FXML
-    private Button cancelButton;
-    @FXML
-    private Button saveButton;
-
-    @FXML
-    private ComboBox<Customers> customerID_box;
-    @FXML
-    private ComboBox<Users> userID_box;
-    @FXML
-    private ComboBox<Contacts> contactBox;
-    @FXML
-    private ComboBox<String> typeBox;
-    @FXML
-    private DatePicker datePickerBox;
-    @FXML
-    private ComboBox<LocalTime> startTimeBox;
-    @FXML
-    private ComboBox<LocalTime> endTimeBox;
+    @FXML private ComboBox<Customers> customerID_box;
+    @FXML private ComboBox<Users> userID_box;
+    @FXML private ComboBox<Contacts> contactBox;
+    @FXML private ComboBox<String> typeBox;
+    @FXML private DatePicker datePickerBox;
+    @FXML private ComboBox<LocalTime> startTimeBox;
+    @FXML private ComboBox<LocalTime> endTimeBox;
 
     public ObservableList<Users> userList = DBUsers.getAllUsers();
     public ObservableList<Contacts> contactsList = DBContacts.getAllContacts();

@@ -29,6 +29,6 @@ public class Users {
 
     @Override
     public String toString(){
-        return String.valueOf(userID + " - " + username);
+        return userID + " - " + username;
     }
 }

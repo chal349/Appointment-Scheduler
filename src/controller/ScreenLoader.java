@@ -10,6 +10,7 @@ import main.Main;
 import java.io.IOException;
 import java.util.Optional;
 
+
 public class ScreenLoader {
 
     public static void display(String title, String fxml){

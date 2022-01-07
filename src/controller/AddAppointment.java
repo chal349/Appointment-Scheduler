@@ -4,7 +4,6 @@ import DBconnection.DBAppointments;
 import DBconnection.DBContacts;
 import DBconnection.DBCustomers;
 import DBconnection.DBUsers;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,12 +14,10 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
-
 import model.Appointments;
 import model.Contacts;
 import model.Customers;
 import model.Users;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.*;
@@ -174,7 +171,6 @@ public class AddAppointment implements Initializable {
     }
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         datePickerBox.setValue(LocalDate.now());
@@ -197,12 +193,4 @@ public class AddAppointment implements Initializable {
             startTimeBox.setItems(start);
             endTimeBox.setItems(end);
         }
-
-
-
-
-
-
-
-
 }

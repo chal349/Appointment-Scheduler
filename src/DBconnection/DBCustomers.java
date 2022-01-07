@@ -1,46 +1,19 @@
 package DBconnection;
 
-import controller.Customers_Controller;
 import helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import model.Customers;
-import model.Users;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
-import java.util.TimeZone;
+
 
 public class DBCustomers {
 
-    /*public static ObservableList<Customers> getAllCustomers() {
-        ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
-        String sql = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, Division_ID FROM customers";
-        try {
-            PreparedStatement PS = JDBC.getConnection().prepareStatement(sql);
-            ResultSet rs = PS.executeQuery();
-            while (rs.next()) {
-                int customerID = rs.getInt("Customer_ID");
-                String name = rs.getString("Customer_Name");
-                String address = rs.getString("Address");
-                String postalCode = rs.getString("Postal_Code");
-                String phone = rs.getString("Phone");
-                int divisionID = rs.getInt("Division_ID");
-
-                Customers customer = new Customers(customerID, name, address, postalCode, phone, divisionID);
-                allCustomers.add(customer);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return allCustomers;
-    }*/
 
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
@@ -131,7 +104,6 @@ public class DBCustomers {
                 alert2.setContentText(customer.getName()+" "+"has been deleted.");
                 alert2.showAndWait();
             }
-
         }
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -139,5 +111,4 @@ public class DBCustomers {
             alert.showAndWait();
         }
     }
-
 }

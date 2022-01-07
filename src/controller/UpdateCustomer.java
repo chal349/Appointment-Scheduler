@@ -16,8 +16,6 @@ import javafx.stage.Stage;
 import model.Countries;
 import model.Customers;
 import model.Divisions;
-
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

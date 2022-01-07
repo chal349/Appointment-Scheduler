@@ -11,21 +11,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-import main.Main;
 import model.Appointments;
-import model.Users;
-
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 public class Login implements Initializable {
 
@@ -61,7 +57,7 @@ public class Login implements Initializable {
 
         if(validLogin) {
 
-            printWriter.append(username + "- successfully logged in on at " + ZonedDateTime.now() + "\n");
+            printWriter.append(username + "- successfully logged in on at " + Instant.now() + " [UTC]\n");
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
@@ -75,7 +71,7 @@ public class Login implements Initializable {
                      start = appointment.getStart();
                 }
 
-                DateTimeFormatter hoursMinutes = DateTimeFormatter.ofPattern("HH:mm a");
+                DateTimeFormatter hoursMinutes = DateTimeFormatter.ofPattern("HH:mm MM/dd/yy");
                 String time = start.format(hoursMinutes);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -91,7 +87,7 @@ public class Login implements Initializable {
                 alert.show();
             }
         } else {
-                printWriter.append(username + "- has been denied access on " + ZonedDateTime.now() + "\n");
+                printWriter.append(username + "- has been denied access on " + Instant.now() + " [UTC]\n");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(rb.getString("ErrorHeader"));
                 alert.setTitle(rb.getString("ErrorTitle"));

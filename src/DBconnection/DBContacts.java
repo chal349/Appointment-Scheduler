@@ -4,7 +4,6 @@ import helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Contacts;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -26,6 +25,4 @@ public class DBContacts {
         }
         return list;
     }
-
-    
 }
