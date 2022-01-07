@@ -162,13 +162,13 @@ public class UpdateCustomer implements Initializable {
         
         //populates state/province combo box and country combo box with available choices based on customers previous selection
         divisions = DBDivisions.getAllDivisions();
-        for(Divisions divisionSelected : divisions) {
-            if(customerSelected.getDivisionID() == divisionSelected.getDivisionID()){
-                stateProvinceBox.setValue(divisionSelected);
+        for(Divisions division : divisions) {
+            if(customerSelected.getDivisionID() == division.getDivisionID()){
+                stateProvinceBox.setValue(division);
                 
-                for(Countries C : countries){
-                    if(divisionSelected.getCountryID() == C.getCountryID()) {
-                        countryBox.setValue(C);
+                for(Countries country : countries){
+                    if(division.getCountryID() == country.getCountryID()) {
+                        countryBox.setValue(country);
                     }
                 }
             }

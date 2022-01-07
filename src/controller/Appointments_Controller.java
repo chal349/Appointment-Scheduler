@@ -181,7 +181,7 @@ public class Appointments_Controller implements Initializable {
     /**
      * Initializes Appointments Controller screen -Contains LAMBDAS for moving throughout application and for formatting start and end date and time
      * LAMBDA- time formatting Lambdas are used for concise code.
-     * LAMBDA- setOnAction button Lambdas replaces each navigation button with one line of code.
+     * LAMBDA- SetOnAction button Lambdas replaces each navigation button with one line of code.
      * @param location
      * @param resources
      */
