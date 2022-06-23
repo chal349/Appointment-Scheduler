@@ -1,26 +1,7 @@
-01-07-2022
-----------------------
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/79333726/175381846-6b4fd1e9-1728-47f2-9ad7-0ed647f28d8b.gif)
+
 APPOINTMENT SCHEDULER 1.0
-Author: Corey Hall
-coreyrichardhall@gmail.com
-----------------------
-IDE Information:
-IDE: IntelliJ IDEA 2021.1.1 (Community Edition)
-Build #IC-211.7142.45, built on April 30, 2021
-VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
-System: Windows 10 Home x64
 
-Libraries:
-Java JDK: Java SE 11.0.11
-JavaFX SDK: 11.0.2
-MySQL Driver: MySQL Connector 8.0.25
-
------------------------
-Instructions:
-To use the application, set the root folder as source, and create
-a build configuration that points to the main class, "sample.Main".
-
-The default login information is "test" for both username and password.
 ----------------------
 
 This application can be used to manage appointments for different customers in any timezone using a relational database.
@@ -33,8 +14,9 @@ Users can Create, Update, Delete customers.
 View appointments by timeframe (day, week, or month)
 Alerts the user when there is an appointment soon (within 15 minutes)
 
-----------------------
 Reporting Functionalities
+
+----------------------
 
 The application can generate the following reports:
 1. Tracking the number of appointments by month
