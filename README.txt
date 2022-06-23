@@ -23,11 +23,13 @@ a build configuration that points to the main class, "sample.Main".
 The default login information is "test" for both username and password.
 ----------------------
 
-This application can be used to manage appointments for different customers using a relational database.
+This application can be used to manage appointments for different customers in any timezone using a relational database.
 
 Functionalities:
-Create, Update, Delete appointments
-Create, Update, Delete customers
+Login screen displays information based on users language settings.
+All appointment times are stored "UTC" in mySQL database. Appointment times are converted to users local timezone upon login.
+Users can Create, Update, Delete appointments.
+Users can Create, Update, Delete customers.
 View appointments by timeframe (day, week, or month)
 Alerts the user when there is an appointment soon (within 15 minutes)
 
@@ -44,7 +46,3 @@ The application can generate the following reports:
 7. Showing a schedule of appointments for a given contact in a given month
 8. Showing a schedule of appointments for a given contact in a given week
 
-To use this functionality, 
-1. Select a date from the date picker in the top-right of the main GUI
-2. Click the "View Reports" button near the bottom-left of the main GUI
-.. The Reports screen will show available reports for the selected time period.
