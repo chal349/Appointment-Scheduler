@@ -22,7 +22,7 @@ import static controller.ScreenLoader.exit;
  */
 
 /**
- * Reports Controller Class - User can view and select Reports - contains LAMBDAS in Initialize, and both onActionEvent methods
+ * Reports Controller Class - User can view and select Reports
  */
 public class Reports_Controller implements Initializable {
 
@@ -69,71 +69,13 @@ public class Reports_Controller implements Initializable {
     // Lists for populating combo boxes
     public ObservableList<Contacts> contactsList = DBContacts.getAllContacts();
     public ObservableList<Customers> customersList = DBCustomers.getAllCustomers();
-
-    /**
-     * onAction filters Contacts Schedule tableview based on combo box selection
-     * LAMBDAS for formatting Start and end times - used for clean concise code
-     * @param event
-     */
-    @FXML
-    void onContactSelectionFilterTableview(ActionEvent event) {
-        //gets contact selected from combo box and sets tableview based on that contacts schedule
-        int contactID = contactComboBox.getSelectionModel().getSelectedItem().getContactID();
-        contactTableView.setItems(DBAppointments.getAllAppointmentsByContact(contactID));
-
-        contactAppID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
-        contactType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
-        contactTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
-        contactDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
-        //LAMBDAS to format Start and End times
-        contactStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
-        contactEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
-        contactCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        //displays alert if contact has no appointments scheduled
-            if (DBAppointments.getAllAppointmentsByContact(contactID).isEmpty()){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Alert");
-                alert.setHeaderText(contactComboBox.getSelectionModel().getSelectedItem().getName() + " - has no appointments scheduled.");
-                alert.show();
-            }
-    }
-
-    /**
-     * onAction filters Customer Schedule tableview based on combo box selection
-     * LAMBDAS for formatting Start and end times - used for clean concise code
-     * @param event
-     */
-    @FXML
-    void onCustomerSelectionFilterTableview(ActionEvent event) {
-        //gets customer selected from combo box and filters tableview based on that customers schedule
-        int customerID = customerComboBox.getSelectionModel().getSelectedItem().getCustomerID();
-        customerTableView.setItems(DBAppointments.getAllAppointmentsByCustomer(customerID));
-
-        customerAppID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
-        customerType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
-        customerTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
-        customerDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
-        //LAMBDAS to format Start and End times
-        customerStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
-        customerEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
-        customerContactID_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
-        //displays alert if customer has no appointments scheduled
-        if (DBAppointments.getAllAppointmentsByCustomer(customerID).isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Alert");
-            alert.setHeaderText(customerComboBox.getSelectionModel().getSelectedItem().getName() + " - has no appointments scheduled.");
-            alert.show();
-        }
-    }
-
-    /**
-     * Initializes Reports Controller screen -Contains LAMBDAS for moving throughout application
-     * LAMBDA- setOnAction button Lambdas replaces each navigation button with one line of code.
-     * @param url
-     * @param resourceBundle
-     */
+    
+   /**
+    * Initializes Reports Controller screen 
+    */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        
         //LAMBDAS FOR NAVIGATION
         customersButton.setOnAction(actionEvent -> display("Customers", "../view/Customers.fxml"));
         appointmentsButton.setOnAction(actionEvent -> display("Appointments", "../view/Appointments.fxml"));
@@ -151,4 +93,63 @@ public class Reports_Controller implements Initializable {
         allMonth_col.setCellValueFactory(new PropertyValueFactory<>("month"));
         allNumber_col.setCellValueFactory(new PropertyValueFactory<>("total"));
     }
+
+    /**
+     * onAction filters Contacts Schedule tableview based on combo box selection
+     */
+    @FXML
+    void onContactSelectionFilterTableview(ActionEvent event) {
+        
+        //gets contact selected from combo box and sets tableview based on that contacts schedule
+        int contactID = contactComboBox.getSelectionModel().getSelectedItem().getContactID();
+        contactTableView.setItems(DBAppointments.getAllAppointmentsByContact(contactID));
+
+        contactAppID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        contactType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
+        contactTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        contactDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        
+        //LAMBDAS to format Start and End times
+        contactStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
+        contactEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
+        contactCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        
+        //displays alert if contact has no appointments scheduled
+            if (DBAppointments.getAllAppointmentsByContact(contactID).isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Alert");
+                alert.setHeaderText(contactComboBox.getSelectionModel().getSelectedItem().getName() + " - has no appointments scheduled.");
+                alert.show();
+            }
+    }
+
+    /**
+     * onAction filters Customer Schedule tableview based on combo box selection
+     */
+    @FXML
+    void onCustomerSelectionFilterTableview(ActionEvent event) {
+        
+        //gets customer selected from combo box and filters tableview based on that customers schedule
+        int customerID = customerComboBox.getSelectionModel().getSelectedItem().getCustomerID();
+        customerTableView.setItems(DBAppointments.getAllAppointmentsByCustomer(customerID));
+
+        customerAppID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        customerType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
+        customerTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        customerDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        
+        //LAMBDAS to format Start and End times
+        customerStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
+        customerEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
+        customerContactID_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
+        
+        //displays alert if customer has no appointments scheduled
+        if (DBAppointments.getAllAppointmentsByCustomer(customerID).isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Alert");
+            alert.setHeaderText(customerComboBox.getSelectionModel().getSelectedItem().getName() + " - has no appointments scheduled.");
+            alert.show();
+        }
+    }
+
 }
