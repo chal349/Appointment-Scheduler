@@ -20,8 +20,6 @@ public class ScreenLoader {
 
     /**
      * display method gets the title and fxml file for the next screen - gets the primaryStage from Main class
-     * @param title
-     * @param fxml
      */
     public static void display(String title, String fxml){
         try {
