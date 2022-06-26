@@ -71,11 +71,39 @@ public class AddAppointment implements Initializable {
     // Establishes Business hours based on EST
     private LocalTime openEST = LocalTime.of(8, 0);
     private LocalTime closedEST = LocalTime.of(22, 0);
+    
+    
+     /**
+     * Initializes the AddAppointments screen
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        
+        // all combo boxes and the date picker box is populated
+        datePickerBox.setValue(LocalDate.now());
+        typeBox.setItems(typesList);
+        userID_box.setItems(userList);
+        customerID_box.setItems(customersList);
+        contactBox.setItems(contactsList);
+
+        //populates start and time boxes
+        ObservableList<LocalTime> start = FXCollections.observableArrayList();
+        ObservableList<LocalTime> end = FXCollections.observableArrayList();
+        LocalTime times = LocalTime.MIDNIGHT;
+        start.add(times);
+        end.add(times);
+        times = times.plusMinutes(15);
+        while(!times.equals(LocalTime.MIDNIGHT)) {
+            start.add(times);
+            end.add(times);
+            times = times.plusMinutes(15);
+        }
+            startTimeBox.setItems(start);
+            endTimeBox.setItems(end);
+        }
 
     /**
      * actionEvent goes back to Appointments screen when clicked
-     * @param event
-     * @throws IOException
      */
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
@@ -88,8 +116,6 @@ public class AddAppointment implements Initializable {
 
     /**
      * actionEvent saves new appointment to database and returns to Appointments screen
-     * @param event
-     * @throws IOException
      */
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
@@ -193,34 +219,4 @@ public class AddAppointment implements Initializable {
             stage.show();
         }
     }
-
-    /**
-     * Initializes the AddAppointments screen
-     * @param url
-     * @param resourceBundle
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        // all combo boxes and the date picker box is populated
-        datePickerBox.setValue(LocalDate.now());
-        typeBox.setItems(typesList);
-        userID_box.setItems(userList);
-        customerID_box.setItems(customersList);
-        contactBox.setItems(contactsList);
-
-        //populates start and time boxes
-        ObservableList<LocalTime> start = FXCollections.observableArrayList();
-        ObservableList<LocalTime> end = FXCollections.observableArrayList();
-        LocalTime times = LocalTime.MIDNIGHT;
-        start.add(times);
-        end.add(times);
-        times = times.plusMinutes(15);
-        while(!times.equals(LocalTime.MIDNIGHT)) {
-            start.add(times);
-            end.add(times);
-            times = times.plusMinutes(15);
-        }
-            startTimeBox.setItems(start);
-            endTimeBox.setItems(end);
-        }
 }
