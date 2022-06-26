@@ -71,11 +71,66 @@ public class UpdateAppointment implements Initializable {
     private Appointments appointmentSelected;
     private LocalTime openEST = LocalTime.of(8, 0);
     private LocalTime closedEST = LocalTime.of(22, 0);
+    
+   /**
+    * Initializes UpdateAppointment screen
+    */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //populates start and end time boxes
+        ObservableList<LocalTime> start = FXCollections.observableArrayList();
+        ObservableList<LocalTime> end = FXCollections.observableArrayList();
+        LocalTime times = LocalTime.MIDNIGHT;
+        start.add(times);
+        end.add(times);
+        times = times.plusMinutes(15);
+        while (!times.equals(LocalTime.MIDNIGHT)) {
+            start.add(times);
+            end.add(times);
+            times = times.plusMinutes(15);
+        }
+        startTimeBox.setItems(start);
+        endTimeBox.setItems(end);
+        //Populates date picker and combo boxes with database info
+        datePickerBox.setValue(LocalDate.now());
+        typeBox.setItems(typesList);
+        userID_box.setItems(userList);
+        customerID_box.setItems(customersList);
+        contactBox.setItems(contactsList);
+
+        //Populates all text fields and combo boxes to have appointment to modify selections preselected
+        appointmentSelected = Appointments_Controller.getAppointmentToModify();
+        appointmentID_field.setText(String.valueOf(appointmentSelected.getAppointmentID()));
+        typeBox.setValue(appointmentSelected.getType());
+        titleField.setText(String.valueOf(appointmentSelected.getTitle()));
+        descriptionField.setText(String.valueOf(appointmentSelected.getDescription()));
+        locationField.setText(String.valueOf(appointmentSelected.getLocation()));
+        startTimeBox.setValue(appointmentSelected.getStart().toLocalTime());
+        endTimeBox.setValue(appointmentSelected.getEnd().toLocalTime());
+        datePickerBox.setValue(appointmentSelected.getStart().toLocalDate());
+
+        // set customerID combo box to selected appointment to modify
+        for (Customers customer : customerID_box.getItems()) {
+            if (appointmentSelected.getCustomerID() == customer.getCustomerID()) {
+                customerID_box.setValue(customer);
+            }
+        }
+        // set contactID combo box to selected appointment to modify
+        for (Contacts contact : contactBox.getItems()) {
+            if (appointmentSelected.getContactID() == contact.getContactID()) {
+                contactBox.setValue(contact);
+            }
+        }
+        // set userID combo box to selected appointment to modify
+        for (Users user : userID_box.getItems()) {
+            if (appointmentSelected.getUserID() == user.getUserID()) {
+                userID_box.setValue(user);
+            }
+        }
+    }
 
     /**
      * onAction Cancel and return to Appointments screen
-     * @param event
-     * @throws IOException
      */
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
@@ -88,11 +143,10 @@ public class UpdateAppointment implements Initializable {
 
     /**
      * onAction Save if all inputs are valid
-     * @param event
-     * @throws IOException
      */
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
+        
         // Checks that all text fields and combo boxes have selections/entries
         if
                (titleField.getText().isEmpty() ||
@@ -186,6 +240,7 @@ public class UpdateAppointment implements Initializable {
             alert.setContentText("Selected Start time must be before selected End time.");
             alert.showAndWait();
             return;
+            
             //If all selections were made and valid - new appointment is added and user returns to Appointments screen.
         } else {
             DBAppointments.updateAppointment(title, description, location, type, new_StartDateAndTime, new_EndDateAndTime, customerID, userID, contactID, appointmentID);
@@ -194,65 +249,6 @@ public class UpdateAppointment implements Initializable {
             stage.setScene(new Scene(scene));
             stage.setTitle("Appointments");
             stage.show();
-        }
-    }
-
-    /**
-     * Initializes UpdateAppointment screen
-     * @param url
-     * @param resourceBundle
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //populates start and end time boxes
-        ObservableList<LocalTime> start = FXCollections.observableArrayList();
-        ObservableList<LocalTime> end = FXCollections.observableArrayList();
-        LocalTime times = LocalTime.MIDNIGHT;
-        start.add(times);
-        end.add(times);
-        times = times.plusMinutes(15);
-        while (!times.equals(LocalTime.MIDNIGHT)) {
-            start.add(times);
-            end.add(times);
-            times = times.plusMinutes(15);
-        }
-        startTimeBox.setItems(start);
-        endTimeBox.setItems(end);
-        //Populates date picker and combo boxes with database info
-        datePickerBox.setValue(LocalDate.now());
-        typeBox.setItems(typesList);
-        userID_box.setItems(userList);
-        customerID_box.setItems(customersList);
-        contactBox.setItems(contactsList);
-
-        //Populates all text fields and combo boxes to have appointment to modify selections preselected
-        appointmentSelected = Appointments_Controller.getAppointmentToModify();
-        appointmentID_field.setText(String.valueOf(appointmentSelected.getAppointmentID()));
-        typeBox.setValue(appointmentSelected.getType());
-        titleField.setText(String.valueOf(appointmentSelected.getTitle()));
-        descriptionField.setText(String.valueOf(appointmentSelected.getDescription()));
-        locationField.setText(String.valueOf(appointmentSelected.getLocation()));
-        startTimeBox.setValue(appointmentSelected.getStart().toLocalTime());
-        endTimeBox.setValue(appointmentSelected.getEnd().toLocalTime());
-        datePickerBox.setValue(appointmentSelected.getStart().toLocalDate());
-
-        // set customerID combo box to selected appointment to modify
-        for (Customers customer : customerID_box.getItems()) {
-            if (appointmentSelected.getCustomerID() == customer.getCustomerID()) {
-                customerID_box.setValue(customer);
-            }
-        }
-        // set contactID combo box to selected appointment to modify
-        for (Contacts contact : contactBox.getItems()) {
-            if (appointmentSelected.getContactID() == contact.getContactID()) {
-                contactBox.setValue(contact);
-            }
-        }
-        // set userID combo box to selected appointment to modify
-        for (Users user : userID_box.getItems()) {
-            if (appointmentSelected.getUserID() == user.getUserID()) {
-                userID_box.setValue(user);
-            }
         }
     }
 }
