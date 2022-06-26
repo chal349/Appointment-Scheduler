@@ -9,9 +9,8 @@ This application can be used to manage appointments for different customers in a
 Functionalities:
 Login screen displays information based on users language settings.
 All appointment times are stored "UTC" in mySQL database. Appointment times are converted to users local timezone upon login.
-Users can Create, Update, Delete appointments.
-Users can Create, Update, Delete customers.
-View appointments by timeframe (day, week, or month)
+Users can Create, Update, Delete appointments and customers.
+Users can View appointments by timeframe (day, week, or month)
 Alerts the user when there is an appointment soon (within 15 minutes)
 
 Reporting Functionalities
