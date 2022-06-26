@@ -57,97 +57,17 @@ public class UpdateCustomer implements Initializable {
     //Lists for populating combo boxes
     ObservableList<Countries> countries = DBCountries.getAllCountries();
     ObservableList<Divisions> divisions = DBDivisions.getAllDivisions();
-
-    /**
-     * actionEvent clears stateProvince combo box and repopulates based on country selection
-     * @param event
-     */
-    @FXML
-    void country_box(ActionEvent event) {
-        divisions.clear();
-        stateProvinceBox.setItems(divisions);
-    }
-
-    /**
-     * mouseEvent populates stateProvince box based on country selection
-     * @param event
-     */
-    public void stateProvince_box(MouseEvent event) {
-        try{
-            divisions.setAll();
-            int divisionSelection = countryBox.getSelectionModel().getSelectedItem().getCountryID();
-
-            for (Divisions division : DBDivisions.getAllDivisions()){
-                if(division.getCountryID() == divisionSelection){
-                    divisions.add(division);
-                }
-                stateProvinceBox.getSelectionModel().select(customerSelected.getDivisionID()-1);
-            }
-        } catch (NullPointerException n){
-        }
-    }
-
-    /**
-     * onaction Cancel and return to Customers screen
-     * @param event
-     * @throws IOException
-     */
-    @FXML
-    void onActionCancel(ActionEvent event) throws IOException {
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.setTitle("Customers");
-        stage.show();
-    }
-
-    /**
-     * onAction Save customer to database and return to Customers screen
-     * @param event
-     * @throws IOException
-     */
-    @FXML
-    void onActionSave(ActionEvent event)throws IOException {
-        //checks all text fields and combo boxes for inputs
-        if      (fullNameField.getText().isEmpty()          || 
-                streetAddressField.getText().isEmpty()      ||
-                postalCodeField.getText().isEmpty()         ||
-                phoneNumberField.getText().isEmpty()        ||
-                countryBox.getSelectionModel().isEmpty()    ||
-                stateProvinceBox.getSelectionModel().isEmpty())
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("All fields must be completed.");
-            alert.showAndWait();
-        } 
-        //gets inputs from all text fields and combo boxes and Updates customer in database - returns to Customers screen
-        else{
-            int customerID = customerSelected.getCustomerID();
-            String name = fullNameField.getText();
-            String address = streetAddressField.getText() + ", " + cityTownField.getText();
-            String postalCode = postalCodeField.getText();
-            String phone = phoneNumberField.getText();
-            Divisions selection = stateProvinceBox.getSelectionModel().getSelectedItem();
-            int divisionID = selection.getDivisionID();
-            DBCustomers.updateCustomer(customerID, name, address, postalCode, phone, divisionID);
-
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.setTitle("Customers");
-            stage.show();
-        }
-    }
-
+    
+    
     /**
      * Initializes UpdateCustomer screen
-     * @param url
-     * @param resourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        
         //gets customer selected from customers screen
         customerSelected = Customers_Controller.getCustomerToModify();
+        
         //populates all text fields with customers info from database
         customerID_field.setText(String.valueOf(customerSelected.getCustomerID()));
         fullNameField.setText(String.valueOf(customerSelected.getName()));
@@ -175,5 +95,82 @@ public class UpdateCustomer implements Initializable {
         }
         stateProvinceBox.setItems(divisions);
         countryBox.setItems(countries);
+    }
+
+    /**
+     * actionEvent clears stateProvince combo box and repopulates based on country selection
+     */
+    @FXML
+    void country_box(ActionEvent event) {
+        divisions.clear();
+        stateProvinceBox.setItems(divisions);
+    }
+
+    /**
+     * mouseEvent populates stateProvince box based on country selection
+     */
+    public void stateProvince_box(MouseEvent event) {
+        try{
+            divisions.setAll();
+            int divisionSelection = countryBox.getSelectionModel().getSelectedItem().getCountryID();
+
+            for (Divisions division : DBDivisions.getAllDivisions()){
+                if(division.getCountryID() == divisionSelection){
+                    divisions.add(division);
+                }
+                stateProvinceBox.getSelectionModel().select(customerSelected.getDivisionID()-1);
+            }
+        } catch (NullPointerException n){
+        }
+    }
+
+    /**
+     * onAction Cancel and return to Customers screen
+     */
+    @FXML
+    void onActionCancel(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.setTitle("Customers");
+        stage.show();
+    }
+
+    /**
+     * onAction Save customer to database and return to Customers screen
+     */
+    @FXML
+    void onActionSave(ActionEvent event)throws IOException {
+        
+        //checks all text fields and combo boxes for inputs
+        if      (fullNameField.getText().isEmpty()          || 
+                streetAddressField.getText().isEmpty()      ||
+                postalCodeField.getText().isEmpty()         ||
+                phoneNumberField.getText().isEmpty()        ||
+                countryBox.getSelectionModel().isEmpty()    ||
+                stateProvinceBox.getSelectionModel().isEmpty())
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("All fields must be completed.");
+            alert.showAndWait();
+        } 
+        
+        //gets inputs from all text fields and combo boxes and Updates customer in database - returns to Customers screen
+        else{
+            int customerID = customerSelected.getCustomerID();
+            String name = fullNameField.getText();
+            String address = streetAddressField.getText() + ", " + cityTownField.getText();
+            String postalCode = postalCodeField.getText();
+            String phone = phoneNumberField.getText();
+            Divisions selection = stateProvinceBox.getSelectionModel().getSelectedItem();
+            int divisionID = selection.getDivisionID();
+            DBCustomers.updateCustomer(customerID, name, address, postalCode, phone, divisionID);
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.setTitle("Customers");
+            stage.show();
+        }
     }
 }
