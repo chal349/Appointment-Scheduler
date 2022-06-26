@@ -13,8 +13,6 @@ Users can Create, Update, Delete appointments and customers.
 Users can View appointments by timeframe (week, month, or all).
 Application alerts the user when there is an appointment soon (within 15 minutes).
 
-Reporting Functionalities
-
 ----------------------
 
 The application can generate the following reports:
