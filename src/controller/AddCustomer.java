@@ -55,10 +55,19 @@ public class AddCustomer implements Initializable {
     //Lists for populating combo boxes
     ObservableList<Countries> countries = DBCountries.getAllCountries();
     ObservableList<Divisions> divisions = DBDivisions.getAllDivisions();
+    
+   /**
+    * initializes AddCustomers screen
+    */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Populates combo boxes
+        stateProvinceBox.setItems(divisions);
+        countryBox.setItems(countries);
+    }
 
     /**
      * stateProvince combo box re-populates based on country combo box selection
-     * @param event
      */
     public void stateProvince_box(MouseEvent event) {
         try{
@@ -69,15 +78,12 @@ public class AddCustomer implements Initializable {
                     divisions.add(division);
                 }
             }
-
         } catch (NullPointerException n){
         }
     }
 
     /**
      * actionEvent returns to Customers screen on click
-     * @param event
-     * @throws IOException
      */
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
@@ -90,11 +96,10 @@ public class AddCustomer implements Initializable {
 
     /**
      * actionEvent saves new customer to database if all fields and selections are valid
-     * @param event
-     * @throws IOException
      */
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
+        
         //checks that all fields and choices have been made
         if (fullNameField.getText().isEmpty() ||
             streetAddressField.getText().isEmpty() ||
@@ -105,6 +110,7 @@ public class AddCustomer implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("All fields must be completed.");
             alert.showAndWait();
+            
             //saves new customer to database and returns to Customers screen
         } else{
             String name = fullNameField.getText();
@@ -121,17 +127,5 @@ public class AddCustomer implements Initializable {
             stage.setTitle("Customers");
             stage.show();
         }
-    }
-
-    /**
-     * initializes AddCustomers screen
-     * @param url
-     * @param resourceBundle
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Populates combo boxes
-        stateProvinceBox.setItems(divisions);
-        countryBox.setItems(countries);
     }
 }
