@@ -23,7 +23,7 @@ import static controller.ScreenLoader.exit;
  */
 
 /**
- * Appointments Controller Class - User can view and select appointments for adding, updating, or deleting - Contains LAMBDAS in Initialize
+ * Appointments Controller Class - User can view and select appointments for adding, updating, or deleting
  */
 public class Appointments_Controller implements Initializable {
 
@@ -86,14 +86,71 @@ public class Appointments_Controller implements Initializable {
     private static Appointments appointmentToDelete;
     private static Appointments appointmentToModify;
     public static Appointments getAppointmentToModify() {return appointmentToModify;}
+    
+   /**
+    * Initializes Appointments Controller screen -LAMBDAS for moving throughout application and for formatting start and end date and time
+    */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
+        //LAMBDAS for navigation buttons
+        customersButton.setOnAction(actionEvent -> display("Customers", "../view/Customers.fxml"));
+        reportsButton.setOnAction(actionEvent -> display("Reports", "../view/Reports.fxml"));
+        addButton.setOnAction(actionEvent -> display("Add Appointment", "../view/AddAppointment.fxml"));
+        logoutButton.setOnAction(actionEvent -> exit());
+
+        //Populate ALL TABLEVIEW with info
+        allTableView.setItems(DBAppointments.getAllAppointments());
+        allApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        allTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        allDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        allLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
+        allType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
+        
+        //LAMBDAS to format Start and End times
+        allStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
+        allEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
+        allContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
+        allCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        allUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
+
+       //Populate MONTH TABLEVIEW with info
+        monthTableView.setItems(DBAppointments.getMonthAppointments());
+        monthApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        monthTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        monthDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        monthLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
+        monthContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
+        monthType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
+        
+        //LAMBDAS to format Start and End times
+        monthStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
+        monthEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
+        monthCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        monthUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
+
+        //Populate MONTH TABLEVIEW with info
+        weekTableView.setItems(DBAppointments.getWeekAppointments());
+        weekApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        weekTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        weekDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        weekLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
+        weekContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
+        weekType_Col.setCellValueFactory(new PropertyValueFactory<>("type"));
+        
+        //LAMBDAS to format Start and End times
+        weekStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
+        weekEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
+        weekCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        weekUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
+    }
 
     /**
      * actionEvent deletes appointment from database based on which tableview is selected
-     * @param event
-     * @throws SQLException
      */
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
+        
         //ALL TABLEVIEW
         if (allTab.isSelected()) {
             appointmentToDelete = allTableView.getSelectionModel().getSelectedItem();
@@ -104,7 +161,8 @@ public class Appointments_Controller implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            //MONTH TABLEVIEW
+            
+        //MONTH TABLEVIEW
         } else if (monthTab.isSelected()) {
             appointmentToDelete = monthTableView.getSelectionModel().getSelectedItem();
             if(appointmentToDelete == null){
@@ -114,7 +172,8 @@ public class Appointments_Controller implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            //WEEK TABLEVIEW
+            
+        //WEEK TABLEVIEW
         } else if (weekTab.isSelected()) {
             appointmentToDelete = weekTableView.getSelectionModel().getSelectedItem();
             if(appointmentToDelete == null){
@@ -139,6 +198,7 @@ public class Appointments_Controller implements Initializable {
      */
     @FXML
     void onActionUpdateScreen(ActionEvent event) throws IOException {
+        
         //ALL TABLEVIEW
         if (allTab.isSelected()) {
             appointmentToModify = allTableView.getSelectionModel().getSelectedItem();
@@ -149,7 +209,8 @@ public class Appointments_Controller implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            //MONTH TABLEVIEW
+            
+        //MONTH TABLEVIEW
         } else if (monthTab.isSelected()) {
             appointmentToModify = monthTableView.getSelectionModel().getSelectedItem();
             if(appointmentToModify == null){
@@ -159,7 +220,8 @@ public class Appointments_Controller implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            //WEEK TABLEVIEW
+            
+        //WEEK TABLEVIEW
         } else if (weekTab.isSelected()) {
             appointmentToModify = weekTableView.getSelectionModel().getSelectedItem();
             if(appointmentToModify == null){
@@ -175,64 +237,6 @@ public class Appointments_Controller implements Initializable {
         stage.setScene(new Scene(scene));
         stage.setTitle("Update Appointment");
         stage.show();
-
     }
-
-    /**
-     * Initializes Appointments Controller screen -Contains LAMBDAS for moving throughout application and for formatting start and end date and time
-     * LAMBDA- time formatting Lambdas are used for concise code.
-     * LAMBDA- SetOnAction button Lambdas replaces each navigation button with one line of code.
-     * @param location
-     * @param resources
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //LAMBDAS for navigation buttons
-        customersButton.setOnAction(actionEvent -> display("Customers", "../view/Customers.fxml"));
-        reportsButton.setOnAction(actionEvent -> display("Reports", "../view/Reports.fxml"));
-        addButton.setOnAction(actionEvent -> display("Add Appointment", "../view/AddAppointment.fxml"));
-        logoutButton.setOnAction(actionEvent -> exit());
-
-        //Populate ALL TABLEVIEW with info
-        allTableView.setItems(DBAppointments.getAllAppointments());
-        allApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
-        allTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
-        allDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
-        allLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
-        allType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
-        //LAMBDAS to format Start and End times
-        allStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
-        allEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
-        allContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
-        allCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        allUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
-
-       //Populate MONTH TABLEVIEW with info
-        monthTableView.setItems(DBAppointments.getMonthAppointments());
-        monthApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
-        monthTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
-        monthDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
-        monthLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
-        monthContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
-        monthType_col.setCellValueFactory(new PropertyValueFactory<>("type"));
-        //LAMBDAS to format Start and End times
-        monthStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
-        monthEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
-        monthCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        monthUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
-
-        //Populate MONTH TABLEVIEW with info
-        weekTableView.setItems(DBAppointments.getWeekAppointments());
-        weekApptID_col.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
-        weekTitle_col.setCellValueFactory(new PropertyValueFactory<>("title"));
-        weekDescription_col.setCellValueFactory(new PropertyValueFactory<>("description"));
-        weekLocation_col.setCellValueFactory(new PropertyValueFactory<>("location"));
-        weekContact_col.setCellValueFactory(new PropertyValueFactory<>("contactID"));
-        weekType_Col.setCellValueFactory(new PropertyValueFactory<>("type"));
-        //LAMBDAS to format Start and End times
-        weekStart_col.setCellValueFactory(data -> data.getValue().getStartFormatted());
-        weekEnd_col.setCellValueFactory(data -> data.getValue().getEndFormatted());
-        weekCustID_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        weekUserID_col.setCellValueFactory(new PropertyValueFactory<>("userID"));
-    }
+    
 }
